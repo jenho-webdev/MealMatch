@@ -35,7 +35,7 @@ async function fetchRecipes(cuisine){
 async function fetchActivities(sport,duration)
 {
 
-    const sportData = await fect(``);
+    const sportData = await fetch(``);
 
 }
 
