@@ -19,3 +19,8 @@
 .My-Color-Theme-4-hsla { color: hsla(19, 37, 44, 1); }
 .My-Color-Theme-5-hsla { color: hsla(20, 67, 75, 1); }
 
+.logo {
+    display:flex;
+    width:100%;
+    justify-content: center;
+}
