@@ -1,0 +1,74 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta http-equiv="X-UA-Compatible" content="IE=edge">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <link rel="stylesheet" href="/assets/styles2.css">
+  <title>Selected food page</title>
+</head>
+
+<header>
+  <h1>food result: (lets also add a logo) </h1>
+</header>
+
+<div class="container">
+  <img src="image.jpg" alt="Image">
+  <p>Lorem ipsum dolor sit amet,Lorem, ipsum dolor sit amet consectetur adipisicing elit.
+     Cumque facilis est, soluta iste veritatis sequi, 
+    dicta molestias harum mollitia inventore cum id rerum nihil doloribus Lorem ipsum 
+    dolor sit amet consectetur adipisicing elit.
+     Distinctio harum minus molestiae dolorem maiores, tenetur, et quaerat asperiores 
+     consectetur facere quidem in nesciunt voluptatibus omnis 
+    loremnostrum  Lorem ipsum, dolor sit amet consectetur adipisicing elit. Quia fugit 
+    nemo animi ab eaque. Inventore mollitia hic quidem recusandae, 
+    aut iste porro eos nihil excepturi deserunt autem quos, officiis distinctio!
+  Lorem praesentium quod beatae illum! qui temporibus quos provident earum. consectetur 
+  adipiscing elit. Sed consequat, lectus nec tempor scelerisque,
+   orci tellus mollis nulla, non rhoncus odio massa id sapien.</p>
+</div>
+
+<div class="container">
+  <img src="image.jpg" alt="Image">
+  <p>Lorem ipsum dolor sit amet,Lorem, ipsum dolor sit amet consectetur adipisicing elit.
+     Cumque facilis est, soluta iste veritatis sequi, 
+    dicta molestias harum mollitia inventore cum id rerum nihil doloribus Lorem ipsum 
+    dolor sit amet consectetur adipisicing elit.
+     Distinctio harum minus molestiae dolorem maiores, tenetur, et quaerat asperiores 
+     consectetur facere quidem in nesciunt voluptatibus omnis 
+    loremnostrum  Lorem ipsum, dolor sit amet consectetur adipisicing elit. Quia fugit 
+    nemo animi ab eaque. Inventore mollitia hic quidem recusandae, 
+    aut iste porro eos nihil excepturi deserunt autem quos, officiis distinctio!
+  Lorem praesentium quod beatae illum! qui temporibus quos provident earum. consectetur 
+  adipiscing elit. Sed consequat, lectus nec tempor scelerisque,
+   orci tellus mollis nulla, non rhoncus odio massa id sapien.</p>
+</div>
+
+ 
+<div class="link-container">
+  <a href="#">Save</a>
+  <a href="#">share </a>
+  <a href="#">Back to Home </a>
+</div>
+<div class="share-button">Share</div>
+<script>
+  // JavaScript code goes here
+  const shareButton = document.querySelector('.share-button');
+  shareButton.addEventListener('click', () => {
+    if (navigator.share) {
+      navigator.share({
+        title: document.title,
+        url: window.location.href
+      })
+      .then(() => console.log('Successfully shared'))
+      .catch(error => console.log('Error sharing:', error));
+    } else {
+      console.log('Web Share API not supported');
+    }
+  });
+</script>
+
+</body>
+</html>
+
+
