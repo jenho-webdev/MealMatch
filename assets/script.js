@@ -3,16 +3,14 @@
 const NINJAS_API = "qeQ/ixgJ1FhLzMigxs+yag==sahHalNRb0bq0szN";
 const Spoonacular_API = "15c0363f59de4bfba530413a239c2ccb"
 
-//DOM
+//Recipe Request Page DOM
 const cuisineInputEl = document.querySelector("#cuisine-input");
 const sportInputEl = document.querySelector("#sport-input");
-const day1Box = document.querySelector("#day1-box");
-const day2Box = document.querySelector("#day2-box");
-const day3Box = document.querySelector("#day3-box");
-const day4Box = document.querySelector("#day4-box");
-const day5Box = document.querySelector("#day5-box");
-const day6Box = document.querySelector("#day6-box");
-const day7Box = document.querySelector("#day7-box");
+const submitBtn = document.querySelector("submit-btn");
+
+
+//Weekly Calendar page DOM
+
 
 //API URLs
 const fecthRecipesURL = `https://api.spoonacular.com/recipes/complexSearch`;
@@ -25,6 +23,8 @@ const sport = "run";
 const duration = "1";
 const durationUnit = "hour";
 
+//Global Var
+const Today = dayjs().day(); //gets day of current week
 
 
 
@@ -36,15 +36,16 @@ const durationUnit = "hour";
 //on page load function to "do something"(ie. load localstorage for saved cuisines)
 window.addEventListener("load", () => {
     
-  getLocalData();
+  //getLocalRecipesData();
     
 });
-
 
 
 //------------------Locate Storage functions(https://developer.mozilla.org/en-US/docs/Web/API/Window/localStorage)
 
 //-----------------------Get locally stored data---------------------------------------------------
+
+//GET (one) recipe, return (one) recipe JOSON from localStorage
 function getLocalRecipesData () {
 
   const recipes = localStorage.getItem("recipes");
@@ -55,6 +56,7 @@ function getLocalRecipesData () {
 
 //--------------------------Set data to local storage----------------------------------
 
+//SET (one) recipe JOSON to localStorage
 function setLocalRecipesData (recipe) {
 
   const localData = getLocalRecipesData();
@@ -69,12 +71,21 @@ function setLocalRecipesData (recipe) {
 
 
 //------------>Get ------------------------
-async function fetchRecipes(cuisine){
 
-    const recipes = await fetch(
-      `https://api.spoonacular.com/recipes/complexSearch?query=cuisine=${cuisine}&number=1`
-    )
-
+//Pass in cuisine(String) and return a "repackaged" recipe
+// return recipe contain {recipe name,calories,ID, image url,}
+async function fetchRecipes(cuisine, ){
+  
+  //1.06pts per call that return a recipe with info and nutrition
+  const recipe = await fetch(
+    `https://api.spoonacular.com/recipes/complexSearch?apiKey=${Spoonacular_API}&query=cuisine=${cuisine}&number=1&addRecipeNutrition=true`
+  );
+  const nutrients = recipe.nutrients
+  const calories = nutrients.find(item =>item.name === "Calories");
+  const saturatedFat = nutrients.find(item => item.name === "Saturated fat")
+  const recipeID = recipe.id;
+  
+  
 
 }
 //------------->logic/compute------------------------------
@@ -96,7 +107,7 @@ async function fetchRecipes(cuisine){
 //------------------------Activities Related functions below-----------------------------------------------
 
 //----------->Get Sport Data-------------------------------------
-async function fetchActivities(sport,duration)
+async function fetchActivities(calories)
 {
 
     const sportData = await fetch(``);
