@@ -1,7 +1,11 @@
 
 //API Keys
 const NINJAS_API = "qeQ/ixgJ1FhLzMigxs+yag==sahHalNRb0bq0szN";
-const Spoonacular_API = "15c0363f59de4bfba530413a239c2ccb"
+
+//Spoonacular API list. switch by commenting out.
+const Spoonacular_API = "15c0363f59de4bfba530413a239c2ccb";
+//const Spoonacular_API = "b7db31d63a4d49e4ba04b02bdfcde847";
+
 
 //Recipe Request Page DOM
 const cuisineInputEl = document.querySelector("#cuisine-input");
@@ -106,20 +110,74 @@ async function fetchRecipes(cuisine, ){
 
 //------------------------Activities Related functions below-----------------------------------------------
 
+//initial var sample
+var sampleMenuCalories = 123;
+var sportResult = "default";
+var sportCalories = 1;
+var sportDuration = "";
+
+
 //----------->Get Sport Data-------------------------------------
-async function fetchActivities(calories)
-{
+//Sample of Jen's async
+//async function fetchActivities(calories){const sportData = await fetch(``);}
 
-    const sportData = await fetch(``);
+//function to test function in chrome inspect
+function testNinjaAPI(){
+  sportSearch();
+  console.log(sportResult);
+  console.log(sportCalories);
+  computeDuration();
+}
 
+//search for activities based on sport var (currently use only the [0] of the API response array)
+function sportSearch(){
+var searchNinjaUrl = "https://api.api-ninjas.com/v1/caloriesburned?activity=" + sport;
+fetch(searchNinjaUrl,
+{headers: { 'X-Api-Key': NINJAS_API},})
+.then(function (response) {
+  if (!response.ok) {
+    throw response.json();
+  }
+
+  return response.json();
+})
+.then(function (data) {
+  if (data == "") {
+    console.log("search input did not have output. try something else");
+    return;  //ends function early for bad search input.
+  }
+  console.log(data); 
+  sportResult = data[0];
+  sportCalories = sportResult.calories_per_hour;
+  console.log(sportResult);
+  console.log(sportResult.name);
+  console.log(sportResult.calories_per_hour);
+  console.log(sportCalories);
+})
+.catch(function (error) {
+  console.error(error);
+  notFound.textContent = "searchNinjaUrl_error";
+});
+return;
 }
 
 //------------------------>set------------------------------
 
 
-
 //------------------->compute-------------------------------
 
+//get duration of sport in minutes to match menu calories
+function computeDuration() {
+  if (sportCalories == ""){
+    console.log("coumputeDuration function errored");
+    return;
+  }
+  sportDuration = sampleMenuCalories / sportCalories;
+  console.log(sportDuration + "hours")
+  var sportDurationMin = sportDuration * 60;
+  console.log(sportDurationMin.toFixed() + "minutes");
+  return;
+}
 
 //------------------------>display-------------------------
 
