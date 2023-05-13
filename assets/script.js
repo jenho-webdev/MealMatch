@@ -19,23 +19,101 @@ const fecthRecipesURL = `https://api.spoonacular.com/recipes/complexSearch`;
 const fetchCaloriesBurnt = `https://api.api-ninjas.com/v1/caloriesburnedactivities`;
 const fetchExercises = `https://api.api-ninjas.com/v1/exercises?`;
 
+//Var for TESTING/PLACEHOLDER
+const cuisine = "Japanese";
+const sport = "run";
+const duration = "1";
+const durationUnit = "hour";
+
+
+
+
+//----------------DOM functions and eventlistener functions-------------------------------------------
+
+
+//---------------------->UI manipulation functions------------------------------
+
+//on page load function to "do something"(ie. load localstorage for saved cuisines)
 window.addEventListener("load", () => {
-  
+    
+  getLocalData();
+    
 });
 
+
+
+//------------------Locate Storage functions(https://developer.mozilla.org/en-US/docs/Web/API/Window/localStorage)
+
+//-----------------------Get locally stored data---------------------------------------------------
+function getLocalRecipesData () {
+
+  const recipes = localStorage.getItem("recipes");
+  return recipes;
+};
+
+
+
+//--------------------------Set data to local storage----------------------------------
+
+function setLocalRecipesData (recipe) {
+
+  const localData = getLocalRecipesData();
+  localData.push(recipe);
+  localStorage.setItem("recipes", localData);
+
+};
+
+
+
+//------------------------Recipes Related functions below-----------------------------------------------
+
+
+//------------>Get ------------------------
 async function fetchRecipes(cuisine){
 
     const recipes = await fetch(
-      `https://api.spoonacular.com/recipes/complexSearch?query=cuisine=${cuisine}&number=2`
-    );
+      `https://api.spoonacular.com/recipes/complexSearch?query=cuisine=${cuisine}&number=1`
+    )
 
 
 }
+//------------->logic/compute------------------------------
 
+
+
+//----------------->set to localStorage---------------------------
+
+
+
+//------------------>display to UI-------------------------------
+
+
+
+
+
+
+
+//------------------------Activities Related functions below-----------------------------------------------
+
+//----------->Get Sport Data-------------------------------------
 async function fetchActivities(sport,duration)
 {
 
-    const sportData = await fect(``);
+    const sportData = await fetch(``);
 
 }
+
+//------------------------>set------------------------------
+
+
+
+//------------------->compute-------------------------------
+
+
+//------------------------>display-------------------------
+
+
+
+
+
 
