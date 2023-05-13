@@ -1,3 +1,13 @@
+body {
+
+  background-color: #e3edec;
+
+
+  
+}
+
+
+
 
 header {
   background-color: #579e99;
@@ -23,7 +33,7 @@ img {
   display: inline-block;
   margin: 0 10px;
   padding: 10px 20px;
-  background-color: #333;
+  background-color: #9E6447;
   color: #fff;
   text-decoration: none;
   border-radius: 5px;
@@ -33,9 +43,14 @@ img {
   background-color: #fff;
   color: #333;
   border: 1px solid #333;
+  background: #ebb498;
+  box-shadow: 0 0 5px #98EBE5, 0 0 25px 
+  #98ebe5, 0 0 50px #98ebe5, 0 0 200px #98ebe5;
+
+
 }
 
-.container {
+ .exercise-result {
   display: flex;
   flex-direction: row;
   align-items: center;
@@ -43,15 +58,53 @@ img {
   padding: 20px;
   background-color: #ebb498;
   border-radius: 5px;
-}
-.container img {
+} 
+
+
+
+
+
+
+
+.meal-result {
+  display: flex;
+  flex-direction: row;
+  align-items: center;
+  margin: 20px;
+  padding: 20px;
+  background-color: #ebb498;
+  border-radius: 5px;
+
+
+  
+} 
+
+
+.meal-result img {
   width: 50%;
   margin-right: 20px;
 }
-.container p {
+
+
+
+
+.exercise-result img {
+  width: 50%;
+  margin-right: 20px;
+}
+
+
+
+.meal-result p {
   font-size: 16px;
   line-height: 1.5;
 }
+
+.exercise-result p {
+  font-size: 16px;
+  line-height: 1.5;
+}
+
 
 .share-button {
   display: inline-block;
@@ -60,4 +113,12 @@ img {
   border-radius: 5px;
   padding: 10px;
   cursor: pointer;
+  
+
+}
+.share-button:hover {
+background: #ebb498;
+box-shadow: 0 0 5px #98EBE5, 0 0 25px 
+#98ebe5, 0 0 50px #98ebe5, 0 0 200px #98ebe5;
+
 }
