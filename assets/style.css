@@ -29,11 +29,16 @@
 .frontPage {
     background-color:rgba(235, 180, 152, 1);
 }
- .row {
+
+ /* .row {
     margin: 0 100px 0 100px;
     justify-content: center;
     height: 100;
- }
+ } */
+
+ .nav-extended{
+  background-color: #579E99;
+}
  .link-container {
     text-align: left;
   }
@@ -58,16 +63,11 @@
   
   }
 
-  body
-{
+body,h1,h2,h3,h4,h5,h6 {
+  font-family: "Raleway", Arial, Helvetica, sans-serif;
+  font-weigHT: lighter;
   font-family: Open sans, Helvetica;
   background: #111;
   color: white;
   font-size: 16px;
-}
-
-h1
-{
-  font-weight: lighter;
-}
-
+  }
