@@ -8,14 +8,13 @@
   <link rel="stylesheet" href="https://use.fontawesome.com/releases/v5.8.1/css/all.css"
     integrity="sha384-50oBUHEmvpQ+1lW4y57PTFmhCaXp0ML5d60M1M7uH2+nqUivzIebhndOJK28anvf" crossorigin="anonymous" />
   <link href="https://fonts.googleapis.com/css?family=Open+Sans&display=swap" rel="stylesheet" />
-  <link rel="stylesheet" href="./assets/style.css" />
-  <link rel="stylesheet" href="./assets/mock.css" />
-  <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/materialize/1.0.0/css/materialize.min.css">
-  <script src="https://cdnjs.cloudflare.com/ajax/libs/materialize/1.0.0/js/materialize.min.js"></script>
 
+  <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/materialize/1.0.0/css/materialize.min.css">
   <link rel="stylesheet" href="https://www.w3schools.com/w3css/4/w3.css">
   <link rel="stylesheet" href="https://fonts.googleapis.com/css?family=Raleway">
   <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/4.7.0/css/font-awesome.min.css">
+  <link rel="stylesheet" href="./assets/style.css" />
+  <link rel="stylesheet" href="./assets/mock.css" />
   <style>
     body,
     h1,
@@ -33,70 +32,48 @@
   </style>
   <title>MealMatch</title>
 </head>
+
 <body class="frontPage">
-   
-</head>
 
-  <body>
-    <div class="logo">
-      <img src="./assets/image/logo.png" style="width: 200px; height: 200px; ">
-    </div>
+  <div class="logo">
+    <img src="./assets/image/logo.png" style="width: 200px; height: 200px; ">
+  </div>
 
+  <div class="link-container">
+    <a href="#">Save</a>
+    <a href="#">share </a>
+    <a href="index.html">Back to Home </a>
+  </div>
 
+  
 
-    </div>
-    <div class="" style="width:100%">
-      <div class="w3-bar w3-black">
-        <button class="w3-bar-item w3-button tablink" onclick="openLink(event);"><i
-            class="w3-margin-right"></i>Save</button>
-        <button class="w3-bar-item w3-button tablink" onclick="openLink(event);"><i class="w3-margin-right"></i>Back to
-          Main</button>
-
-      </div>
-    </div>
-    <!-- Header -->
-    <header class="box" style="max-width:1500px">
-
-
-      <!-- Tabs -->
-
-      <div class="card">
+  <!-- Header -->
+  <header class="form-input">
+    <!-- Tabs -->
+    <div class="row">
+      <div>
         <h3 class="card-header text-uppercase">Find a workout to match your meal</h3>
-        <form id="user-form" class="card-body">
+        <form id="user-form" class="card">
           <label class="form-label" for="cuisine-select">Select a Cuisine</label>
-      
-          <select id="cuisine-select" class="form-input w-100">
-            <option value="" disabled selected></option>
+          <select id="cuisine-select" class="form-input">
+            <option value="" disabled selected>Select a cuisine</option>
             <option value="mexican">Mexican</option>
             <option value="japanese">Japanese</option>
             <option value="american">American</option>
             <option value="chinese">Chinese</option>
             <option value="italian">Italian</option>
           </select>
-      
-          <label class="form-label" for="workout-select">Select a Workout</label>
-          <select id="workout-select" class="form-input w-100">
-            <option value="" disabled selected></option>
-            <option value="walk">Walk</option>
-            <option value="run">Run</option>
-            <option value="bike">Bike</option>
-          </select>
-        </form>
-      </div>
-      
-
-
-
-
           <button type="submit" class="btn">Get Your Match!</button>
         </form>
-
       </div>
-  </body>
-  <footer> </footer>
-  <script src="https://code.jquery.com/jquery-3.4.1.min.js"></script>
-  <script src="https://cdn.jsdelivr.net/npm/dayjs@1.11.3/dayjs.min.js"
-    integrity="sha256-iu/zLUB+QgISXBLCW/mcDi/rnf4m4uEDO0wauy76x7U=" crossorigin="anonymous"></script>
-  <script src="./assets/script.js"></script>
+    </div>
+  </header>
+  
+</body>
+<script src="https://code.jquery.com/jquery-3.4.1.min.js"></script>
+<script src="https://cdn.jsdelivr.net/npm/dayjs@1.11.3/dayjs.min.js"
+  integrity="sha256-iu/zLUB+QgISXBLCW/mcDi/rnf4m4uEDO0wauy76x7U=" crossorigin="anonymous"></script>
+<script src="./assets/script.js"></script>
+<script src="https://cdnjs.cloudflare.com/ajax/libs/materialize/1.0.0/js/materialize.min.js"></script>
 
 </html>
