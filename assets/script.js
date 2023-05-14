@@ -124,7 +124,7 @@ async function fetchRecipe(cuisine){
 //------------------------Activities Related functions below-----------------------------------------------
 
 //initial var sample
-var sampleMenuCalories = 123;
+var sampleMenuCalories = 123;  //sample var used for testingcode . 
 var sportResult = "default";
 var sportCalories = 1;
 var sportDuration = "";
@@ -134,13 +134,6 @@ var sportDuration = "";
 //Sample of Jen's async
 //async function fetchActivities(calories){const sportData = await fetch(``);}
 
-//function to test function in chrome inspect
-function testNinjaAPI(){
-  sportSearch();
-  console.log(sportResult);
-  console.log(sportCalories);
-  computeDuration();
-}
 
 //search for activities based on sport var (currently use only the [0] of the API response array)
 function sportSearch(){
