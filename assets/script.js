@@ -36,8 +36,7 @@ form1El.addEventListener("click", (event) => {
     console.log(`You clicked on ${event.target.textContent}`);
     
 
-  }
-});
+  });
 
 //---------------------->UI manipulation functions------------------------------
 
@@ -53,16 +52,23 @@ window.addEventListener("load", () => {
 
 //-----------------------Get locally stored data---------------------------------------------------
 
-
+//CALL getLocalRecipesData (); TO GET SAVED RECIPES FROM LOCAL STORAGE
 
 
 //--------------------------Set data to local storage----------------------------------
+
+
+//CALL setLocalRecipesData (recipe); TO SAVE RECIPE TO LOCAL STORAGE
 
 
 
 
 
 //------------------------Recipes Related functions below-----------------------------------------------
+
+// CALL displayArecipe (); OR displaySavedRecipes (); FOR RECIPE(S) OUTPUT TO UI;
+
+
 
 
 //------------>Get ------------------------
@@ -134,10 +140,10 @@ function getLocalRecipesData () {
 //------------------>display to UI-------------------------------
 
 function displayArecipe () {};
-
+//TO BE DONE AFTER UI IS FINALIZED
 
 function displaySavedRecipes () {};
-
+//TO BE DONE AFTER UI IS FINALIZED
 
 
 
