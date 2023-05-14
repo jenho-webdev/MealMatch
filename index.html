@@ -1,63 +1,100 @@
 <!DOCTYPE html>
 <html lang="en">
+
 <head>
-    <meta charset="UTF-8">
-    <meta http-equiv="X-UA-Compatible" content="IE=edge">
-    <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <link rel="stylesheet" href="https://use.fontawesome.com/releases/v5.8.1/css/all.css"
-        integrity="sha384-50oBUHEmvpQ+1lW4y57PTFmhCaXp0ML5d60M1M7uH2+nqUivzIebhndOJK28anvf" crossorigin="anonymous" />
-    <link href="https://fonts.googleapis.com/css?family=Open+Sans&display=swap" rel="stylesheet" />
-    <link rel="stylesheet" href="./assets/style.css" />
-    <link rel="stylesheet" href="./assets/mock.css"/>
-    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/materialize/1.0.0/css/materialize.min.css">
-    <script src="https://cdnjs.cloudflare.com/ajax/libs/materialize/1.0.0/js/materialize.min.js"></script>
-  
-    <link rel="stylesheet" href="https://www.w3schools.com/w3css/4/w3.css">
-<link rel="stylesheet" href="https://fonts.googleapis.com/css?family=Raleway">
-<link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/4.7.0/css/font-awesome.min.css">
-<style>
-body,h1,h2,h3,h4,h5,h6 {font-family: "Raleway", Arial, Helvetica, sans-serif}
-.myLink {display: none}
-</style>
-<title>MealMatch</title>
+  <meta charset="UTF-8">
+  <meta http-equiv="X-UA-Compatible" content="IE=edge">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <link rel="stylesheet" href="https://use.fontawesome.com/releases/v5.8.1/css/all.css"
+    integrity="sha384-50oBUHEmvpQ+1lW4y57PTFmhCaXp0ML5d60M1M7uH2+nqUivzIebhndOJK28anvf" crossorigin="anonymous" />
+  <link href="https://fonts.googleapis.com/css?family=Open+Sans&display=swap" rel="stylesheet" />
+  <link rel="stylesheet" href="./assets/style.css" />
+  <link rel="stylesheet" href="./assets/mock.css" />
+  <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/materialize/1.0.0/css/materialize.min.css">
+  <script src="https://cdnjs.cloudflare.com/ajax/libs/materialize/1.0.0/js/materialize.min.js"></script>
+
+  <link rel="stylesheet" href="https://www.w3schools.com/w3css/4/w3.css">
+  <link rel="stylesheet" href="https://fonts.googleapis.com/css?family=Raleway">
+  <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/4.7.0/css/font-awesome.min.css">
+  <style>
+    body,
+    h1,
+    h2,
+    h3,
+    h4,
+    h5,
+    h6 {
+      font-family: "Raleway", Arial, Helvetica, sans-serif
+    }
+
+    .myLink {
+      display: none
+    }
+  </style>
+  <title>MealMatch</title>
 </head>
+
 <body class="frontPage">
-   
-</head>
 
-<body>
+  </head>
+
+  <body>
     <div class="logo">
-        <img src="./assets/image/logo.png" style="width: 200px; height: 200px; ">
-        </div>
-   
-     
+      <img src="./assets/image/logo.png" style="width: 200px; height: 200px; ">
+    </div>
+
+
+
+    </div>
+    <div class="" style="width:100%">
+      <div class="w3-bar w3-black">
+        <button class="w3-bar-item w3-button tablink" onclick="openLink(event);"><i
+            class="w3-margin-right"></i>Save</button>
+        <button class="w3-bar-item w3-button tablink" onclick="openLink(event);"><i class="w3-margin-right"></i>Back to
+          Main</button>
 
       </div>
-      <div class="" style="width:100%">
-        <div class="w3-bar w3-black">
-          <button class="w3-bar-item w3-button tablink" onclick="openLink(event);"><i class="w3-margin-right"></i>Save</button>
-          <button class="w3-bar-item w3-button tablink" onclick="openLink(event);"><i class="w3-margin-right"></i>Back to Main</button>
-      
-        </div>
+    </div>
+    <!-- Header -->
+    <header class="box" style="max-width:1500px">
+
+
+      <!-- Tabs -->
+
+      <div class="card">
+        <h3 class="card-header text-uppercase">Find a workout to match your meal</h3>
+        <form id="user-form" class="card-body">
+          <label class="form-label" for="username">Select a Cuisine</label>
+
+          <select id="format-input" class="form-input w-100">
+            <option value="" disabled selected></option>
+            <option value="atlanta" type="submit">Mexican</option>
+            <option value="denver">Japanese</option>
+            <option value="san-francisco">American</option>
+            <option value="seattle">Chinese</option>
+            <option value="orlando">Italian</option>
+          </select>
+
+          <label class="form-label" for="username">Select a Workout</label>
+          <select id="format-input" class="form-input w-100">
+            <option value="" disabled selected></option>
+            <option value="atlanta" type="submit">Walk</option>
+            <option value="denver">Run</option>
+            <option value="san-francisco">Bike</option>
+          </select>
+
+
+
+
+          <button type="submit" class="btn">Get Your Match!</button>
+        </form>
+
       </div>
-      <!-- Header -->
-      <header class="box" style="max-width:1500px">
-      
-     
-          <!-- Tabs -->
-       
-          <div class="card">
-            <h3 class="card-header text-uppercase">Search a Cuisine</h3>
-            <form id="user-form" class="card-body">
-              <label class="form-label" for="username">Cuisine</label>
-              <input name="username" id="username" type="text" autofocus="true" class="form-input" />
-              <button type="submit" class="btn">Get Your Match!</button>
-            </form>
-          </div>
-</body>
-<footer> </footer>
-<script src="https://code.jquery.com/jquery-3.4.1.min.js"></script>
-<script src="https://cdn.jsdelivr.net/npm/dayjs@1.11.3/dayjs.min.js"
+  </body>
+  <footer> </footer>
+  <script src="https://code.jquery.com/jquery-3.4.1.min.js"></script>
+  <script src="https://cdn.jsdelivr.net/npm/dayjs@1.11.3/dayjs.min.js"
     integrity="sha256-iu/zLUB+QgISXBLCW/mcDi/rnf4m4uEDO0wauy76x7U=" crossorigin="anonymous"></script>
-<script src="./assets/script.js"></script>
+  <script src="./assets/script.js"></script>
+
 </html>
