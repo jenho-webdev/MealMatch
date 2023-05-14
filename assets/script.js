@@ -6,10 +6,7 @@ const Spoonacular_API_jen = 'c6c9bb9062a14ace88c599472838ee3f';
 //const Spoonacular_API = "b7db31d63a4d49e4ba04b02bdfcde847";  //keiji
 
 //Recipe Request Page DOM
-const cuisineInputEl = document.querySelector("#cuisine-input");
-const sportInputEl = document.querySelector("#sport-input");
-const submitBtn = document.querySelector("submit-btn");
-
+const form1El = document.querySelector("form1");
 
 //Weekly Calendar page DOM
 
@@ -27,18 +24,29 @@ const durationUnit = "hour";
 
 //Global Var
 const Today = dayjs().day(); //gets day of current week
-
+const currentrecipe = {};
 
 
 //----------------DOM functions and eventlistener functions-------------------------------------------
 
+form1El.addEventListener("click", (event) => {
+  
+  if (event.target.tagName === "button" && event.target.id === "searchRecipeBtn") {
+    // Do something with the clicked item
+
+  }
+    console.log(`You clicked on ${event.target.textContent}`);
+    
+
+  }
+});
 
 //---------------------->UI manipulation functions------------------------------
 
 //on page load function to "do something"(ie. load localstorage for saved cuisines)
 window.addEventListener("load", () => {
-    
-  //getLocalRecipesData();
+  
+  
     
 });
 
@@ -47,25 +55,12 @@ window.addEventListener("load", () => {
 
 //-----------------------Get locally stored data---------------------------------------------------
 
-//GET (one) recipe, return (one) recipe JOSON from localStorage
-function getLocalRecipesData () {
-
-  const recipes = localStorage.getItem("recipes");
-  return recipes;
-};
 
 
 
 //--------------------------Set data to local storage----------------------------------
 
-//SET (one) recipe JOSON to localStorage
-function setLocalRecipesData (recipe) {
 
-  const localData = getLocalRecipesData();
-  localData.push(recipe);
-  localStorage.setItem("recipes", localData);
-
-};
 
 
 
@@ -102,6 +97,7 @@ async function fetchRecipe(cuisine){
     vegan: vegan,
   }
   //return the repackaged recipeData contain only data that we need
+  currentrecipe = recipeOutput;
   return recipeOutput;
 
 }
@@ -109,13 +105,40 @@ async function fetchRecipe(cuisine){
 
 
 
-//----------------->set to localStorage---------------------------
+//----------------->Set to localStorage---------------------------
 
+//SET (one) recipe JOSON to localStorage
+function setLocalRecipesData (recipe) {
+
+  const localData = getLocalRecipesData();
+  const recipeID = recipe.recipeID
+  const isRecipesUnique = localData.every((item) => item.recipeID === recipeID);
+  if(isRecipesUnique) {
+
+    localData.push(recipe);
+    localStorage.setItem("recipes", JSON.stringify(localData));
+  }
+  else{
+      throw error ("Recipes already saved in your recipes book");
+  }
+  
+};
+
+//------------------------Get saved recipes from local storage--------------
+
+//GET (one) recipe, return (one) recipe JOSON from localStorage
+function getLocalRecipesData () {
+  const savedRecipes = JSON.parse(localStorage.getItem("recipes")) || [];
+  return savedRecipes;
+};
 
 
 //------------------>display to UI-------------------------------
 
+function displayArecipe () {};
 
+
+function displaySavedRecipes () {};
 
 
 
