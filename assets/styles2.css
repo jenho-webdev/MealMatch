@@ -1,0 +1,124 @@
+body {
+
+  background-color: #e3edec;
+
+
+  
+}
+
+
+
+
+header {
+  background-color: #579e99;
+  color: #fff;
+  padding: 20px;
+  text-align: center;
+}
+img {
+  max-width: 100%;
+  height: auto;
+  display: block;
+  margin: 0 auto;
+}
+.image-container {
+  width: 80%;
+  margin: 0 auto;
+  padding: 20px 0;
+}
+.link-container {
+  text-align: center;
+}
+.link-container a {
+  display: inline-block;
+  margin: 0 10px;
+  padding: 10px 20px;
+  background-color: #9E6447;
+  color: #fff;
+  text-decoration: none;
+  border-radius: 5px;
+  transition: all 0.3s ease;
+}
+.link-container a:hover {
+  background-color: #fff;
+  color: #333;
+  border: 1px solid #333;
+  background: #ebb498;
+  box-shadow: 0 0 5px #98EBE5, 0 0 25px 
+  #98ebe5, 0 0 50px #98ebe5, 0 0 200px #98ebe5;
+
+
+}
+
+ .exercise-result {
+  display: flex;
+  flex-direction: row;
+  align-items: center;
+  margin: 20px;
+  padding: 20px;
+  background-color: #ebb498;
+  border-radius: 5px;
+} 
+
+
+
+
+
+
+
+.meal-result {
+  display: flex;
+  flex-direction: row;
+  align-items: center;
+  margin: 20px;
+  padding: 20px;
+  background-color: #ebb498;
+  border-radius: 5px;
+
+
+  
+} 
+
+
+.meal-result img {
+  width: 50%;
+  margin-right: 20px;
+}
+
+
+
+
+.exercise-result img {
+  width: 50%;
+  margin-right: 20px;
+}
+
+
+
+.meal-result p {
+  font-size: 16px;
+  line-height: 1.5;
+}
+
+.exercise-result p {
+  font-size: 16px;
+  line-height: 1.5;
+}
+
+
+.share-button {
+  display: inline-block;
+  background-color: #f2f2f2;
+  border: 1px solid #ccc;
+  border-radius: 5px;
+  padding: 10px;
+  cursor: pointer;
+  
+
+}
+.share-button:hover {
+background: #ebb498;
+box-shadow: 0 0 5px #98EBE5, 0 0 25px 
+#98ebe5, 0 0 50px #98ebe5, 0 0 200px #98ebe5;
+
+}
