@@ -8,72 +8,55 @@
   <link rel="stylesheet" href="https://use.fontawesome.com/releases/v5.8.1/css/all.css"
     integrity="sha384-50oBUHEmvpQ+1lW4y57PTFmhCaXp0ML5d60M1M7uH2+nqUivzIebhndOJK28anvf" crossorigin="anonymous" />
   <link href="https://fonts.googleapis.com/css?family=Open+Sans&display=swap" rel="stylesheet" />
-
   <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/materialize/1.0.0/css/materialize.min.css">
-  <link rel="stylesheet" href="https://www.w3schools.com/w3css/4/w3.css">
+  <!-- <link rel="stylesheet" href="https://www.w3schools.com/w3css/4/w3.css"> -->
   <link rel="stylesheet" href="https://fonts.googleapis.com/css?family=Raleway">
-  <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/4.7.0/css/font-awesome.min.css">
+  <!-- <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/4.7.0/css/font-awesome.min.css"> -->
+  <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/bulma@0.9.4/css/bulma.min.css">
   <link rel="stylesheet" href="./assets/style.css" />
   <link rel="stylesheet" href="./assets/mock.css" />
-  <style>
-    body,
-    h1,
-    h2,
-    h3,
-    h4,
-    h5,
-    h6 {
-      font-family: "Raleway", Arial, Helvetica, sans-serif
-    }
-
-    .myLink {
-      display: none
-    }
-  </style>
   <title>MealMatch</title>
 </head>
 
-<body class="frontPage">
 
-  <div class="logo">
-    <img src="./assets/image/logo.png" style="width: 200px; height: 200px; ">
-  </div>
-
-  <div class="link-container">
-    <a href="#">Save</a>
-    <a href="#">share </a>
-    <a href="index.html">Back to Home </a>
-  </div>
-
-  
-
-  <!-- Header -->
-  <header class="form-input">
-    <!-- Tabs -->
-    <div class="row">
-      <div>
-        <h3 class="card-header text-uppercase">Find a workout to match your meal</h3>
-        <form id="user-form" class="card">
-          <label class="form-label" for="cuisine-select">Select a Cuisine</label>
-          <select id="cuisine-select" class="form-input">
-            <option value="" disabled selected>Select a cuisine</option>
-            <option value="mexican">Mexican</option>
-            <option value="japanese">Japanese</option>
-            <option value="american">American</option>
-            <option value="chinese">Chinese</option>
-            <option value="italian">Italian</option>
-          </select>
-          <button type="submit" class="btn">Get Your Match!</button>
-        </form>
+<!-- Header -->
+<header >
+    <nav class="nav-extended">
+      <div class="row">
+        <img class="col offset-s5" src="./assets/image/logo.png" width="200" height="200">
       </div>
+    
+      <a href="index.html">Back to Home </a>
+      </div>
+    </nav>
+ 
+</header>
+
+<!-- Main container -->
+<body class="frontPage">
+  <!-- Tabs -->
+  <div class="form-input row">
+    <div>
+      <h3 class="card-header text-uppercase">Find a workout to match your meal</h3>
+      <form id="user-form" class="card">
+        <label class="form-label" for="cuisine-select">Select a Cuisine</label>
+        <select id="cuisine-select" class="form-input">
+          <option value="" disabled selected>Select a cuisine</option>
+          <option value="mexican">Mexican</option>
+          <option value="japanese">Japanese</option>
+          <option value="american">American</option>
+          <option value="chinese">Chinese</option>
+          <option value="italian">Italian</option>
+        </select>
+        <button type="submit" class="btn">Get Your Match!</button>
+      </form>
     </div>
-  </header>
-  
+  </div>
 </body>
-<script src="https://code.jquery.com/jquery-3.4.1.min.js"></script>
+
+<!-- <script src="https://code.jquery.com/jquery-3.4.1.min.js"></script> -->
 <script src="https://cdn.jsdelivr.net/npm/dayjs@1.11.3/dayjs.min.js"
   integrity="sha256-iu/zLUB+QgISXBLCW/mcDi/rnf4m4uEDO0wauy76x7U=" crossorigin="anonymous"></script>
-<script src="./assets/script.js"></script>
 <script src="https://cdnjs.cloudflare.com/ajax/libs/materialize/1.0.0/js/materialize.min.js"></script>
-
+<script src="./assets/script.js"></script>
 </html>
