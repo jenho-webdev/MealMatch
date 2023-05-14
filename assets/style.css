@@ -23,8 +23,14 @@
     display:flex;
     width:100%;
     justify-content: center;
+    margin: 20px;
 }
 
 .frontPage {
     background-color:rgba(235, 180, 152, 1);
 }
+ .box {
+    margin: 0 35% 0 35%;
+    justify-content: center;
+    
+ }
