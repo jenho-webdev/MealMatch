@@ -62,22 +62,36 @@ p {
  
   transform: translate(-1px, -1px);
 }
+.nav-container {
+  display: flex;
+  justify-content: center;
+}
 .nav-btn {
   font-size: 200%;
   text-decoration:none;
   padding: 5px;
   width: fit-content;
-  display: block;
   margin: 5px;
   border-radius: var(--border-radius);
-  color: var(--secondary);
+  color: var(--dark);
   border: none;
   outline: none;
-  background-color: var(--dark);
+  background-color: var(--light-dark);
   transform: translate(-1px, -1px);
 
 }
+.nav-btn:hover {
+  color: whitesmoke;
+  background-color: var(--light-dark);
+  transform: translate(0, 0);
+  box-shadow: 2px 2px var(--dark);
+  box-shadow: 0 0 5px #ffbe90, 0 0 5px 
+  #ffbe90, 0 0 10px #ffbe90, 0 0 20px #ffbe90;
+}
 
+.nav-btn-inline {
+  display:inline;
+}
  .btn:hover {
   color: var(--primary);
   background-color: var(--light-dark);
