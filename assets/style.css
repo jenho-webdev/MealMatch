@@ -60,15 +60,20 @@
 .My-Color-Theme-5-hsla {
     color: hsla(20, 67, 75, 1);
 }
+
+.My-Color-Theme-5-hsla {
+    color: hsla(20, 67, 75, 1);
+}
 .welcome.logo {
     justify-content: center;
   }
 .logo {
     display: flex;
     width: 300px;
+
     justify-content: center;
     align-items: center;
-    margin: 1% 0% 1% 50%;
+    margin: 0 auto;
     border-style: double;
 }
 
@@ -110,7 +115,9 @@
 
 
 }
-
+ .container {
+    width: 100%;
+ }
 body,
 h1,
 h2,
