@@ -123,7 +123,9 @@
     color: var(--primary);
     text-decoration: none;
   }
-  
+  .welcome.logo {
+    justify-content: center;
+  }
   .list-item:hover {
     background-color: var(--dark);
   }
