@@ -20,9 +20,10 @@ const fetchExercises = `https://api.api-ninjas.com/v1/exercises?`;
 // const Today = dayjs().day(); //gets day of current week
 
 //all the recipes searched in current browser session(page refresh will wipe this!)
-const currentRecipes = [];
+const searchedRecipes = [];
 //an idex to know which recipe is the user seeing now in current session
 var currentRecipesIndex = 0;
+
 
 //----------------DOM functions and eventlistener functions-------------------------------------------
 
@@ -111,7 +112,7 @@ async function fetchRecipe(cuisine){
     vegan: vegan,
   };
   //push current recipe into var and advance index
-  currentRecipes.push(recipeOutput);
+  searchedRecipes.push(recipeOutput);
   currentRecipesIndex++;
   //return the repackaged recipeData contain only data that we need
   return recipeOutput;
@@ -153,8 +154,31 @@ function getLocalRecipesData () {
 
 //------------------>display to UI-------------------------------
 
-function displayArecipe (recipe) {};
-//TO BE DONE AFTER UI IS FINALIZED
+function displayArecipe (recipe) {
+  // Get the elements that need to be updated
+  const recipeImgEl = document.querySelector("#recipeImgEl");
+  const recipeTitleEl = document.querySelector("#recipeTitleEl");
+  const caloriesEl = document.querySelector("#calories");
+  const ingredientsEl = document.querySelector("#ingredients");
+  const instructionsEl = document.querySelector("#instructions");
+
+  // Update the elements with the recipe details
+  recipeImgEl.src = recipe.image;
+  recipeTitleEl.textContent = recipe.title;
+  caloriesEl.textContent = `Calories: ${recipe.calories}`;
+  ingredientsEl.innerHTML = `<b>Ingredients:</b><br>${recipe.ingredients.join(
+    "<br>"
+  )}`;
+  instructionsEl.innerHTML = `<b>Instructions:</b><br>${recipe.instructions.join(
+    "<br>"
+  )}`;
+
+  // Scroll to the recipe section
+  document
+    .querySelector("#recipe-section")
+    .scrollIntoView({ behavior: "smooth" });
+};
+
 
 function displaySavedRecipes () {};
 //TO BE DONE AFTER UI IS FINALIZED
