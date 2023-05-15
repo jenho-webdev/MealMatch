@@ -3,10 +3,12 @@
 const NINJAS_API = "qeQ/ixgJ1FhLzMigxs+yag==sahHalNRb0bq0szN";
 const Spoonacular_API = "c6c9bb9062a14ace88c599472838ee3f"
 const Spoonacular_API_jen = 'c6c9bb9062a14ace88c599472838ee3f';
-//Recipe Request Page DOM
-const form1El = document.querySelector("form1");
 
-//Weekly Calendar page DOM
+//Recipe Request Page DOM
+const searchBtn = document.querySelector("#search");
+const saveBtn = document.querySelector("#save");
+const backBtn = document.querySelector("#back");
+const nextBtn = document.querySelector("#next");
 
 
 //API URLs
@@ -14,38 +16,46 @@ const fecthRecipesURL = `https://api.spoonacular.com/recipes/complexSearch`;
 const fetchCaloriesBurnt = `https://api.api-ninjas.com/v1/caloriesburnedactivities`;
 const fetchExercises = `https://api.api-ninjas.com/v1/exercises?`;
 
-//Var for TESTING/PLACEHOLDER
-const cuisine = "Japanese";
-const sport = "run";
-const duration = "1";
-const durationUnit = "hour";
-
 //Global Var
-const Today = dayjs().day(); //gets day of current week
-const currentrecipe = {};
+// const Today = dayjs().day(); //gets day of current week
 
+//all the recipes searched in current browser session(page refresh will wipe this!)
+const currentRecipes = [];
+//an idex to know which recipe is the user seeing now in current session
+var currentRecipesIndex = 0;
 
 //----------------DOM functions and eventlistener functions-------------------------------------------
 
-form1El.addEventListener("click", (event) => {
+searchBtn.addEventListener("click", (e) => {
+
+ e.preventDefault();
+//Get select input
+const optionEl = document.getElementById("cuisine-select");
+//CAll get recipe function and pass in the input
+if (optionEl) {
+
+const cuisine = optionEl.value;
+const newRecipe = fetchRecipe(cuisine);
+// display result to UI
+displayArecipe(newRecipe);
   
-  if (event.target.tagName === "button" && event.target.id === "searchRecipeBtn") {
-    // Do something with the clicked item
+}
 
-  }
-    console.log(`You clicked on ${event.target.textContent}`);
-    
+});
 
-  });
 
 //---------------------->UI manipulation functions------------------------------
 
-//on page load function to "do something"(ie. load localstorage for saved cuisines)
-window.addEventListener("load", () => {
+// on page load function to "do something"(ie. load localstorage for saved cuisines)
+
+// window.onload = () => {
+
+//   M.AutoInit();
+// };
   
-  
+   
     
-});
+
 
 
 //------------------Locate Storage functions(https://developer.mozilla.org/en-US/docs/Web/API/Window/localStorage)
@@ -78,32 +88,33 @@ window.addEventListener("load", () => {
 async function fetchRecipe(cuisine){
   
   //1.06pts per call that return a recipe with info and nutrition
-  const fetchRecipe = await fetch(
-    `https://api.spoonacular.com/recipes/complexSearch?cuisine=${cuisine}&number=1&addRecipeNutrition=true&apiKey=${Spoonacular_API_jen}`
-  );
-  const recipeData = await fetchRecipe.json();
+  const recipeURL = await fetch(`https://api.spoonacular.com/recipes/complexSearch?cuisine=${cuisine}&number=1&addRecipeNutrition=true&apiKey=${Spoonacular_API_jen}`);
+
+  const recipeData = await  recipeURL.json();
   const nutrients = recipeData.results[0].nutrition.nutrients;
   const calories = nutrients.find((item) => item.name === "Calories").amount;
   // const saturatedFat = nutrients.find(item => item.name === "Saturated fat").amount;
   const recipeID = recipeData.results[0].id;
   const recipeImgUrl = recipeData.results[0].image;
+
   const readyInMinutes = recipeData.results[0].readyInMinutes;
   const title = recipeData.results[0].title;
   const vegan = recipeData.results[0].vegan;
-    // repackage all the recipe data that we need into a new obj
-  const recipeOutput = 
-  {
+  // repackage all the recipe data that we need into a new obj
+  const recipeOutput = {
+    cuisine:  cuisine,
     calories: calories,
     recipeID: recipeID,
     imgURL: recipeImgUrl,
     min: readyInMinutes,
     title: title,
     vegan: vegan,
-  }
+  };
+  //push current recipe into var and advance index
+  currentRecipes.push(recipeOutput);
+  currentRecipesIndex++;
   //return the repackaged recipeData contain only data that we need
-  currentrecipe = recipeOutput;
   return recipeOutput;
-
 }
 //------------->logic/compute------------------------------
 
@@ -116,7 +127,9 @@ function setLocalRecipesData (recipe) {
 
   const localData = getLocalRecipesData();
   const recipeID = recipe.recipeID
+  
   const isRecipesUnique = localData.every((item) => item.recipeID === recipeID);
+  
   if(isRecipesUnique) {
 
     localData.push(recipe);
@@ -125,6 +138,7 @@ function setLocalRecipesData (recipe) {
   else{
       throw error ("Recipes already saved in your recipes book");
   }
+  
   
 };
 
@@ -139,7 +153,7 @@ function getLocalRecipesData () {
 
 //------------------>display to UI-------------------------------
 
-function displayArecipe () {};
+function displayArecipe (recipe) {};
 //TO BE DONE AFTER UI IS FINALIZED
 
 function displaySavedRecipes () {};
