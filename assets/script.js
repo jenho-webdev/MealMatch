@@ -24,14 +24,14 @@ var currentRecipesIndex = 0;
 
 //----------------DOM functions and eventlistener functions-------------------------------------------
 
-searchBtn.addEventListener("click", (e) => {
+searchBtn.addEventListener("click", async (e) => {
   e.preventDefault();
   //Get select input
   const optionEl = document.getElementById("cuisine-select");
   //CAll get recipe function and pass in the input
   if (optionEl) {
     const cuisine = optionEl.value;
-    const newRecipe = fetchRecipe(cuisine);
+    const newRecipe = await fetchRecipe(cuisine);
     // display result to UI
     displayArecipe(newRecipe);
   }
