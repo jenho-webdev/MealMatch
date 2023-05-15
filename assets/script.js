@@ -215,10 +215,10 @@ var sampleMenuCalories = 123;  //sample var used for testingcode .
 var sportResult = "default";
 var sportCalories = 1;
 var sportDuration = "";
-var sport0 = "3.0 mph, moderate" //output = Walking 3.0 mph, moderate
-var sport1 = "6.7 mph (9 min mile)" //output = Running, 6.7 mph (9 min mile)
-var sport2 = "12-13.9 mph, moderate" //output = Cycling, 12-13.9 mph, moderate
-var sport3 = "treading water, moderate" //output = Swimming, treading water, moderate
+var sport0 = "3.0 mph" //output = Walking 3.0 mph, moderate
+var sport1 = "6.7 mph" //output = Running, 6.7 mph (9 min mile)
+var sport2 = "12-13.9 mph" //output = Cycling, 12-13.9 mph, moderate
+var sport3 = "treading water, m" //output = Swimming, treading water, moderate
 
 
 
@@ -229,7 +229,7 @@ var sport3 = "treading water, moderate" //output = Swimming, treading water, mod
 
 //search for activities based on sport var (currently use only the [0] of the API response array)
 function sportSearch(){
-var searchNinjaUrl = "https://api.api-ninjas.com/v1/caloriesburned?activity=" + sportTest;
+var searchNinjaUrl = "https://api.api-ninjas.com/v1/caloriesburned?activity=" + sport2;
 fetch(searchNinjaUrl,
 {headers: { 'X-Api-Key': NINJAS_API},})
 .then(function (response) {
