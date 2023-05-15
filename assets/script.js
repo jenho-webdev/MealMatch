@@ -26,8 +26,9 @@ var currentRecipesIndex = 0;
 
 //----------------DOM functions and eventlistener functions-------------------------------------------
 
-searchBtn.addEventListener("click", () => {
-  
+searchBtn.addEventListener("click", (e) => {
+
+ e.preventDefault();
 //Get select input
 const optionEl = document.getElementById("cuisine-select");
 //CAll get recipe function and pass in the input
@@ -45,7 +46,8 @@ displayArecipe(newRecipe);
 
 //---------------------->UI manipulation functions------------------------------
 
-//on page load function to "do something"(ie. load localstorage for saved cuisines)
+// on page load function to "do something"(ie. load localstorage for saved cuisines)
+
 // window.onload = () => {
 
 //   M.AutoInit();
@@ -84,6 +86,7 @@ displayArecipe(newRecipe);
 //Pass in cuisine(String) and return a "repackaged" recipe
 // return recipe contain {recipe name,calories,ID, image url,}
 async function fetchRecipe(cuisine){
+  
   //1.06pts per call that return a recipe with info and nutrition
   const recipeURL = await fetch(`https://api.spoonacular.com/recipes/complexSearch?cuisine=${cuisine}&number=1&addRecipeNutrition=true&apiKey=${Spoonacular_API_jen}`);
 
