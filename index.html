@@ -24,9 +24,11 @@
 <header >
     <nav class="nav-extended">
       <div class="row">
-        <img class="col offset-s5" src="./assets/image/logo.png" width="200" height="200">
+        <img class="logo" src="./assets/image/logo.png" width="20px" height="20px">
       </div>
-    
+      <h1>~Welcome to Meal Match~ </h1>
+      <!--home page id = homePage-->
+    <div class="home" id="homePage">
       <a href="index.html">Back to Home </a>
       </div>
     </nav>
@@ -36,12 +38,13 @@
 <!-- Main container -->
 <body class="frontPage">
   <!-- Tabs -->
-  <div class="form-input row">
+  <div class="input-field row">
     <div>
       <h3 class="card-header text-uppercase">Find a workout to match your meal</h3>
       <form id="user-form" class="card">
-        <label class="form-label" for="cuisine-select">Select a Cuisine</label>
-        <select id="cuisine-select" class="form-input">
+        <label class="form-label" for="cuisine-select">Cuisine</label>
+        <!--drop down box option id = cuisineChoice-->
+        <select id="cuisine-select" class="input-field" id="cuisineChoice">
           <option value="" disabled selected>Select a cuisine</option>
           <option value="mexican">Mexican</option>
           <option value="japanese">Japanese</option>
@@ -49,9 +52,18 @@
           <option value="chinese">Chinese</option>
           <option value="italian">Italian</option>
         </select>
-        <button type="submit" class="btn">Get Your Match!</button>
+        <!--get match button id = getMatch-->
+        <button type="submit" class="btn" id="getMatch">Get Your Match!</button>
       </form>
     </div>
+  </div>
+
+  <div class="container" >
+    <div class="row">
+      <div class="col">
+        <!--food container-->
+      </div>
+    </div class="col">
   </div>
 </body>
 
