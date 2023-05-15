@@ -9,10 +9,8 @@
     integrity="sha384-50oBUHEmvpQ+1lW4y57PTFmhCaXp0ML5d60M1M7uH2+nqUivzIebhndOJK28anvf" crossorigin="anonymous" />
   <link href="https://fonts.googleapis.com/css?family=Open+Sans&display=swap" rel="stylesheet" />
   <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/materialize/1.0.0/css/materialize.min.css">
-  <!-- <link rel="stylesheet" href="https://www.w3schools.com/w3css/4/w3.css"> -->
+  <link href="https://fonts.googleapis.com/icon?family=Material+Icons" rel="stylesheet">
   <link rel="stylesheet" href="https://fonts.googleapis.com/css?family=Raleway">
-  <!-- <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/4.7.0/css/font-awesome.min.css"> -->
-  <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/bulma@0.9.4/css/bulma.min.css">
   <link rel="stylesheet" href="./assets/style.css" />
   <link rel="stylesheet" href="./assets/mock.css" />
   <title>MealMatch</title>
@@ -39,8 +37,8 @@
     <div>
       <h3 class="card-header text-uppercase">Find a workout to match your meal</h3>
       <form id="user-form" class="card">
-        <label class="form-label" for="cuisine-select">Select a Cuisine</label>
-        <select id="cuisine-select" class="form-input">
+        <label class="form-label" for="cuisine-select">Cuisine</label>
+        <select id="cuisine-select" class="browser-default">
           <option value="" disabled selected>Select a cuisine</option>
           <option value="mexican">Mexican</option>
           <option value="japanese">Japanese</option>
@@ -48,9 +46,47 @@
           <option value="chinese">Chinese</option>
           <option value="italian">Italian</option>
         </select>
-        <button type="submit" class="btn">Get Your Match!</button>
+        <button type="submit" class="btn" id="search">Get Your Match!</button>
       </form>
     </div>
+  </div>
+  <div class="container">
+    <div class="row">
+      <!-- food card -->
+      <div class="col l6 s6">
+        <div class="card large">
+          <div class="card-image">
+            <img src="./assets/image/logo.png">
+            <span class="card-title">Card Title</span>
+            <a class="btn-floating halfway-fab waves-effect waves-light red"><i class="material-icons">add</i></a>
+          </div>
+          <div class="card-content">
+            <p>I am a very simple card. I am good at containing small bits of information. I am convenient because I require
+              little markup to use effectively.</p>
+          </div>
+        </div>
+      </div>
+      <!-- sport card -->
+      <div class="col l6  s6">
+        <div class="card large">
+          <div class="card-image">
+            <img id="recipe-img" src="./assets/image/logo.png">
+            <span class="recipe-title"></span>
+            <a class="btn-floating halfway-fab waves-effect waves-light red"><i class="material-icons">add</i></a>
+          </div>
+
+          <div class="card-content">
+            <p></p>
+          </div>
+        </div>
+      </div>
+    </div>
+
+
+
+    </div>
+
+
   </div>
 </body>
 
