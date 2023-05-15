@@ -215,6 +215,11 @@ var sampleMenuCalories = 123;  //sample var used for testingcode .
 var sportResult = "default";
 var sportCalories = 1;
 var sportDuration = "";
+var sport0 = "3.0 mph, moderate" //output = Walking 3.0 mph, moderate
+var sport1 = "6.7 mph (9 min mile)" //output = Running, 6.7 mph (9 min mile)
+var sport2 = "12-13.9 mph, moderate" //output = Cycling, 12-13.9 mph, moderate
+var sport3 = "treading water, moderate" //output = Swimming, treading water, moderate
+
 
 
 //----------->Get Sport Data-------------------------------------
@@ -224,7 +229,7 @@ var sportDuration = "";
 
 //search for activities based on sport var (currently use only the [0] of the API response array)
 function sportSearch(){
-var searchNinjaUrl = "https://api.api-ninjas.com/v1/caloriesburned?activity=" + sport;
+var searchNinjaUrl = "https://api.api-ninjas.com/v1/caloriesburned?activity=" + sportTest;
 fetch(searchNinjaUrl,
 {headers: { 'X-Api-Key': NINJAS_API},})
 .then(function (response) {
@@ -274,8 +279,18 @@ function computeDuration() {
 
 //------------------------>display-------------------------
 
+function displaySport0() {
+  console.log("work after HTML layout determined")
+};
 
+function displaySport1() {
+  console.log("work after HTML layout determined")
+};
 
+function displaySport2() {
+  console.log("work after HTML layout determined")
+};
 
-
-
+function displaySport3() {
+  console.log("work after HTML layout determined")
+};
