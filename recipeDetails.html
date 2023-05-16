@@ -4,11 +4,11 @@
     <meta charset="UTF-8" />
     <meta http-equiv="X-UA-Compatible" content="IE=edge" />
     <meta name="viewport" content="width=device-width, initial-scale=1.0" />
-    <link
-      type="text/css"
-      rel="stylesheet"
-      href="https://cdnjs.cloudflare.com/ajax/libs/materialize/1.0.0/css/materialize.min.css"
-    />
+    <link rel="stylesheet" href="https://use.fontawesome.com/releases/v5.8.1/css/all.css"
+    integrity="sha384-50oBUHEmvpQ+1lW4y57PTFmhCaXp0ML5d60M1M7uH2+nqUivzIebhndOJK28anvf" crossorigin="anonymous" />
+    <link type="text/css" rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/materialize/1.0.0/css/materialize.min.css"/>
+    <link href="https://fonts.googleapis.com/icon?family=Material+Icons" rel="stylesheet">
+    <link rel="stylesheet" href="https://fonts.googleapis.com/css?family=Raleway">
     <link rel="stylesheet" href="./assets/styles2.css" />
     <title>Recipe Details</title>
   </head>
@@ -31,21 +31,25 @@
         <!-- Recipe img card and sport detail card -->
         <div class="row">
           <div class="col s12 l3">
-            <div class="card small z-depth-4">
-              <div class="card-content">
-                <div id="recipe-image-details" class="card-image">
-                  <!-- Recipe img can go here-->
-                </div>
+            <div class="card z-depth-4">
+              <div class="card-image card-image-recipe">
+                <img id="recipe-image" src="assets/image/logo.png">
               </div>
             </div>
-            <div class="card small z-depth-4">
+            <div class="card z-depth-4">
               <div class="card-content">
-                <span class="card-title" style="font-weight: bold;">Excercise Details</span>
-                <div id="sport-icon" class="card-image">
+                <span class="card-title center-align" style="font-weight: bold;">Excercise Details</span>
+                <div class="card-image sport-icon center-align">
                   <!-- Sport icon can go here-->
+                  <img id="sport-icon" src="./assets/image/logo.png">
                 </div>
                 <div id="sport-details" class="card-content">
                   <!-- Sport details can go here-->
+                  <ul>
+                    <li>Lorem ipsum dolor sit amet consectetur adipisic</li>
+                    <li>Lorem ipsum dolor sit amet consectetur adipisic</li>
+                    <li>Lorem ipsum dolor sit amet consectetur adipisic</li>
+                  </ul>
                 </div>
               </div>
             </div>
@@ -55,26 +59,40 @@
             <span id="recipe-title" class="title-text">Recipe Title</span>
             <hr class="line">
             <!-- Recipe Ingredients Card-->
-            <div class="card small z-depth-4">
+            <div class="card z-depth-4">
               <div class="card-content">
                 <span class="card-title" style="font-weight: bold;">Ingredients</span>
                 <div id="ingredients-details"class="card-content">
                   <!-- List can go here-->
+                  <ul>
+                    <li>Ingredient 1</li>
+                    <li>Ingredient 2</li>
+                    <li>Ingredient 3</li>
+                    <li>Ingredient 4</li>
+                    <li>Ingredient 5</li>
+                  </ul>
                 </div>
               </div>
             </div>
             <!--Recipe cooking instructions -->
-            <div class="card small z-depth-4">
+            <div class="card z-depth-4">
               <div class="card-content">
                 <span class="card-title" style="font-weight: bold;">Cooking Directions</span>
                 <div id="directions-details" class="card-content">
                   <!-- List can go here-->
+                  <ul>
+                    <li>Step 1</li>
+                    <li>Step 2</li>
+                    <li>Step 3</li>
+                    <li>Step 4</li>
+                    <li>Step 5</li>
+                  </ul>
                 </div>
               </div>
             </div>
             <!-- Save Button -->
             <div class="center">
-              <button id="save-details" class="btn waves-effect waves-light " type="submit" name="action">Save</button>
+              <button id="save-details" class="btn btn-large waves-effect waves-light " type="submit" name="action">Save</button>
             </div>
           </div>
         </div>
