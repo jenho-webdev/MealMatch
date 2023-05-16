@@ -43,52 +43,6 @@ searchBtn.addEventListener("click", async (e) => {
 
 //------------------Locate Storage functions(https://developer.mozilla.org/en-US/docs/Web/API/Window/localStorage)
 
-//below are functions to load, save, display, and use locally stored cuisine element
-var saveList = ""; //initial blank savelist at load. Array. store cuisine input.
-
-//load local storage
-function loadSaved() {
-  var saved = JSON.parse(localStorage.getItem("saved"));
-  console.log(saved);
-  if (saved !== null) {
-    saveList = saved;
-  }}
-
-//save input value
-function storeSave() {
-  saveList.push(cuisineInputEl.value);  //currently set to cuisine input. change if needed
-  localStorage.setItem("saved", JSON.stringify(saveList));
-  }
-
-//displays the local storage save content. generates li with buttons nested to make list of saved content.
-function displaySave() {
-  saveDisplay.innerHTML = ""; //wipe reviously loaded content
-  for (var i = 0; i < saveList.length; i++) { 
-    var save = saveList[i]; 
-
-    var li = document.createElement("li");
-    li.textContent = "";
-    li.setAttribute("saveValue", i);
-
-    var button = document.createElement("button");
-    button.textContent = save;
-
-    li.appendChild(button);
-    saveList.appendChild(li);
-  }
-}  
-
-//re-search using saved content.
-function reloadSave(event) {
-  var element = event.target;
-
-  if (element.matches("button") === true) {
-    var index = element.parentElement.getAttribute("saveValue");
-  console.log(index);
-  inputValue = saveList[index];
-  fetchRecipe(cuisine); //or other function to start cuisine search process.
-  }
-}
 
 //-----------------------Get locally stored data---------------------------------------------------
 
@@ -201,7 +155,7 @@ function displayArecipe(recipe) {
     .scrollIntoView({ behavior: "smooth" });
 }
 
-function displaySavedRecipes() {}
+function displaySavedRecipes() {};
 //TO BE DONE AFTER UI IS FINALIZED
 
 //------------------------Activities Related functions below-----------------------------------------------
@@ -261,6 +215,52 @@ async function fetchActivities(calories) {
 
 //------------------------>set------------------------------
 
+//below are functions to load, save, display, and use locally stored cuisine element
+var saveList = ""; //initial blank savelist at load. Array. store cuisine input.
+
+//load local storage
+function loadSaved() {
+  var saved = JSON.parse(localStorage.getItem("saved"));
+  console.log(saved);
+  if (saved !== null) {
+    saveList = saved;
+  }}
+
+//save input value
+function storeSave() {
+  saveList.push(cuisineInputEl.value);  //currently set to cuisine input. change if needed
+  localStorage.setItem("saved", JSON.stringify(saveList));
+  }
+
+//displays the local storage save content. generates li with buttons nested to make list of saved content.
+function displaySave() {
+  saveDisplay.innerHTML = ""; //wipe reviously loaded content
+  for (var i = 0; i < saveList.length; i++) { 
+    var save = saveList[i]; 
+
+    var li = document.createElement("li");
+    li.textContent = "";
+    li.setAttribute("saveValue", i);
+
+    var button = document.createElement("button");
+    button.textContent = save;
+
+    li.appendChild(button);
+    saveList.appendChild(li);
+  }
+}  
+
+//re-search using saved content.
+function reloadSave(event) {
+  var element = event.target;
+
+  if (element.matches("button") === true) {
+    var index = element.parentElement.getAttribute("saveValue");
+  console.log(index);
+  inputValue = saveList[index];
+  fetchRecipe(cuisine); //or other function to start cuisine search process.
+  }
+}
 
 //------------------->compute-------------------------------
 
