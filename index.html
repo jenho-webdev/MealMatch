@@ -16,84 +16,115 @@
   <title>MealMatch</title>
 </head>
 
+<body>
 
-
-<!-- Header -->
-<header >
+  <!-- Header -->
+  <header>
     <nav class="nav-extended">
-      <div class="row">
-        <img class="col offset-s5" src="./assets/image/logo.png" width="200" height="200">
+      <div class="welcome row">
+        <img class="logo" src="./assets/image/logo.png">
       </div>
-    
-      <a href="index.html">Back to Home </a>
+      <h1>~Welcome to Meal Match~ </h1>
+      <!--home page id = homePage-->
+      <div class="home" id="homePage">
+        <a href="index.html">Back to Home </a>
       </div>
     </nav>
- 
-</header>
 
-<!-- Main container -->
-<body class="frontPage">
-  <!-- Tabs -->
-  <div class="form-input row">
-    <div>
-      <h3 class="card-header text-uppercase">Find a workout to match your meal</h3>
-      <form id="user-form" class="card">
-        <label class="form-label" for="cuisine-select">Cuisine</label>
-        <select id="cuisine-select" class="browser-default">
-          <option value="" disabled selected>Select a cuisine</option>
-          <option value="mexican">Mexican</option>
-          <option value="japanese">Japanese</option>
-          <option value="american">American</option>
-          <option value="chinese">Chinese</option>
-          <option value="italian">Italian</option>
-        </select>
-        <button type="submit" class="btn" id="search">Get Your Match!</button>
-      </form>
-    </div>
-  </div>
-  <div class="container">
-    <div class="row">
-      <!-- food card -->
-      <div class="col l6 s6">
-        <div class="card large">
-          <div class="card-image">
-            <img src="./assets/image/logo.png">
-            <span class="card-title">Card Title</span>
-            <a class="btn-floating halfway-fab waves-effect waves-light red"><i class="material-icons">add</i></a>
-          </div>
-          <div class="card-content">
-            <p>I am a very simple card. I am good at containing small bits of information. I am convenient because I require
-              little markup to use effectively.</p>
-          </div>
-        </div>
-      </div>
-      <!-- sport card -->
-      <div class="col l6  s6">
-        <div class="card large">
-          <div class="card-image">
-            <img id="recipe-img" src="./assets/image/logo.png">
-            <span class="recipe-title"></span>
-            <a class="btn-floating halfway-fab waves-effect waves-light red"><i class="material-icons">add</i></a>
-          </div>
+  </header>
 
-          <div class="card-content">
-            <p></p>
-          </div>
-        </div>
+  <!-- Main container -->
+  <main class="frontPage">
+    <!-- Tabs -->
+    <div class="input-field row">
+      <div>
+        <h3 class="card-header text-uppercase">Find a workout to match your meal</h3>
+        <form id="user-form" class="card">
+          <label class="form-label" for="cuisine-select">Cuisine</label>
+          <select id="cuisine-select" class="browser-default input-field">
+            <option value="" disabled selected>Select a cuisine</option>
+            <option value="mexican">Mexican</option>
+            <option value="japanese">Japanese</option>
+            <option value="american">American</option>
+            <option value="chinese">Chinese</option>
+            <option value="italian">Italian</option>
+          </select>
+          <button type="submit" class="btn" id="search">Get Your Match!</button>
+        </form>
       </div>
     </div>
+    <section class="container" >
+      <section class="row" id="card-row">
+        <!-- food card -->
+        <div class="col l6 s6">
+          <div class="card large">
+            <div class="card-image">
+              <img id="recipeImg" src="./assets/image/logo.png">
+              <span class="card-title">Card Title</span>
+              <a class="btn-floating halfway-fab waves-effect waves-light red"><i class="material-icons">add</i></a>
+            </div>
+            <div class="card-content">
+              <p>I am a very simple card. I am good at containing small bits of information. I am convenient because I
+                require
+                little markup to use effectively.</p>
+            </div>
+          </div>
+        </div>
+        <!-- sport card -->
+        <div class="col l6 s6">
+          <div class="card large">
+            <div class="row">
+              <div class="col s12">
+                <!-- Row Container 1 -->
+                <div class="sport-row" id="walk" style="border:solid #327864 3px">
+                  <h2>Walking</h2><!-- Content for Row Container 1 -->
+                </div>
+                <!-- Row Container 2 -->
+                <div class="sport-row" id="run" style="border:solid #327864 3px">
+                  <h2>Running</h2><!-- Content for Row Container 2 -->
+                </div>
+                <!-- Row Container 3 -->
+                <div class="sport-row" id="bike" style="border:solid #327864 3px">
+                  <h2>Biking</h2><!-- Content for Row Container 3 -->
+                </div>
+                <!-- Row Container 4 -->
+                <div class="sport-row" id="swim" style="border:solid #327864 3px">
+                  <h2>Swimming</h2><!-- Content for Row Container 4 -->
+                </div>
+            </div>
+           
+          </div>
+        </div>
+      </section>
+    </section>
 
 
-
+    <div class="row" id="btn-row">
+      <div class="nav-container">
+        <button class="nav-btn nav-btn-inline" id="save">Save</button>
+        <button class="nav-btn nav-btn-inline" id="next">Next</button>
+        <button class="nav-btn nav-btn-inline" id="back">Back</button>
+      </div>
     </div>
+        
+      
 
+        
 
-  </div>
+  
+  
+
+   
+    
+  </main>
 </body>
-
+  
 <!-- <script src="https://code.jquery.com/jquery-3.4.1.min.js"></script> -->
 <script src="https://cdn.jsdelivr.net/npm/dayjs@1.11.3/dayjs.min.js"
   integrity="sha256-iu/zLUB+QgISXBLCW/mcDi/rnf4m4uEDO0wauy76x7U=" crossorigin="anonymous"></script>
 <script src="https://cdnjs.cloudflare.com/ajax/libs/materialize/1.0.0/js/materialize.min.js"></script>
 <script src="./assets/script.js"></script>
+
 </html>
+
+<!--88 disappearing js file, minjs-->
