@@ -81,11 +81,10 @@
     background-color: #98EBE5;
 }
 
-/* .row {
-    margin: 0 100px 0 100px;
-    justify-content: center;
-    height: 100;
- } */
+ .row {
+  
+    height: 100%;
+ } 
 
 .nav-extended {
     background-color: #579E99;
@@ -149,6 +148,7 @@ h6 {
     --light-dark: #c7774f;
     --dark: #482c1f;
     --border-radius: .3rem;
+    --sports: #327864;
   }
   
   * {
@@ -183,11 +183,11 @@ h6 {
     background-color: var(--light-dark);
   }
   h2{
-    font-size: 30px;
+    font-size: 40px;
     color:antiquewhite;
     text-align: left;
     background-color:#327864;
-    justify-content: space-between;
+    justify-content: space-around;
   }
   main {
     margin: 20px auto;
@@ -210,7 +210,6 @@ h6 {
     border: none;
     outline: none;
     background-color: var(--dark);
-   
     transform: translate(-1px, -1px);
   }
   .nav-container {
@@ -224,6 +223,7 @@ h6 {
     width: fit-content;
     margin: 5px;
     border-radius: var(--border-radius);
+    
     color: var(--dark);
     border: none;
     outline: none;
@@ -288,10 +288,23 @@ h6 {
   .hero p {
     max-width: 75%;
   }
-  
-  .sport-row {
-    color: white;
+  .sport-detail {
+    display: flex;
+    flex-direction: column;
+    height: 100vh; 
   }
+
+  .sportChoice {
+    height: 100%;
+  }
+  .sport-row {
+    background-color: var(--sports);
+    border: 2px solid black;
+    height: 25%;
+  }
+
+ 
+
   .list-group {
     padding: 0;
     list-style: none;
@@ -339,6 +352,11 @@ h6 {
     padding: 2.5%;
     border-radius: 10px 10px 0 0;
     box-shadow: black 8px;
+  }
+
+  #recipeImg {
+    height: 100%;
+    width: 100%;
   }
   
   .card-body {

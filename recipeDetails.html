@@ -17,10 +17,10 @@
     <!-- Navbar -->
     <nav class="custom-nav">
       <div class="nav-wrapper">
-        <a href="#" class="brand-logo">MealMatch</a>
-        <ul id="nav-mobile" class="right hide-on-med-and-down">
-          <li><a href="#" id="home-details" class="btn btn-details">Home</a></li>
-          <li><a href="#" id="back-details" class="btn btn-details">Back</a></li>
+        <a href="#" class="brand-logo center hide-on-small-only"><img class="responsive-image" src="./assets/image/logo.png" alt="MealMatch Logo" class="logo-img"></a>
+        <ul id="nav-mobile" class="left">
+          <li><a href="./index.html" id="home-details" class="btn btn-details">Home</a></li>
+          <li><a href="#" id="book-details" class="btn btn-details">Recipe Book</a></li>
         </ul>
       </div>
     </nav>
@@ -31,16 +31,16 @@
         <!-- Recipe img card and sport detail card -->
         <div class="row">
           <div class="col s12 l3">
-            <div class="card small">
+            <div class="card small z-depth-4">
               <div class="card-content">
                 <div id="recipe-image-details" class="card-image">
                   <!-- Recipe img can go here-->
                 </div>
               </div>
             </div>
-            <div class="card small">
+            <div class="card small z-depth-4">
               <div class="card-content">
-                <span class="card-title">Excercise Details</span>
+                <span class="card-title" style="font-weight: bold;">Excercise Details</span>
                 <div id="sport-icon" class="card-image">
                   <!-- Sport icon can go here-->
                 </div>
@@ -52,28 +52,30 @@
           </div>
           <!-- Recipe Details -->
           <div class="col s12 l9">
-            <h5 id="recipe-title" class="title-text">Recipe Title</h5>
+            <span id="recipe-title" class="title-text">Recipe Title</span>
             <hr class="line">
             <!-- Recipe Ingredients Card-->
-            <div class="card small">
+            <div class="card small z-depth-4">
               <div class="card-content">
-                <span class="card-title">Ingredients</span>
+                <span class="card-title" style="font-weight: bold;">Ingredients</span>
                 <div id="ingredients-details"class="card-content">
                   <!-- List can go here-->
                 </div>
               </div>
             </div>
             <!--Recipe cooking instructions -->
-            <div class="card small">
+            <div class="card small z-depth-4">
               <div class="card-content">
-                <span class="card-title">Cooking Dierections</span>
+                <span class="card-title" style="font-weight: bold;">Cooking Directions</span>
                 <div id="directions-details" class="card-content">
                   <!-- List can go here-->
                 </div>
               </div>
             </div>
             <!-- Save Button -->
-            <button id="save-details" class="btn waves-effect waves-light" type="submit" name="action">Save</button>
+            <div class="center">
+              <button id="save-details" class="btn waves-effect waves-light " type="submit" name="action">Save</button>
+            </div>
           </div>
         </div>
       </div>

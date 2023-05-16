@@ -53,72 +53,113 @@
         </form>
       </div>
     </div>
-    <section class="container" >
+    <section class="container">
       <section class="row" id="card-row">
         <!-- food card -->
-        <div class="col l6 s6">
-          <div class="card large">
-            <div class="card-image">
-              <img id="recipeImg" src="./assets/image/logo.png">
-              <span class="card-title">Card Title</span>
-              <a class="btn-floating halfway-fab waves-effect waves-light red"><i class="material-icons">add</i></a>
-            </div>
-            <div class="card-content">
-              <p>I am a very simple card. I am good at containing small bits of information. I am convenient because I
-                require
-                little markup to use effectively.</p>
+   
+          <div class="col 16 s6">
+            <div class="card">
+              <div class="card-image">
+                <img id="recipeImg" src="./assets/image/logo.png">
+                <span id="recipeTitleEl" class="card-title">Card Title</span>
+                <a class="btn-floating halfway-fab waves-effect waves-light red"><i class="material-icons">add</i></a>
+              </div>
+              <div class="card-content">
+                <p id="summary">I am a very simple card. I am good at containing small bits of information. I am convenient because I require little markup to use effectively.</p>
+              </div>
+              <div class="card-action">
+                <a id="calories" href="#">This is a link</a>
+                <a id="redirectURL" href="#">Details</a>
+<!--tool tips / card-->
+              </div>
             </div>
           </div>
         </div>
+        <!-- <div class="col l6 s6">
+          <div class="card large">
+            
+            <div class="card-image">
+             
+              <img id="recipeImg" style="height: 100%; width: 100%; padding: 20px" src="./assets/image/logo.png">
+              <span class="card-title">Card Title</span>
+              
+            </div>
+            <a class="btn-floating halfway-fab waves-effect waves-light red"><i class="material-icons">add</i></a>
+            <div class="card-content">
+              
+              <p>I am a very simple card. I am good at containing small bits of information. I am convenient because I
+                require
+                little markup to use effectively.</p>
+              <div class="card-action">
+                <a href="#">This is a link</a>
+
+              </div>
+            </div>
+
+          </div>
+        </div> -->
         <!-- sport card -->
         <div class="col l6 s6">
           <div class="card large">
             <div class="row">
-              <div class="col s12">
+              <div class="sportChoice col s12" id="sport-details">
                 <!-- Row Container 1 -->
-                <div class="sport-row" id="walk" style="border:solid #327864 3px">
-                  <h2>Walking</h2><!-- Content for Row Container 1 -->
+                <div class="sport-row" id="walk" style="border:solid black 3px">
+                  <h2>
+                    <i class="small material-icons">directions_walk</i>
+                    Walking
+                  </h2><!-- Content for Row Container 1 -->
                 </div>
                 <!-- Row Container 2 -->
-                <div class="sport-row" id="run" style="border:solid #327864 3px">
-                  <h2>Running</h2><!-- Content for Row Container 2 -->
+                <div class="sport-row" id="run" style="border:solid black 3px">
+                  <h2>
+                    <i class="small material-icons">directions_run</i>
+                    Running
+                  </h2><!-- Content for Row Container 2 -->
                 </div>
                 <!-- Row Container 3 -->
-                <div class="sport-row" id="bike" style="border:solid #327864 3px">
-                  <h2>Biking</h2><!-- Content for Row Container 3 -->
+                <div class="sport-row" id="bike" style="border:solid black 3px">
+                  <h2>
+                    <i class="small material-icons">directions_bike</i>
+                    Biking
+                  </h2><!-- Content for Row Container 3 -->
                 </div>
                 <!-- Row Container 4 -->
-                <div class="sport-row" id="swim" style="border:solid #327864 3px">
-                  <h2>Swimming</h2><!-- Content for Row Container 4 -->
+                <div class="sport-row" id="swim" style="border:solid black 3px">
+                  <h2>
+                    <i class="small material-icons">pool</i>
+                    Swimming
+                  </h2><!-- Content for Row Container 4 -->
                 </div>
+              </div>
+
             </div>
-           
           </div>
-        </div>
       </section>
     </section>
 
 
     <div class="row" id="btn-row">
       <div class="nav-container">
-        <button class="nav-btn nav-btn-inline" id="save">Save</button>
-        <button class="nav-btn nav-btn-inline" id="next">Next</button>
+        <!-- <button class="nav-btn nav-btn-inline" id="save">Save</button> -->
         <button class="nav-btn nav-btn-inline" id="back">Back</button>
+        <button class="nav-btn nav-btn-inline" id="next">Next</button>
+        
       </div>
     </div>
-        
-      
 
-        
 
-  
-  
 
-   
-    
+
+
+
+
+
+
+
   </main>
 </body>
-  
+
 <!-- <script src="https://code.jquery.com/jquery-3.4.1.min.js"></script> -->
 <script src="https://cdn.jsdelivr.net/npm/dayjs@1.11.3/dayjs.min.js"
   integrity="sha256-iu/zLUB+QgISXBLCW/mcDi/rnf4m4uEDO0wauy76x7U=" crossorigin="anonymous"></script>
