@@ -8,8 +8,7 @@ const Spoonacular_API_jen = "c6c9bb9062a14ace88c599472838ee3f";
 //Recipe Request Page DOM
 const searchBtn = document.querySelector("#search");
 const saveBtn = document.querySelector("#save");
-const backBtn = document.querySelector("#back");
-const nextBtn = document.querySelector("#next");
+const backNextBtn = Array.from(document.querySelectorAll(".nav-btn-inline"));
 
 //API URLs
 const fetchhRecipesURL = `https://api.spoonacular.com/recipes/complexSearch`;
@@ -27,20 +26,55 @@ var currentRecipesIndex = 0;
 
 //----------------DOM functions and eventlistener functions-------------------------------------------
 
+// Event listener for search button
 searchBtn.addEventListener("click", async (e) => {
   e.preventDefault();
-  //Get select input
+  let cuisine = '';
   const optionEl = document.getElementById("cuisine-select");
-  //CAll get recipe function and pass in the input
   if (optionEl) {
-    const cuisine = optionEl.value;
-    const newRecipe = await fetchRecipe(cuisine);
-    // display result to UI
-    displayArecipe(newRecipe);
+    cuisine = optionEl.value;
   }
+  const newRecipe = await fetchRecipe(cuisine);
+  displayArecipe(newRecipe);
 });
 
-document.addEventListener("click", (e)
+//eventlistener for next and back buttons
+
+backNextBtn.forEach((btn) =>
+{
+  btn.addEventListener("click", (e) => {
+    e.preventDefault();
+    let loadRecipe = {};
+    let setIndex = 0;
+    
+    if (btn.id === "back" && currentRecipesIndex >= 1) 
+    {
+
+      setIndex = currentRecipesIndex - 1;
+      loadRecipe = searchedRecipes[setIndex];
+
+      if (loadRecipe != null) {
+        displayArecipe(loadRecipe);
+      }
+    } 
+    else if (btn.id === "next") 
+    {
+      setIndex = currentRecipesIndex + 1;
+      loadRecipe = searchedRecipes[setIndex];
+      if(loadRecipe != null) 
+      {
+        displayArecipe(loadRecipe);
+      }
+      else
+      {
+        const cuisine = getCuisineInput();
+        fetchRecipe(cuisine);
+      }
+      
+    }
+  });
+});
+
 
 
 
@@ -76,26 +110,24 @@ function moveHTML(){
 // return recipe contain {recipe name,calories,ID, image url,}
 async function fetchRecipe(cuisine) {
   //1.06pts per call that return a recipe with info and nutrition
-  const recipeURL = await fetch(
-    `https://api.spoonacular.com/recipes/complexSearch?cuisine=${cuisine}&number=1&addRecipeNutrition=true&apiKey=${Spoonacular_API_Keiji}`
-  );
-
-  const recipeData = await recipeURL.json();
+  const apiUrl = `https://api.spoonacular.com/recipes/complexSearch?apiKey=${Spoonacular_API_Keiji}&cuisine=${cuisine}&sort=random&number=1&addRecipeNutrition=true&fillIngredients=true`;
 
   
-  const recipeobt = recipeData.results[0];   //recipe object
+  const apiFetch = await (await fetch(apiUrl)).json();
+   
+  const recipeObj = apiFetch.results[0];   //recipe object
   //things that are under the recipeData.results[0]
   
-  const recipeID = recipeobt.id;  
-  const recipeImgUrl = recipeobt.image; 
-  const summary = recipeobt.summary;
-  const readyInMinutes = recipeobt.readyInMinutes;
-  const title = recipeobt.title;
-  const vegan = recipeobt.vegan;
-  //const ingredients = recipeobt.ingredients;
-
+  const recipeID = recipeObj.id;  
+  const recipeImgUrl = recipeObj.image; 
+  const summary = recipeObj.summary;
+  const readyInMinutes = recipeObj.readyInMinutes;
+  const title = recipeObj.title;
+  const vegan = recipeObj.vegan;
+  const ingredients = recipeObj.extendedIngredients;
+ 
   //things that is under the butrients array
-  const nutrients = recipeobt.nutrition.nutrients; //"nutrients array of objects"
+  const nutrients = recipeObj.nutrition.nutrients; //"nutrients array of objects"
   const calories = nutrients.find((item) => item.name === "Calories").amount;
     
   // repackage all the recipe data that we need into a new obj
@@ -103,7 +135,7 @@ async function fetchRecipe(cuisine) {
     index: currentRecipesIndex,
     cuisine: cuisine,
     calories: calories, 
-    // ingredients:ingredients,
+    ingredients:ingredients,
     summary: summary,
     recipeID: recipeID,
     imgURL: recipeImgUrl,
@@ -118,7 +150,8 @@ async function fetchRecipe(cuisine) {
   setLocalRecipesData(recipeOutput);
   return recipeOutput;
 
-}
+  
+};
 //------------->logic/compute------------------------------
 
 //----------------->Set to localStorage---------------------------
