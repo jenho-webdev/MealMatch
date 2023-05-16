@@ -20,7 +20,7 @@ const fetchExercises = `https://api.api-ninjas.com/v1/exercises?`;
 // const Today = dayjs().day(); //gets day of current week
 
 //all the recipes searched in current browser session(page refresh will wipe this!)
-const searchedRecipes = [];
+var searchedRecipes = [];
 //an idex to know which recipe is the user seeing now in current session
 var currentRecipesIndex = 0;
 
@@ -44,42 +44,48 @@ searchBtn.addEventListener("click", async (e) => {
     resultContainer.classList.remove("hide");
   recipeNavBtns.classList.remove("hide");
 
-  let cuisine = "";
-  const optionEl = document.getElementById("cuisine-select");
-  if (optionEl) {
-    cuisine = optionEl.value;
-  }
+  const cuisine = getCuisineInput();
   const newRecipe = await fetchRecipe(cuisine);
   displayArecipe(newRecipe);
 });
 
 //eventlistener for next and back buttons
 
-backNextBtn.forEach((btn) => {
-  btn.addEventListener("click", (e) => {
+backNextBtn.forEach((btn) => 
+{
+  btn.addEventListener("click", async (e) => 
+  {
     e.preventDefault();
     let loadRecipe = {};
     let setIndex = 0;
 
-    if (btn.id === "back" && currentRecipesIndex >= 1) {
-      setIndex = currentRecipesIndex - 1;
-      loadRecipe = searchedRecipes[setIndex];
-
-      if (loadRecipe != null) {
-        displayArecipe(loadRecipe);
-      }
-    } else if (btn.id === "next") {
-      setIndex = currentRecipesIndex + 1;
-      loadRecipe = searchedRecipes[setIndex];
-      if (loadRecipe != null) {
-        displayArecipe(loadRecipe);
-      } else {
-        const cuisine = getCuisineInput();
-        fetchRecipe(cuisine);
-      }
+    if (btn.id === "back" && currentRecipesIndex >= 1) 
+    {
+      currentRecipesIndex--;
+    }
+    else if (btn.id === "next") 
+    {
+      currentRecipesIndex++;
+    }
+    if (currentRecipesIndex >= 0 && currentRecipesIndex < searchedRecipes.length) 
+    {
+      const currentRecipe = searchedRecipes[currentRecipesIndex];
+      displayArecipe(currentRecipe);
+    } 
+    else 
+    {
+      const cuisine = getCuisineInput();
+      const newRecipe = await fetchRecipe(cuisine);
+      displayArecipe(newRecipe);
     }
   });
 });
+
+function getCuisineInput() {
+  const cuisineSelect = document.getElementById("cuisine-select");
+  const cuisine = cuisineSelect.value;
+  return cuisine;
+}
 
 //---------------------->UI manipulation functions------------------------------
 
