@@ -1,12 +1,11 @@
 body {
 
   background-color: #e3edec;
-
-
-  
 }
 
-
+.custom-nav {
+  background-color:#579e99 ;
+}
 
 
 header {
@@ -14,6 +13,14 @@ header {
   color: #fff;
   padding: 20px;
   text-align: center;
+}
+
+.body-bg {
+background-color: #ebb498;
+}
+
+.btn-details {
+  background-color: #9E6447;
 }
 img {
   max-width: 100%;
@@ -32,7 +39,7 @@ img {
 .link-container a {
   display: inline-block;
   margin: 0 10px;
-  padding: 10px 20px;
+  padding: 10px 10px;
   background-color: #9E6447;
   color: #fff;
   text-decoration: none;
@@ -47,7 +54,31 @@ img {
   box-shadow: 0 0 5px #98EBE5, 0 0 25px 
   #98ebe5, 0 0 50px #98ebe5, 0 0 200px #98ebe5;
 
+}
 
+.title-text {
+  color: #579e99;
+  font-weight: bold;
+}
+
+.logo {
+  size: 30px;
+}
+
+.brand-logo {
+  display: flex;
+  flex-direction: row;
+  justify-content: flex-start;
+  position: absolute;
+  width: 100px;
+  height: auto;
+}
+
+.line {
+  border: none;
+  border-top: 2px solid #9E6447;
+  margin-top: 10px;
+  margin-bottom: 20px;
 }
 
  .exercise-result {
@@ -59,11 +90,6 @@ img {
   background-color: #ebb498;
   border-radius: 5px;
 } 
-
-
-
-
-
 
 
 .meal-result {

@@ -1,73 +1,130 @@
 <!DOCTYPE html>
 <html lang="en">
+
 <head>
-    <meta charset="UTF-8">
-    <meta http-equiv="X-UA-Compatible" content="IE=edge">
-    <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <link rel="stylesheet" href="https://use.fontawesome.com/releases/v5.8.1/css/all.css"
-        integrity="sha384-50oBUHEmvpQ+1lW4y57PTFmhCaXp0ML5d60M1M7uH2+nqUivzIebhndOJK28anvf" crossorigin="anonymous" />
-    <link href="https://fonts.googleapis.com/css?family=Open+Sans&display=swap" rel="stylesheet" />
-    <link rel="stylesheet" href="./assets/style.css" />
-    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/materialize/1.0.0/css/materialize.min.css">
-    <script src="https://cdnjs.cloudflare.com/ajax/libs/materialize/1.0.0/js/materialize.min.js"></script>
-    
-    <link rel="stylesheet" href="https://www.w3schools.com/w3css/4/w3.css">
-<link rel="stylesheet" href="https://fonts.googleapis.com/css?family=Raleway">
-<link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/4.7.0/css/font-awesome.min.css">
-<style>
-body,h1,h2,h3,h4,h5,h6 {font-family: "Raleway", Arial, Helvetica, sans-serif}
-.myLink {display: none}
-</style>
-<title>MealMatch</title>
+  <meta charset="UTF-8">
+  <meta http-equiv="X-UA-Compatible" content="IE=edge">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <link rel="stylesheet" href="https://use.fontawesome.com/releases/v5.8.1/css/all.css"
+    integrity="sha384-50oBUHEmvpQ+1lW4y57PTFmhCaXp0ML5d60M1M7uH2+nqUivzIebhndOJK28anvf" crossorigin="anonymous" />
+  <link href="https://fonts.googleapis.com/css?family=Open+Sans&display=swap" rel="stylesheet" />
+  <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/materialize/1.0.0/css/materialize.min.css">
+  <link href="https://fonts.googleapis.com/icon?family=Material+Icons" rel="stylesheet">
+  <link rel="stylesheet" href="https://fonts.googleapis.com/css?family=Raleway">
+  <link rel="stylesheet" href="./assets/style.css" />
+  <link rel="stylesheet" href="./assets/mock.css" />
+  <title>MealMatch</title>
 </head>
-<body class="w3-light-grey">
-   
-</head>
-
-
-
-
 
 <body>
-    <div class="logo">
-        <img src="./assets/image/Burn off the calories you eat.png" style="width: 200px; height: 200px; ">
-        </div>
-    <div class="w3-bar w3-white w3-border-bottom w3-xlarge">
-        <a href="#" class="w3-bar-item w3-button w3-text-black w3-hover-green"><b><i class="fa fa-map-marker w3-margin-right"></i>MealMatch</b></a>
 
+  <!-- Header -->
+  <header>
+    <nav class="nav-extended">
+      <div class="welcome row">
+        <img class="logo" src="./assets/image/logo.png">
       </div>
-      <div class="" style="width:100%">
-        <div class="w3-bar w3-black">
-          <button class="w3-bar-item w3-button tablink" onclick="openLink(event);"><i class="fa fa-plane w3-margin-right"></i>Cuisine + Exercise</button>
-          <button class="w3-bar-item w3-button tablink" onclick="openLink(event);"><i class="fa fa-bed w3-margin-right"></i>Exercise + Duration</button>
-          <button class="w3-bar-item w3-button tablink" onclick="openLink(event);"><i class="fa fa-car w3-margin-right"></i>Cuisine + Duration</button>
-        </div>
+      <h1>~Welcome to Meal Match~ </h1>
+      <!--home page id = homePage-->
+      <div class="home" id="homePage">
+        <a href="index.html">Back to Home </a>
       </div>
-      <!-- Header -->
-      <header class="w3-display-container w3-content w3-hide-small" style="max-width:1500px">
-      
-     
-          <!-- Tabs -->
-          <div id="Flight" class="w3-container w3-white w3-padding-16">
-            <h3>Welcome to MealMatch</h3>
-            <div class="w3-row-padding" style="margin:0 -16px;">
-              <div class="w3-half">
-                <label>Cuisine</label>
-                <input class="w3-input w3-border" type="text" placeholder="Choose a cuisine">
-              </div>
-              <div class="w3-half">
-                <label>Exercise</label>
-                <input class="w3-input w3-border" type="text" placeholder="Choose an exercise">
-              </div>
+    </nav>
+
+  </header>
+
+  <!-- Main container -->
+  <main class="frontPage">
+    <!-- Tabs -->
+    <div class="input-field row">
+      <div>
+        <h3 class="card-header text-uppercase">Find a workout to match your meal</h3>
+        <form id="user-form" class="card">
+          <label class="form-label" for="cuisine-select">Cuisine</label>
+          <select id="cuisine-select" class="browser-default input-field">
+            <option value="" disabled selected>Select a cuisine</option>
+            <option value="mexican">Mexican</option>
+            <option value="japanese">Japanese</option>
+            <option value="american">American</option>
+            <option value="chinese">Chinese</option>
+            <option value="italian">Italian</option>
+          </select>
+          <button type="submit" class="btn" id="search">Get Your Match!</button>
+        </form>
+      </div>
+    </div>
+    <section class="container" >
+      <section class="row" id="card-row">
+        <!-- food card -->
+        <div class="col l6 s6">
+          <div class="card large">
+            <div class="card-image">
+              <img id="recipeImg" src="./assets/image/logo.png">
+              <span class="card-title">Card Title</span>
+              <a class="btn-floating halfway-fab waves-effect waves-light red"><i class="material-icons">add</i></a>
             </div>
-            <p><button class="w3-button w3-dark-grey">Search and find matches</button></p>
+            <div class="card-content">
+              <p>I am a very simple card. I am good at containing small bits of information. I am convenient because I
+                require
+                little markup to use effectively.</p>
+            </div>
           </div>
-       
-       
+        </div>
+        <!-- sport card -->
+        <div class="col l6 s6">
+          <div class="card large">
+            <div class="row">
+              <div class="col s12">
+                <!-- Row Container 1 -->
+                <div class="sport-row" id="walk" style="border:solid #327864 3px">
+                  <h2>Walking</h2><!-- Content for Row Container 1 -->
+                </div>
+                <!-- Row Container 2 -->
+                <div class="sport-row" id="run" style="border:solid #327864 3px">
+                  <h2>Running</h2><!-- Content for Row Container 2 -->
+                </div>
+                <!-- Row Container 3 -->
+                <div class="sport-row" id="bike" style="border:solid #327864 3px">
+                  <h2>Biking</h2><!-- Content for Row Container 3 -->
+                </div>
+                <!-- Row Container 4 -->
+                <div class="sport-row" id="swim" style="border:solid #327864 3px">
+                  <h2>Swimming</h2><!-- Content for Row Container 4 -->
+                </div>
+            </div>
+           
+          </div>
+        </div>
+      </section>
+    </section>
+
+
+    <div class="row" id="btn-row">
+      <div class="nav-container">
+        <button class="nav-btn nav-btn-inline" id="save">Save</button>
+        <button class="nav-btn nav-btn-inline" id="next">Next</button>
+        <button class="nav-btn nav-btn-inline" id="back">Back</button>
+      </div>
+    </div>
+        
+      
+
+        
+
+  
+  
+
+   
+    
+  </main>
 </body>
-<footer> </footer>
-<script src="https://code.jquery.com/jquery-3.4.1.min.js"></script>
+  
+<!-- <script src="https://code.jquery.com/jquery-3.4.1.min.js"></script> -->
 <script src="https://cdn.jsdelivr.net/npm/dayjs@1.11.3/dayjs.min.js"
-    integrity="sha256-iu/zLUB+QgISXBLCW/mcDi/rnf4m4uEDO0wauy76x7U=" crossorigin="anonymous"></script>
+  integrity="sha256-iu/zLUB+QgISXBLCW/mcDi/rnf4m4uEDO0wauy76x7U=" crossorigin="anonymous"></script>
+<script src="https://cdnjs.cloudflare.com/ajax/libs/materialize/1.0.0/js/materialize.min.js"></script>
 <script src="./assets/script.js"></script>
+
 </html>
+
+<!--88 disappearing js file, minjs-->
