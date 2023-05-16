@@ -3,14 +3,6 @@
 const NINJAS_API = "qeQ/ixgJ1FhLzMigxs+yag==sahHalNRb0bq0szN";
 const Spoonacular_API = "c6c9bb9062a14ace88c599472838ee3f"
 const Spoonacular_API_jen = 'c6c9bb9062a14ace88c599472838ee3f';
-<<<<<<< HEAD
-//Recipe Request Page DOM
-const cuisineInputEl = document.querySelector("#cuisine-input");
-const sportInputEl = document.querySelector("#sport-input");
-const submitBtn = document.querySelector("submit-btn");
-
-=======
->>>>>>> a2355d654865add8e4074db7d985f60c06acb453
 
 //Recipe Request Page DOM
 const searchBtn = document.querySelector("#search");
@@ -25,12 +17,7 @@ const fetchCaloriesBurnt = `https://api.api-ninjas.com/v1/caloriesburnedactiviti
 const fetchExercises = `https://api.api-ninjas.com/v1/exercises?`;
 
 //Global Var
-<<<<<<< HEAD
-const Today = dayjs().day(); //gets day of current week
-
-=======
 // const Today = dayjs().day(); //gets day of current week
->>>>>>> a2355d654865add8e4074db7d985f60c06acb453
 
 //all the recipes searched in current browser session(page refresh will wipe this!)
 const currentRecipes = [];
@@ -39,15 +26,6 @@ var currentRecipesIndex = 0;
 
 //----------------DOM functions and eventlistener functions-------------------------------------------
 
-<<<<<<< HEAD
-
-//---------------------->UI manipulation functions------------------------------
-
-//on page load function to "do something"(ie. load localstorage for saved cuisines)
-window.addEventListener("load", () => {
-    
-  //getLocalRecipesData();
-=======
 searchBtn.addEventListener("click", (e) => {
 
  e.preventDefault();
@@ -76,7 +54,6 @@ displayArecipe(newRecipe);
 // };
   
    
->>>>>>> a2355d654865add8e4074db7d985f60c06acb453
     
 
 
@@ -152,8 +129,6 @@ async function fetchRecipe(cuisine){
 
 //----------------->set to localStorage---------------------------
 
-<<<<<<< HEAD
-=======
 //SET (one) recipe JOSON to localStorage
 function setLocalRecipesData (recipe) {
 
@@ -181,16 +156,12 @@ function getLocalRecipesData () {
   const savedRecipes = JSON.parse(localStorage.getItem("recipes")) || [];
   return savedRecipes;
 };
->>>>>>> a2355d654865add8e4074db7d985f60c06acb453
 
 
 //------------------>display to UI-------------------------------
 
-<<<<<<< HEAD
-=======
 function displayArecipe (recipe) {};
 //TO BE DONE AFTER UI IS FINALIZED
->>>>>>> a2355d654865add8e4074db7d985f60c06acb453
 
 
 
