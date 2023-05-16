@@ -1,0 +1,84 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta http-equiv="X-UA-Compatible" content="IE=edge" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <link
+      type="text/css"
+      rel="stylesheet"
+      href="https://cdnjs.cloudflare.com/ajax/libs/materialize/1.0.0/css/materialize.min.css"
+    />
+    <link rel="stylesheet" href="./assets/styles2.css" />
+    <title>Recipe Details</title>
+  </head>
+
+  <body class="body-bg">
+    <!-- Navbar -->
+    <nav class="custom-nav">
+      <div class="nav-wrapper">
+        <a href="#" class="brand-logo">MealMatch</a>
+        <ul id="nav-mobile" class="right hide-on-med-and-down">
+          <li><a href="#" id="home-details" class="btn btn-details">Home</a></li>
+          <li><a href="#" id="back-details" class="btn btn-details">Back</a></li>
+        </ul>
+      </div>
+    </nav>
+    <!-- Content Container -->
+    <div class="row">
+      <div class="col s12">
+        
+        <!-- Recipe img card and sport detail card -->
+        <div class="row">
+          <div class="col s12 l3">
+            <div class="card small">
+              <div class="card-content">
+                <div id="recipe-image-details" class="card-image">
+                  <!-- Recipe img can go here-->
+                </div>
+              </div>
+            </div>
+            <div class="card small">
+              <div class="card-content">
+                <span class="card-title">Excercise Details</span>
+                <div id="sport-icon" class="card-image">
+                  <!-- Sport icon can go here-->
+                </div>
+                <div id="sport-details" class="card-content">
+                  <!-- Sport details can go here-->
+                </div>
+              </div>
+            </div>
+          </div>
+          <!-- Recipe Details -->
+          <div class="col s12 l9">
+            <h5 id="recipe-title" class="title-text">Recipe Title</h5>
+            <hr class="line">
+            <!-- Recipe Ingredients Card-->
+            <div class="card small">
+              <div class="card-content">
+                <span class="card-title">Ingredients</span>
+                <div id="ingredients-details"class="card-content">
+                  <!-- List can go here-->
+                </div>
+              </div>
+            </div>
+            <!--Recipe cooking instructions -->
+            <div class="card small">
+              <div class="card-content">
+                <span class="card-title">Cooking Dierections</span>
+                <div id="directions-details" class="card-content">
+                  <!-- List can go here-->
+                </div>
+              </div>
+            </div>
+            <!-- Save Button -->
+            <button id="save-details" class="btn waves-effect waves-light" type="submit" name="action">Save</button>
+          </div>
+        </div>
+      </div>
+    </div>
+  </div>
+  </body>
+  <script src="https://cdnjs.cloudflare.com/ajax/libs/materialize/1.0.0/js/materialize.min.js"></script>
+</html>
