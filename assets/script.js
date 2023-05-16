@@ -72,7 +72,7 @@ function moveHTML(){
 async function fetchRecipe(cuisine) {
   //1.06pts per call that return a recipe with info and nutrition
   const recipeURL = await fetch(
-    `https://api.spoonacular.com/recipes/complexSearch?cuisine=${cuisine}&number=1&addRecipeNutrition=true&apiKey=${Spoonacular_API_jen}`
+    `https://api.spoonacular.com/recipes/complexSearch?cuisine=${cuisine}&number=1&addRecipeNutrition=true&apiKey=${Spoonacular_API}`
   );
 
   const recipeData = await recipeURL.json();
