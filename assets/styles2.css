@@ -1,3 +1,8 @@
+* {
+  box-sizing: border-box;
+  font-family: Raleway, Arial, Helvetica, sans-serif;
+}
+
 body {
 
   background-color: #e3edec;
@@ -7,9 +12,12 @@ body {
   background-color: #e3edec;
 }
 .custom-nav {
-  background-color:#579e99 ;
+  background:linear-gradient(#579e99, #98EBE5,#579e99);
   height: 100px;
   line-height: 100px;
+}
+.card-content ul li {
+  list-style-type: square;
 }
 
 .custom-nav li a:hover {
@@ -25,12 +33,13 @@ header {
 }
 
 .body-bg {
-background-color: #ebb498;
+background: linear-gradient(#ebb498,#9E6447,#ebb498);
 }
 
 .btn-details {
   background-color: #9E6447;
 }
+
 img {
   max-width: 100%;
   height: auto;
@@ -71,7 +80,7 @@ img {
 }
 
 .title-text {
-  color: #579e99;
+  color: #367974;
   font-size: 3rem;
   font-weight: bold;
 }
@@ -95,7 +104,20 @@ img {
   width: 100px;
   height: auto;
 }
+.card-image-recipe {
+  padding: 2rem;
+  background:linear-gradient(#579e99, #98EBE5,#579e99);
+}
+.card-image {
+  text-align: center;
+}
 
+.sport-icon {
+  width: 120px;
+  margin:0 auto;
+  padding:.5rem;
+  background:linear-gradient(#579e99, #98EBE5,#579e99);
+}
 
 .line {
   border: none;
@@ -136,7 +158,6 @@ img {
 
 
 
-
 .exercise-result img {
   width: 50%;
   margin-right: 20px;
@@ -171,7 +192,9 @@ box-shadow: 0 0 5px #98EBE5, 0 0 25px
 #98ebe5, 0 0 50px #98ebe5, 0 0 200px #98ebe5;
 
 }
-
+.card-image-recipe, .card-content.sport-icon {
+  transition: all 0.3s ease;
+}
 @media screen and (max-width: 992px) {
   .col.m6 {
     width: 50%;
@@ -188,11 +211,33 @@ box-shadow: 0 0 5px #98EBE5, 0 0 25px
     width: 50%;
     float: left;
   }
+  .card-image-recipe {
+    transform: scale(0.8);
+    margin-top: 1rem;
+    margin-bottom: 1rem;
+  }
+
+  .card-content.sport-icon {
+    transform: scale(0.8);
+    margin-top: 1rem;
+    margin-bottom: 1rem;
+  }
 }
 
 @media (max-width: 600px) {
   .col.s12 {
     width: 100% !important;
     margin-left: 0 !important;
+  }
+  .card-image-recipe {
+    transform: scale(0.6);
+    margin-top: 2rem;
+    margin-bottom: 2rem;
+  }
+
+  .card-content.sport-icon {
+    transform: scale(0.6);
+    margin-top: 2rem;
+    margin-bottom: 2rem;
   }
 }

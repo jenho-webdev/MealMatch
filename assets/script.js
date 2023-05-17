@@ -82,7 +82,6 @@ backNextBtn.forEach((btn) => {
 });
 
 //---------------------->UI manipulation functions------------------------------
-//----display content after selecting cuisine------------------
 
 //------------------Locate Storage functions(https://developer.mozilla.org/en-US/docs/Web/API/Window/localStorage)
 
