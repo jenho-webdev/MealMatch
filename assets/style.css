@@ -348,6 +348,7 @@ h6 {
   /* FONT UTILS */
   .text-uppercase {
     text-transform: uppercase;
+    text-align: center;
   }
   
   @media screen and (max-width: 992px) {
