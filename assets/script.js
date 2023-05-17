@@ -162,9 +162,17 @@ function displaySavedRecipes() {};
 
 //Sports area DOM
 const walk = document.querySelector("#walk");
+const walkCalories = document.querySelector("#walkCalories");
+const walkDuration = document.querySelector("#walkDuration");
 const run = document.querySelector("#run");
+const runCalories = document.querySelector("#runCalories");
+const runDuration = document.querySelector("#runDuration");
 const bike = document.querySelector("#bike");
+const bikeCalories = document.querySelector("#bikeCalories");
+const bikeDuration = document.querySelector("#bikeDuration");
 const swim = document.querySelector("#swim");
+const swimCalories = document.querySelector("#swimCalories");
+const swimDuration = document.querySelector("#swimDuration");
 
 
 
@@ -183,8 +191,10 @@ var sport3 = "treading water, m" //output = Swimming, treading water, moderate
 
 var sportSet = ["3.0 mph", "6.7 mph", "12-13.9 mph", "treading water, m"]
 var sportInfoCurrent = [];
+var sportDurationCurrent = [];
 var sportInfoPackage = [];
-const displaySportLoop = [walk, run, bike, swim];
+const displaySportCaloriesLoop = [walkCalories, runCalories, bikeCalories, swimCalories];
+const displaySportDurationLoop = [walkDuration, runDuration, bikeDuration, swimDuration];
 
 //----------->Get Sport Data-------------------------------------
 //Sample of Jen's async
@@ -229,9 +239,9 @@ return;
 }
 }
 
-async function fetchActivities(calories) {
-  const sportData = await fetch(``);
-}
+// async function fetchActivities(calories) {
+//   const sportData = await fetch(``);
+// }
 
 //------------------------>set------------------------------
 
@@ -247,47 +257,74 @@ var saveList = ""; //initial blank savelist at load. Array. store cuisine input.
 //   }}
 
 //save input value
-function storeSaveSport() {
-  saveList.push(cuisineInputEl.value);  //currently set to cuisine input. change if needed
-  localStorage.setItem("saved", JSON.stringify(saveList));
-  }
+// function storeSaveSport() {
+//   saveList.push(cuisineInputEl.value);  //currently set to cuisine input. change if needed
+//   localStorage.setItem("saved", JSON.stringify(saveList));
+//   }
 
 //displays the local storage save content. generates li with buttons nested to make list of saved content.
-function displaySave() {
-  saveDisplay.innerHTML = ""; //wipe reviously loaded content
-  for (var i = 0; i < saveList.length; i++) { 
-    var save = saveList[i]; 
+// function displaySave() {
+//   saveDisplay.innerHTML = ""; //wipe reviously loaded content
+//   for (var i = 0; i < saveList.length; i++) { 
+//     var save = saveList[i]; 
 
-    var li = document.createElement("li");
-    li.textContent = "";
-    li.setAttribute("saveValue", i);
+//     var li = document.createElement("li");
+//     li.textContent = "";
+//     li.setAttribute("saveValue", i);
 
-    var button = document.createElement("button");
-    button.textContent = save;
+//     var button = document.createElement("button");
+//     button.textContent = save;
 
-    li.appendChild(button);
-    saveList.appendChild(li);
-  }
-}  
+//     li.appendChild(button);
+//     saveList.appendChild(li);
+//   }
+// }  
 
 //re-search using saved content.
-function reloadSave(event) {
-  var element = event.target;
+// function reloadSave(event) {
+//   var element = event.target;
 
-  if (element.matches("button") === true) {
-    var index = element.parentElement.getAttribute("saveValue");
-  console.log(index);
-  inputValue = saveList[index];
-  fetchRecipe(cuisine); //or other function to start cuisine search process.
-  }
-}
+//   if (element.matches("button") === true) {
+//     var index = element.parentElement.getAttribute("saveValue");
+//   console.log(index);
+//   inputValue = saveList[index];
+//   fetchRecipe(cuisine); //or other function to start cuisine search process.
+//   }
+// }
 
 //------------------->compute-------------------------------
 
-function sportDisplay() {
-  for (var i = 0; i < displaySportLoop.length; i++) { 
-    var content = document.createElement("p");
-    content.textContent = "calories burned per hour =" + sportInfoCurrent[i][0].calories_per_hour;
-    displaySportLoop[i].appendChild(content)
+//get duration of sport in minutes to match menu calories
+function computeDuration() {
+  for (var i = 0; i < sportInfoCurrent.length; i++) { 
+    var sportCalories = sportInfoCurrent[i][0].calories_per_hour
+  if (sportCalories == ""){
+    console.log("computeDuration function errored");
+    return;
+  }
+  sportDuration = sampleMenuCalories / sportCalories;
+  console.log(sportDuration + "hours")
+  var sportDurationMin = sportDuration * 60;
+  console.log(sportDurationMin.toFixed() + "minutes");
+  sportDurationCurrent.push(sportDurationMin.toFixed());
+}
+}
+
+//------------------->display-------------------------------
+
+function sportDisplayCalories() {
+  for (var i = 0; i < displaySportCaloriesLoop.length; i++) { 
+    // var content = document.createElement("p");
+    displaySportCaloriesLoop[i].textContent = "Calories: \n " + sportInfoCurrent[i][0].calories_per_hour +"/hour";
+    // displaySportLoop[i].appendChild(content)
   }
 }
+
+function sportDisplayDuration() {
+  for (var i = 0; i < displaySportDurationLoop.length; i++) { 
+    // var content = document.createElement("p");
+    displaySportDurationLoop[i].textContent = "Duration: \n " + sportDurationCurrent[i]+" minutes";
+    // displaySportLoop[i].appendChild(content)
+  }
+}
+
