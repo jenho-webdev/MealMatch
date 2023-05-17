@@ -33,12 +33,43 @@ function getCuisineInput() {
 
 //on page load, hide the result dive and button row at the bottom
 
-document.addEventListener('DOMContentLoaded', function() {
-  // Hide the bottom section initially
- 
+document.addEventListener('DOMContentLoaded', function() 
+{
+
+  // const apiKey = localStorage.getItem('apiKey');
+  // if (!apiKey) 
+  // {
+  //   // Initialize the modal
+  //   const apiModal = document.getElementById('apiModal');
+  //   const modalInstance = M.Modal.init(apiModal);
+
+  //   // Open the modal
+  //   modalInstance.open();
+
+  //   // Add event listener to save the API key when the save button is clicked
+  //     const saveApiKeyBtn = document.getElementById('saveApiKeyBtn');
+  //     const modalOverlay = document.getElementsByClassName("modal-overlay");
+  //     saveApiKeyBtn.addEventListener('click', function() 
+  //     {
+  //       const apiKeyInput = document.getElementById("apiKeyInput");
+  //       const apiKey = apiKeyInput.value;
+
+  //       // Store the API key locally
+  //       localStorage.setItem("apiKey", apiKey);
+  //       // Close the modal
+  //       modal.style.display = "none";
+  //       modalOverlay.style.display = "none";
+  //     });
+
+  // };
+  // Hide the bottom section initially  
   resultContainer.classList.add('hide');
   recipeNavBtns.classList.add('hide');
+
+  // Clear the searched recipes from localStorage
+  localStorage.removeItem('recipes');
 });
+
 
 
 // Event listener for search button
@@ -104,7 +135,6 @@ backNextBtn.forEach((btn) =>
 //moves to recipeDetails.html
 function moveHTML() {
   var queryString = "./recipeDetails.html?q=" + currentRecipesIndex;
-
   location.assign(queryString);
 }
 
@@ -118,7 +148,7 @@ function moveHTML() {
 // return recipe contain {recipe name,calories,ID, image url,}
 async function fetchRecipe(cuisine) {
   //1.06pts per call that return a recipe with info and nutrition
-  const apiUrl = `https://api.spoonacular.com/recipes/complexSearch?apiKey=${Spoonacular_API_Keiji}&cuisine=${cuisine}&sort=random&number=1&addRecipeNutrition=true&fillIngredients=true`;
+  const apiUrl = `https://api.spoonacular.com/recipes/complexSearch?apiKey=${Spoonacular_API_jen}&cuisine=${cuisine}&sort=random&number=1&addRecipeNutrition=true&fillIngredients=true`;
 
   const apiFetch = await (await fetch(apiUrl)).json();
 
