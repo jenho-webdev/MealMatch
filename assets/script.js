@@ -8,9 +8,9 @@ const Spoonacular_API_jen = "c6c9bb9062a14ace88c599472838ee3f";
 //Recipe Request Page DOM
 const searchBtn = document.querySelector("#search");
 const saveBtn = document.querySelector("#save");
-const backBtn = document.querySelector("#back");
-const nextBtn = document.querySelector("#next");
-
+const backNextBtn = Array.from(document.querySelectorAll(".nav-btn-inline"));
+const resultContainer = document.querySelector("#results-container");
+const recipeNavBtns = document.querySelector("#btn-row");
 //API URLs
 const fecthRecipesURL = `https://api.spoonacular.com/recipes/complexSearch`;
 const fetchCaloriesBurnt = `https://api.api-ninjas.com/v1/caloriesburnedactivities`;
@@ -20,24 +20,103 @@ const fetchExercises = `https://api.api-ninjas.com/v1/exercises?`;
 // const Today = dayjs().day(); //gets day of current week
 
 //all the recipes searched in current browser session(page refresh will wipe this!)
-const searchedRecipes = [];
+var searchedRecipes = [];
 //an idex to know which recipe is the user seeing now in current session
 var currentRecipesIndex = 0;
 
 //----------------DOM functions and eventlistener functions-------------------------------------------
+function getCuisineInput() {
+  const cuisineSelect = document.getElementById("cuisine-select");
+  const cuisine = cuisineSelect.value;
+  return cuisine;
+}
 
+//on page load, hide the result dive and button row at the bottom
+
+document.addEventListener('DOMContentLoaded', function() 
+{
+
+  // const apiKey = localStorage.getItem('apiKey');
+  // if (!apiKey) 
+  // {
+  //   // Initialize the modal
+  //   const apiModal = document.getElementById('apiModal');
+  //   const modalInstance = M.Modal.init(apiModal);
+
+  //   // Open the modal
+  //   modalInstance.open();
+
+  //   // Add event listener to save the API key when the save button is clicked
+  //     const saveApiKeyBtn = document.getElementById('saveApiKeyBtn');
+  //     const modalOverlay = document.getElementsByClassName("modal-overlay");
+  //     saveApiKeyBtn.addEventListener('click', function() 
+  //     {
+  //       const apiKeyInput = document.getElementById("apiKeyInput");
+  //       const apiKey = apiKeyInput.value;
+
+  //       // Store the API key locally
+  //       localStorage.setItem("apiKey", apiKey);
+  //       // Close the modal
+  //       modal.style.display = "none";
+  //       modalOverlay.style.display = "none";
+  //     });
+
+  // };
+  // Hide the bottom section initially  
+  resultContainer.classList.add('hide');
+  recipeNavBtns.classList.add('hide');
+
+  // Clear the searched recipes from localStorage
+  localStorage.removeItem('recipes');
+});
+
+
+
+// Event listener for search button
 searchBtn.addEventListener("click", async (e) => {
   e.preventDefault();
-  //Get select input
-  const optionEl = document.getElementById("cuisine-select");
-  //CAll get recipe function and pass in the input
-  if (optionEl) {
-    const cuisine = optionEl.value;
-    const newRecipe = await fetchRecipe(cuisine);
-    // display result to UI
-    displayArecipe(newRecipe);
-  }
+  // Remove the "hide" class from the bottom section container element
+    resultContainer.classList.remove("hide");
+  recipeNavBtns.classList.remove("hide");
+
+  const cuisine = getCuisineInput();
+  const newRecipe = await fetchRecipe(cuisine);
+  displayArecipe(newRecipe);
 });
+
+//eventlistener for next and back buttons
+
+backNextBtn.forEach((btn) => 
+{
+  btn.addEventListener("click", async (e) => 
+  {
+    e.preventDefault();
+    let loadRecipe = {};
+    let setIndex = 0;
+
+    if (btn.id === "back" && currentRecipesIndex >= 1) 
+    {
+      currentRecipesIndex--;
+    }
+    else if (btn.id === "next") 
+    {
+      currentRecipesIndex++;
+    }
+    if (currentRecipesIndex >= 0 && currentRecipesIndex < searchedRecipes.length) 
+    {
+      const currentRecipe = searchedRecipes[currentRecipesIndex];
+      displayArecipe(currentRecipe);
+    } 
+    else 
+    {
+      const cuisine = getCuisineInput();
+      const newRecipe = await fetchRecipe(cuisine);
+      displayArecipe(newRecipe);
+    }
+  });
+});
+
+
 
 //---------------------->UI manipulation functions------------------------------
 
@@ -54,10 +133,9 @@ searchBtn.addEventListener("click", async (e) => {
 
 //--------------------------HTML changing functions--------------------------------------------------------
 
-//moves to page2.html
-function moveHTML(){
-  var queryString = "./page2.html?q=" + cuisineInputEl.value;
-
+//moves to recipeDetails.html
+function moveHTML() {
+  var queryString = "./recipeDetails.html?q=" + currentRecipesIndex;
   location.assign(queryString);
 }
 
@@ -71,9 +149,7 @@ function moveHTML(){
 // return recipe contain {recipe name,calories,ID, image url,}
 async function fetchRecipe(cuisine) {
   //1.06pts per call that return a recipe with info and nutrition
-  const recipeURL = await fetch(
-    `https://api.spoonacular.com/recipes/complexSearch?cuisine=${cuisine}&number=1&addRecipeNutrition=true&apiKey=${Spoonacular_API}`
-  );
+  const apiUrl = `https://api.spoonacular.com/recipes/complexSearch?apiKey=${Spoonacular_API_jen}&cuisine=${cuisine}&sort=random&number=1&addRecipeNutrition=true&fillIngredients=true`;
 
   const recipeData = await recipeURL.json();
   const nutrients = recipeData.results[0].nutrition.nutrients;
