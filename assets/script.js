@@ -4,7 +4,8 @@ const NINJAS_API = "qeQ/ixgJ1FhLzMigxs+yag==sahHalNRb0bq0szN";
 const Spoonacular_API_Keiji = "b7db31d63a4d49e4ba04b02bdfcde847"; //keiji's key
 const Spoonacular_API_Douglas = "c6c9bb9062a14ace88c599472838ee3f";
 const Spoonacular_API_jen = "c6c9bb9062a14ace88c599472838ee3f";
-
+const Spoonacular_API_Marinah = "16946d9451994c79a77d0a8a9247cea4"; 
+const Spoonacular_API_Marinah2= "ebf25eab986d4cab90b7bc14df68db49";
 //Recipe Request Page DOM
 const searchBtn = document.querySelector("#search");
 const saveBtn = document.querySelector("#save");
@@ -112,7 +113,7 @@ function moveHTML() {
 // return recipe contain {recipe name,calories,ID, image url,}
 async function fetchRecipe(cuisine) {
   //1.06pts per call that return a recipe with info and nutrition
-  const apiUrl = `https://api.spoonacular.com/recipes/complexSearch?apiKey=${Spoonacular_API_Keiji}&cuisine=${cuisine}&sort=random&number=1&addRecipeNutrition=true&fillIngredients=true`;
+  const apiUrl = `https://api.spoonacular.com/recipes/complexSearch?apiKey=${Spoonacular_API_Marinah}&cuisine=${cuisine}&sort=random&number=1&addRecipeNutrition=true&fillIngredients=true`;
 
   const apiFetch = await (await fetch(apiUrl)).json();
 

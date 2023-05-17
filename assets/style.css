@@ -8,6 +8,7 @@
   --sports: #327864;
   --cards: #4d82976c;
   --highlight: #a0fff6;
+  --medium: #813f0d;
 }
 
 * {
@@ -117,7 +118,7 @@ h1 {
   margin: 20px 0;
   text-align: center;
   color: rgb(255, 249, 238);
-  background: linear-gradient(var(--dark), var(--light-dark), var(--dark));
+  background: linear-gradient(var(--medium), var(--light-dark), var(--medium));
 }
 
 

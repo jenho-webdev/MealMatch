@@ -17,6 +17,8 @@ var currentRecipesIndex = window.location;
 
 
 //eventlistener for btn ? 
+const saveButton = document.getElementById('book-details');
+saveButton.addEventListener('click', saveInformation);
 
 
 
