@@ -1,8 +1,8 @@
 //API Keys
 const NINJAS_API = "qeQ/ixgJ1FhLzMigxs+yag==sahHalNRb0bq0szN";
 
-//const Spoonacular_API = "b7db31d63a4d49e4ba04b02bdfcde847";  //keiji's key
-const Spoonacular_API = "c6c9bb9062a14ace88c599472838ee3f";
+const Spoonacular_API_Keiji = "b7db31d63a4d49e4ba04b02bdfcde847"; //keiji's key
+const Spoonacular_API_Douglas = "c6c9bb9062a14ace88c599472838ee3f";
 const Spoonacular_API_jen = "c6c9bb9062a14ace88c599472838ee3f";
 
 //Recipe Request Page DOM
