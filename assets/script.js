@@ -9,7 +9,7 @@ const Spoonacular_API_jen = "c6c9bb9062a14ace88c599472838ee3f";
 const searchBtn = document.querySelector("#search");
 const saveBtn = document.querySelector("#save");
 const backNextBtn = Array.from(document.querySelectorAll(".nav-btn-inline"));
-const resultContainer = document.querySelector("#result-container");
+const resultContainer = document.querySelector("#results-container");
 const recipeNavBtns = document.querySelector("#btn-row");
 //API URLs
 const fetchhRecipesURL = `https://api.spoonacular.com/recipes/complexSearch`;
@@ -25,7 +25,11 @@ var searchedRecipes = [];
 var currentRecipesIndex = 0;
 
 //----------------DOM functions and eventlistener functions-------------------------------------------
-
+function getCuisineInput() {
+  const cuisineSelect = document.getElementById("cuisine-select");
+  const cuisine = cuisineSelect.value;
+  return cuisine;
+}
 
 //on page load, hide the result dive and button row at the bottom
 
@@ -81,11 +85,7 @@ backNextBtn.forEach((btn) =>
   });
 });
 
-function getCuisineInput() {
-  const cuisineSelect = document.getElementById("cuisine-select");
-  const cuisine = cuisineSelect.value;
-  return cuisine;
-}
+
 
 //---------------------->UI manipulation functions------------------------------
 
