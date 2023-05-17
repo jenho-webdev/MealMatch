@@ -83,16 +83,6 @@ backNextBtn.forEach((btn) => {
 
 //---------------------->UI manipulation functions------------------------------
 //----display content after selecting cuisine------------------
-const button = document.getElementById('search');
-const content = document.getElementById('results-container');
-
-button.addEventListener('click', function() {
-  if (content.style.display === 'none') {
-    content.style.display = 'block';
-  } else {
-    content.style.display = 'none';
-  }
-});
 
 //------------------Locate Storage functions(https://developer.mozilla.org/en-US/docs/Web/API/Window/localStorage)
 
