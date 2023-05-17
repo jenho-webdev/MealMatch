@@ -39,7 +39,7 @@
     <div class="input-field row">
       <div>
         <h3 class="card-header text-uppercase">Find a workout to match your meal</h3>
-        <form id="user-form" class="card">
+        <form id="user-form" class="card-search">
           <label class="form-label" for="cuisine-select">Cuisine</label>
           <select id="cuisine-select" class="browser-default input-field">
             <option value="" disabled selected>Select a cuisine</option>
@@ -53,8 +53,10 @@
         </form>
       </div>
     </div>
-    <section class="container" id="result-container">
-      <section class="row" id="card-row">
+
+    <section class="container" id="results-container">
+      <section class="row">
+
         <!-- food card -->
    
           <div class="col 16 s6">
@@ -68,72 +70,91 @@
                 <p id="summary"></p>
               </div>
               <div class="card-action">
-                <a id="calories" href="#">This is a link</a>
-                <a id="redirectURL" href="#">Details</a>
+
+                
+                <a id="calories" href="#">Calories: </a>
+                <a id="redirectURL" href="#">More Info
+                  <i class="small material-icons">restaurant</i>
+                </a>
+
+
 <!--tool tips / card-->
               </div>
             </div>
           </div>
         </div>
-        <!-- <div class="col l6 s6">
-          <div class="card large">
-            
-            <div class="card-image">
-             
-              <img id="recipeImg" style="height: 100%; width: 100%; padding: 20px" src="./assets/image/logo.png">
-              <span class="card-title">Card Title</span>
-              
-            </div>
-            <a class="btn-floating halfway-fab waves-effect waves-light red"><i class="material-icons">add</i></a>
-            <div class="card-content">
-              
-              <p>I am a very simple card. I am good at containing small bits of information. I am convenient because I
-                require
-                little markup to use effectively.</p>
-              <div class="card-action">
-                <a href="#">This is a link</a>
-
-              </div>
-            </div>
-
-          </div>
-        </div> -->
+        
         <!-- sport card -->
         <div class="col l6 s6">
           <div class="card large">
-            <div class="row">
-              <div class="sportChoice col s12" id="sport-details">
+
+              <div class="sportChoice" id="sport-details">
+
                 <!-- Row Container 1 -->
                 <div class="sport-row" id="walk" style="border:solid black 3px">
                   <h2>
                     <i class="small material-icons">directions_walk</i>
                     Walking
+                    <div class="info">
+                      <p class="description col s6" id="walkCalories">
+                        <!--duration and calories burned goes here--> Calories: 254
+                      </p>
+                      <p class="description col s6" id="walkDuration">
+                       Duration: 1.5hours
+                      </p>
+                    </div>
                   </h2><!-- Content for Row Container 1 -->
                 </div>
+
                 <!-- Row Container 2 -->
                 <div class="sport-row" id="run" style="border:solid black 3px">
                   <h2>
                     <i class="small material-icons">directions_run</i>
                     Running
+                    <div class="info">
+                      <p class="description col s6" id="runCalories">
+                        <!--duration and calories burned goes here--> Calories: 254
+                      </p>
+                      <p class="description col s6" id="runDuration">
+                       Duration: 1.5hours
+                      </p>
+                    </div>
                   </h2><!-- Content for Row Container 2 -->
                 </div>
+
                 <!-- Row Container 3 -->
                 <div class="sport-row" id="bike" style="border:solid black 3px">
                   <h2>
                     <i class="small material-icons">directions_bike</i>
                     Biking
+                    <div class="info">
+                      <p class="description col s6" id="bikeCalories">
+                        <!--duration and calories burned goes here--> Calories: 254
+                      </p>
+                      <p class="description col s6" id="bikeDuration">
+                       Duration: 1.5hours
+                      </p>
+                    </div>
                   </h2><!-- Content for Row Container 3 -->
                 </div>
+
                 <!-- Row Container 4 -->
                 <div class="sport-row" id="swim" style="border:solid black 3px">
                   <h2>
                     <i class="small material-icons">pool</i>
                     Swimming
-                  </h2><!-- Content for Row Container 4 -->
+                    <div class="info">
+                    <p class="description col s6" id="swimCalories">
+                      <!--duration and calories burned goes here--> Calories: 254
+                    </p>
+                    <p class="description col s6" id="swimDuration">
+                     Duration: 1.5hours
+                    </p>
+                    </div>
+                  </h2>
                 </div>
               </div>
-
-            </div>
+             
           </div>
       </section>
     </section>
