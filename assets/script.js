@@ -1,7 +1,7 @@
 //API Keys
 const NINJAS_API = "qeQ/ixgJ1FhLzMigxs+yag==sahHalNRb0bq0szN";
 
-const Spoonacular_API_Keiji = "b7db31d63a4d49e4ba04b02bdfcde847";  //keiji's key
+const Spoonacular_API_Keiji = "b7db31d63a4d49e4ba04b02bdfcde847"; //keiji's key
 const Spoonacular_API_Douglas = "c6c9bb9062a14ace88c599472838ee3f";
 const Spoonacular_API_jen = "c6c9bb9062a14ace88c599472838ee3f";
 
@@ -9,7 +9,8 @@ const Spoonacular_API_jen = "c6c9bb9062a14ace88c599472838ee3f";
 const searchBtn = document.querySelector("#search");
 const saveBtn = document.querySelector("#save");
 const backNextBtn = Array.from(document.querySelectorAll(".nav-btn-inline"));
-
+const resultContainer = document.querySelector("#result-container");
+const recipeNavBtns = document.querySelector("#btn-row");
 //API URLs
 const fetchhRecipesURL = `https://api.spoonacular.com/recipes/complexSearch`;
 const fetchCaloriesBurnt = `https://api.api-ninjas.com/v1/caloriesburnedactivities`;
@@ -23,13 +24,27 @@ const searchedRecipes = [];
 //an idex to know which recipe is the user seeing now in current session
 var currentRecipesIndex = 0;
 
-
 //----------------DOM functions and eventlistener functions-------------------------------------------
+
+
+//on page load, hide the result dive and button row at the bottom
+
+document.addEventListener('DOMContentLoaded', function() {
+  // Hide the bottom section initially
+ 
+  resultContainer.classList.add('hide');
+  recipeNavBtns.classList.add('hide');
+});
+
 
 // Event listener for search button
 searchBtn.addEventListener("click", async (e) => {
   e.preventDefault();
-  let cuisine = '';
+  // Remove the "hide" class from the bottom section container element
+    resultContainer.classList.remove("hide");
+  recipeNavBtns.classList.remove("hide");
+
+  let cuisine = "";
   const optionEl = document.getElementById("cuisine-select");
   if (optionEl) {
     cuisine = optionEl.value;
@@ -40,48 +55,35 @@ searchBtn.addEventListener("click", async (e) => {
 
 //eventlistener for next and back buttons
 
-backNextBtn.forEach((btn) =>
-{
+backNextBtn.forEach((btn) => {
   btn.addEventListener("click", (e) => {
     e.preventDefault();
     let loadRecipe = {};
     let setIndex = 0;
-    
-    if (btn.id === "back" && currentRecipesIndex >= 1) 
-    {
 
+    if (btn.id === "back" && currentRecipesIndex >= 1) {
       setIndex = currentRecipesIndex - 1;
       loadRecipe = searchedRecipes[setIndex];
 
       if (loadRecipe != null) {
         displayArecipe(loadRecipe);
       }
-    } 
-    else if (btn.id === "next") 
-    {
+    } else if (btn.id === "next") {
       setIndex = currentRecipesIndex + 1;
       loadRecipe = searchedRecipes[setIndex];
-      if(loadRecipe != null) 
-      {
+      if (loadRecipe != null) {
         displayArecipe(loadRecipe);
-      }
-      else
-      {
+      } else {
         const cuisine = getCuisineInput();
         fetchRecipe(cuisine);
       }
-      
     }
   });
 });
 
-
-
-
 //---------------------->UI manipulation functions------------------------------
 
 //------------------Locate Storage functions(https://developer.mozilla.org/en-US/docs/Web/API/Window/localStorage)
-
 
 //-----------------------Get locally stored data---------------------------------------------------
 
@@ -94,7 +96,7 @@ backNextBtn.forEach((btn) =>
 //--------------------------HTML changing functions--------------------------------------------------------
 
 //moves to recipeDetails.html
-function moveHTML(){
+function moveHTML() {
   var queryString = "./recipeDetails.html?q=" + currentRecipesIndex;
 
   location.assign(queryString);
@@ -112,30 +114,29 @@ async function fetchRecipe(cuisine) {
   //1.06pts per call that return a recipe with info and nutrition
   const apiUrl = `https://api.spoonacular.com/recipes/complexSearch?apiKey=${Spoonacular_API_Keiji}&cuisine=${cuisine}&sort=random&number=1&addRecipeNutrition=true&fillIngredients=true`;
 
-  
   const apiFetch = await (await fetch(apiUrl)).json();
-   
-  const recipeObj = apiFetch.results[0];   //recipe object
+
+  const recipeObj = apiFetch.results[0]; //recipe object
   //things that are under the recipeData.results[0]
-  
-  const recipeID = recipeObj.id;  
-  const recipeImgUrl = recipeObj.image; 
+
+  const recipeID = recipeObj.id;
+  const recipeImgUrl = recipeObj.image;
   const summary = recipeObj.summary;
   const readyInMinutes = recipeObj.readyInMinutes;
   const title = recipeObj.title;
   const vegan = recipeObj.vegan;
   const ingredients = recipeObj.extendedIngredients;
- 
+
   //things that is under the butrients array
   const nutrients = recipeObj.nutrition.nutrients; //"nutrients array of objects"
   const calories = nutrients.find((item) => item.name === "Calories").amount;
-    
+
   // repackage all the recipe data that we need into a new obj
   const recipeOutput = {
     index: currentRecipesIndex,
     cuisine: cuisine,
-    calories: calories, 
-    ingredients:ingredients,
+    calories: calories,
+    ingredients: ingredients,
     summary: summary,
     recipeID: recipeID,
     imgURL: recipeImgUrl,
@@ -149,9 +150,7 @@ async function fetchRecipe(cuisine) {
   //return the repackaged recipeData contain only data that we need
   setLocalRecipesData(recipeOutput);
   return recipeOutput;
-
-  
-};
+}
 //------------->logic/compute------------------------------
 
 //----------------->Set to localStorage---------------------------
@@ -161,12 +160,13 @@ function setLocalRecipesData(recipe) {
   const localData = getLocalRecipesData();
   const recipeID = recipe.recipeID;
 
-  const isRecipesUnique = localData.every((item) => item.recipeID === recipeID);
+  const isRecipesUnique = localData.every((item) => item.recipeID !== recipeID);
 
-  if (!isRecipesUnique) {
+
+  if (isRecipesUnique) {
     localData.push(recipe);
     localStorage.setItem("recipes", JSON.stringify(localData));
-  } 
+  }
 }
 
 //------------------------Get saved recipes from local storage--------------
@@ -185,27 +185,20 @@ function displayArecipe(recipe) {
   const recipeTitleEl = document.querySelector("#recipeTitleEl");
   const caloriesEl = document.querySelector("#calories");
   const recripeSummary = document.querySelector("#summary");
-  // const ingredientsEl = document.querySelector("#ingredients");
-  // const instructionsEl = document.querySelector("#instructions");
- 
+
   // Update the elements with the recipe details
   recipeImgEl.src = recipe.imgURL;
   recipeTitleEl.textContent = recipe.title;
   caloriesEl.textContent = `Calories: ${recipe.calories}`;
   recripeSummary.innerHTML = `${recipe.summary}`;
-  // ingredientsEl.innerHTML = `<b>Ingredients:</b><br>${recipe.ingredients.join(
-  //   "<br>"
-  // )}`;
-  // instructionsEl.innerHTML = `<b>Instructions:</b><br>${recipe.instructions.join(
-  //   "<br>"
-  // )}`;
 
 }
 
-function displaySavedRecipes() {};
+// function displaySavedRecipes() {};
 //TO BE DONE AFTER UI IS FINALIZED
 
 //------------------------Activities Related functions below-----------------------------------------------
+
 
 //Sports area DOM
 const walk = document.querySelector("#walk");
@@ -233,12 +226,13 @@ var sportInfoCurrent = [];
 var sportInfoPackage = [];
 const displaySportLoop = [walk, run, bike, swim];
 
+
 //----------->Get Sport Data-------------------------------------
 //Sample of Jen's async
 //async function fetchActivities(calories){const sportData = await fetch(``);}
 
-
 //search for activities based on sport var (currently use only the [0] of the API response array)
+
 function sportSearch(){
   for (var i = 0; i < sportSet.length; i++) {
 var searchNinjaUrl = "https://api.api-ninjas.com/v1/caloriesburned?activity=" + sportSet[i];
@@ -314,14 +308,15 @@ function computeDuration() {
 //save input value
 function storeSaveSport() {
   saveList.push(cuisineInputEl.value);  //currently set to cuisine input. change if needed
+
   localStorage.setItem("saved", JSON.stringify(saveList));
-  }
+}
 
 //displays the local storage save content. generates li with buttons nested to make list of saved content.
 function displaySave() {
   saveDisplay.innerHTML = ""; //wipe reviously loaded content
-  for (var i = 0; i < saveList.length; i++) { 
-    var save = saveList[i]; 
+  for (var i = 0; i < saveList.length; i++) {
+    var save = saveList[i];
 
     var li = document.createElement("li");
     li.textContent = "";
@@ -333,7 +328,7 @@ function displaySave() {
     li.appendChild(button);
     saveList.appendChild(li);
   }
-}  
+}
 
 //re-search using saved content.
 function reloadSave(event) {
@@ -341,9 +336,9 @@ function reloadSave(event) {
 
   if (element.matches("button") === true) {
     var index = element.parentElement.getAttribute("saveValue");
-  console.log(index);
-  inputValue = saveList[index];
-  fetchRecipe(cuisine); //or other function to start cuisine search process.
+    console.log(index);
+    inputValue = saveList[index];
+    fetchRecipe(cuisine); //or other function to start cuisine search process.
   }
 }
 
@@ -357,3 +352,4 @@ function sportDisplay() {
     displaySportLoop[i].appendChild(content)
   }
 }
+
