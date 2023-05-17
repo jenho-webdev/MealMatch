@@ -2,42 +2,39 @@
   box-sizing: border-box;
   font-family: Raleway, Arial, Helvetica, sans-serif;
 }
+:root {
+  --primary:#579e99;
+  --p-subtle:#98EBE5;
+  --p-light:#E3EDEC;
+  --secondary:#9E6447;
+  --s-subtle:#EBB498
 
-body {
-
-  background-color: #e3edec;
-}
-
-.card {
-  background-color: #e3edec;
 }
 .custom-nav {
-  background:linear-gradient(#579e99, #98EBE5,#579e99);
+  background:linear-gradient(var(--primary), var(--p-subtle),var(--primary));
   height: 100px;
   line-height: 100px;
 }
-.card-content ul li {
-  list-style-type: square;
-}
 
 .custom-nav li a:hover {
-  background-color: #98EBE5;
-  color: #9E6447;
-}
-
-header {
-  background-color: #579e99;
-  color: #fff;
-  padding: 20px;
-  text-align: center;
-}
-
-.body-bg {
-background: linear-gradient(#ebb498,#9E6447,#ebb498);
+  background-color: var(--p-subtle);
+  color: var(--secondary);
 }
 
 .btn-details {
-  background-color: #9E6447;
+  background-color: var(--secondary);
+}
+
+.body-bg {
+background: linear-gradient(var(--s-subtle),var(--secondary), var(--s-subtle));
+}
+
+.card {
+  background-color: var(--p-light);
+}
+
+.card-content ul li {
+  list-style-type: square;
 }
 
 img {
@@ -46,47 +43,16 @@ img {
   display: block;
   margin: 0 auto;
 }
-.image-container {
-  width: 80%;
-  margin: 0 auto;
-  padding: 20px 0;
-}
-.link-container {
-  text-align: center;
-}
-.link-container a {
-  display: inline-block;
-  margin: 0 10px;
-  padding: 10px 10px;
-  background-color: #9E6447;
-  color: #fff;
-  text-decoration: none;
-  border-radius: 5px;
-  transition: all 0.3s ease;
-}
-.link-container a:hover {
-  background-color: #fff;
-  color: #333;
-  border: 1px solid #333;
-  background: #ebb498;
-  box-shadow: 0 0 5px #98EBE5, 0 0 25px 
-  #98ebe5, 0 0 50px #98ebe5, 0 0 200px #98ebe5;
-
-}
 
 .card-title {
-  color: #9E6447;
-  text-decoration: underline #579e99;
+  color: var(--secondary);
+  text-decoration: underline var(--primary);
 }
 
 .title-text {
   color: #367974;
   font-size: 3rem;
   font-weight: bold;
-}
-
-.logo {
-  size: 30px;
 }
 
 .logo-image {
@@ -104,96 +70,32 @@ img {
   width: 100px;
   height: auto;
 }
+
 .card-image-recipe {
   padding: 2rem;
-  background:linear-gradient(#579e99, #98EBE5,#579e99);
+  background:linear-gradient(var(--primary), var(--p-subtle), var(--primary));
 }
+
 .card-image {
   text-align: center;
 }
 
 .sport-icon {
-  width: 120px;
+  width: 7rem;
   margin:0 auto;
   padding:.5rem;
-  background:linear-gradient(#579e99, #98EBE5,#579e99);
+  background:linear-gradient(var(--primary), var(--p-subtle), var(--primary));
 }
 
 .line {
   border: none;
-  border-top: 2px solid #9E6447;
+  border-top: 2px solid var(--secondary);
   margin-top: 10px;
   margin-bottom: 20px;
 }
 
- .exercise-result {
-  display: flex;
-  flex-direction: row;
-  align-items: center;
-  margin: 20px;
-  padding: 20px;
-  background-color: #ebb498;
-  border-radius: 5px;
-} 
-
-
-.meal-result {
-  display: flex;
-  flex-direction: row;
-  align-items: center;
-  margin: 20px;
-  padding: 20px;
-  background-color: #ebb498;
-  border-radius: 5px;
-
-
-  
-} 
-
-
-.meal-result img {
-  width: 50%;
-  margin-right: 20px;
-}
-
-
-
-.exercise-result img {
-  width: 50%;
-  margin-right: 20px;
-}
-
-
-
-.meal-result p {
-  font-size: 16px;
-  line-height: 1.5;
-}
-
-.exercise-result p {
-  font-size: 16px;
-  line-height: 1.5;
-}
-
-
-.share-button {
-  display: inline-block;
-  background-color: #f2f2f2;
-  border: 1px solid #ccc;
-  border-radius: 5px;
-  padding: 10px;
-  cursor: pointer;
-  
-
-}
-.share-button:hover {
-background: #ebb498;
-box-shadow: 0 0 5px #98EBE5, 0 0 25px 
-#98ebe5, 0 0 50px #98ebe5, 0 0 200px #98ebe5;
-
-}
 .card-image-recipe, .card-content.sport-icon {
-  transition: all 0.3s ease;
+  transition: all 0.8s ease;
 }
 @media screen and (max-width: 992px) {
   .col.m6 {
@@ -230,13 +132,13 @@ box-shadow: 0 0 5px #98EBE5, 0 0 25px
     margin-left: 0 !important;
   }
   .card-image-recipe {
-    transform: scale(0.6);
+    transform: scale(0.7);
     margin-top: 2rem;
     margin-bottom: 2rem;
   }
 
   .card-content.sport-icon {
-    transform: scale(0.6);
+    transform: scale(0.7);
     margin-top: 2rem;
     margin-bottom: 2rem;
   }
