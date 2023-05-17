@@ -70,11 +70,11 @@
 .logo {
     display: flex;
     width: 300px;
-
+    padding: 15px;
     justify-content: center;
     align-items: center;
     margin: 0 auto;
-    border-style: double;
+    border-style: double var(--secondary);
 }
 
 .frontPage {
@@ -116,6 +116,7 @@
 }
  .container {
     width: 100%;
+    /* display: none; */
  }
 body,
 h1,
@@ -177,14 +178,14 @@ h6 {
     line-height: 1.25;
   }
   h1 {
-    font-size: 40px;
+    font-size: 50px;
     margin: 10px 0 30px ;
     text-align: center;
     background-color: var(--light-dark);
   }
   h2{
-    font-size: 40px;
-    color:antiquewhite;
+    font-size: 30px;
+    color: blanchedalmond;
     text-align: left;
     background-color:#327864;
     justify-content: space-around;
@@ -302,7 +303,11 @@ h6 {
     border: 2px solid black;
     height: 25%;
   }
+.description {
+    height: 100%;
+    padding: 0 10px 3px;
 
+}
  
 
   .list-group {
@@ -323,25 +328,20 @@ h6 {
     background-color: var(--dark);
   }
   
-  .status-icon {
-    padding: 2px 5px;
-    margin: 0 5px;
-    background-color: rgba(255,255,255, 1);
-    border-radius: var(--border-radius);
-  }
   
-  .icon-danger {
-    color: rgb(255, 70, 70);
-  }
-  
-  .icon-success {
-    color: rgb(29, 153, 255);
-  }
+.small {
+    padding: 10px;
+}
   
   /* CARDS */
-  .card {
+  .card-search {
     margin: 0 0px 10px 0;
     border: 3px solid var(--dark);
+    border-radius: 0 0 10px 10px;
+   
+  }
+  .card {
+    margin: 0 0px 10px 0;
     border-radius: 0 0 10px 10px;
    
   }
@@ -357,6 +357,10 @@ h6 {
   #recipeImg {
     height: 100%;
     width: 100%;
+  }
+
+  .mealCal {
+    padding: 5px;
   }
   
   .card-body {
