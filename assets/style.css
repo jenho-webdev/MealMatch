@@ -17,7 +17,9 @@
 .welcome.logo {
   justify-content: center;
 }
-
+.body-bg {
+  background: linear-gradient(#ebb498,#9E6447,#ebb498);
+  }
 .logo {
   display: flex;
   width: 300px;
@@ -29,7 +31,7 @@
 }
 
 .frontPage {
-  background-color: #98EBE5;
+  background-color: #f3f3f3;
 }
 
 .row {
