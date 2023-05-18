@@ -17,6 +17,36 @@
 
 <body class="body-bg">
 
+  
+<!-- uncomment once it is ready -->
+
+Modal Structure
+<div id="apiModal" class="modal" style="z-index: 1003; display: block; opacity: 1; top: 20%; transform: scaleX(1) scaleY(1); height:80%">
+  <div class="modal-content b">
+    <h2>Enter your API Key</h2>
+    <div class="input-field">
+      <input type="text" id="Spoon-API" placeholder="Enter Spoonacular API Key">
+      <label for="apiKeyInput">API Key</label>
+    </div>
+    <div class="input-field">
+      <input type="text" id="Ninjas-API" placeholder="Enter Ninjas API Key">
+      <label for="apiKeyInput">API Key</label>
+    </div>
+  </div>
+
+  <div class="modal-footer">
+    <a href="#!" class="modal-close waves-effect waves-light btn">Cancel</a>
+    <a href="#!" id="saveApiKeyBtn" class="modal-close waves-effect waves-light btn">Save</a>
+  </div>
+</div>
+<div class="modal-overlay" id="modal-overlay" style="z-index: 1002; display: block; opacity: 0.5;"></div>
+
+  <div class="modal-footer">
+    <a href="#!" class="modal-close waves-effect waves-light btn">Cancel</a>
+    <a href="#!" id="saveApiKeyBtn" class="modal-close waves-effect waves-light btn">Save</a>
+  </div>
+</div>
+
   <!-- Header -->
   <header>
     <nav class="nav-extended">
