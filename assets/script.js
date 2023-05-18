@@ -1,9 +1,13 @@
 //API Keys
-const NINJAS_API = "qeQ/ixgJ1FhLzMigxs+yag==sahHalNRb0bq0szN";
+//hard coding the keys before we have the grab key fuctions on page load
+// const NINJAS_API = "qeQ/ixgJ1FhLzMigxs+yag==sahHalNRb0bq0szN";
+// const Spoonacular_API_Keiji = "b7db31d63a4d49e4ba04b02bdfcde847"; //keiji's key
+// const Spoonacular_API_Douglas = "c6c9bb9062a14ace88c599472838ee3f";
+// const Spoonacular_API_jen = "c6c9bb9062a14ace88c599472838ee3f";
 
-const Spoonacular_API_Keiji = "b7db31d63a4d49e4ba04b02bdfcde847"; //keiji's key
-const Spoonacular_API_Douglas = "c6c9bb9062a14ace88c599472838ee3f";
-const Spoonacular_API_jen = "c6c9bb9062a14ace88c599472838ee3f";
+//keys that are storaged locally on user's localstorage. will be get when onload
+var NINJAS_API = null;
+var Spoonacular_API = null;
 
 //Recipe Request Page DOM
 const searchBtn = document.querySelector("#search");
@@ -23,104 +27,20 @@ const fetchExercises = `https://api.api-ninjas.com/v1/exercises?`;
 var searchedRecipes = [];
 //an idex to know which recipe is the user seeing now in current session
 var currentRecipesIndex = 0;
+var currentRecipeID = 0;
 
-//----------------DOM functions and eventlistener functions-------------------------------------------
-function getCuisineInput() {
-  const cuisineSelect = document.getElementById("cuisine-select");
-  const cuisine = cuisineSelect.value;
-  return cuisine;
-}
-
-//on page load, hide the result dive and button row at the bottom
-
-document.addEventListener('DOMContentLoaded', function() 
-{
-
-  // const apiKey = localStorage.getItem('apiKey');
-  // if (!apiKey) 
-  // {
-  //   // Initialize the modal
-  //   const apiModal = document.getElementById('apiModal');
-  //   const modalInstance = M.Modal.init(apiModal);
-
-  //   // Open the modal
-  //   modalInstance.open();
-
-  //   // Add event listener to save the API key when the save button is clicked
-  //     const saveApiKeyBtn = document.getElementById('saveApiKeyBtn');
-  //     const modalOverlay = document.getElementsByClassName("modal-overlay");
-  //     saveApiKeyBtn.addEventListener('click', function() 
-  //     {
-  //       const apiKeyInput = document.getElementById("apiKeyInput");
-  //       const apiKey = apiKeyInput.value;
-
-  //       // Store the API key locally
-  //       localStorage.setItem("apiKey", apiKey);
-  //       // Close the modal
-  //       modal.style.display = "none";
-  //       modalOverlay.style.display = "none";
-  //     });
-
-  // };
-  // Hide the bottom section initially  
-  resultContainer.classList.add('hide');
-  recipeNavBtns.classList.add('hide');
-
-  // Clear the searched recipes from localStorage
-  localStorage.removeItem('recipes');
-});
-
-
-
-// Event listener for search button
-searchBtn.addEventListener("click", async (e) => {
-  e.preventDefault();
-  // Remove the "hide" class from the bottom section container element
-    resultContainer.classList.remove("hide");
-  recipeNavBtns.classList.remove("hide");
-
-  const cuisine = getCuisineInput();
-  const newRecipe = await fetchRecipe(cuisine);
-  displayArecipe(newRecipe);
-});
-
-//eventlistener for next and back buttons
-
-backNextBtn.forEach((btn) => 
-{
-  btn.addEventListener("click", async (e) => 
-  {
-    e.preventDefault();
-    let loadRecipe = {};
-    let setIndex = 0;
-
-    if (btn.id === "back" && currentRecipesIndex >= 1) 
-    {
-      currentRecipesIndex--;
-    }
-    else if (btn.id === "next") 
-    {
-      currentRecipesIndex++;
-    }
-    if (currentRecipesIndex >= 0 && currentRecipesIndex < searchedRecipes.length) 
-    {
-      const currentRecipe = searchedRecipes[currentRecipesIndex];
-      displayArecipe(currentRecipe);
-    } 
-    else 
-    {
-      const cuisine = getCuisineInput();
-      const newRecipe = await fetchRecipe(cuisine);
-      displayArecipe(newRecipe);
-    }
-  });
-});
-
-
-
-//---------------------->UI manipulation functions------------------------------
 
 //------------------Locate Storage functions(https://developer.mozilla.org/en-US/docs/Web/API/Window/localStorage)
+ // Store the API key locally
+ function setAPIKeyToLocal (name,key)
+ {
+    localStorage.setItem(name, key);
+ };
+
+ function getAPIKeyFromLocal(name) 
+ {
+   return localStorage.getItem(name);
+ };
 
 
 //-----------------------Get locally stored data---------------------------------------------------
@@ -130,6 +50,109 @@ backNextBtn.forEach((btn) =>
 //--------------------------Set data to local storage----------------------------------
 
 //CALL setLocalRecipesData (recipe); TO SAVE RECIPE TO LOCAL STORAGE
+
+
+//----------------DOM functions and eventlistener functions-------------------------------------------
+function getCuisineInput() {
+  const cuisineSelect = document.getElementById("cuisine-select");
+  const cuisine = cuisineSelect.value;
+  return cuisine;
+}
+
+function getApiInput()
+{
+  //check if both key exist locally
+  Spoonacular_API = getAPIKeyFromLocal("spoonApiKey");
+  NINJAS_API = getAPIKeyFromLocal("NinjasApikey");
+
+  //if anyone of the key is null, open modal to get keys from user
+  if (!Spoonacular_API || !NINJAS_API) {
+    // Initialize the modal
+    const apiModal = document.getElementById("apiModal");
+    const modalInstance = M.Modal.init(apiModal);
+
+    // Open the modal
+    modalInstance.open();
+
+    // Add event listener to save the API key when the save button is clicked
+    const saveApiKeyBtn = document.getElementById("saveApiKeyBtn");
+    const modalOverlay = document.getElementsById("modal-overlay");
+
+    saveApiKeyBtn.addEventListener("click", function () {
+      const spoonApiKeyEl = document.getElementById("Spoon-API");
+      const spoonApiKey = spoonApiKeyEl.value;
+      const SportApiKeyEl = document.getElementById("Ninjas-API");
+      const sportApiKey = SportApiKeyEl.value;
+      //store the keys to local storage
+      setAPIKeyToLocal("spoonApiKey", spoonApiKey);
+      setAPIKeyToLocal("NinjasApikey", sportApiKey);
+
+      // Close the modal
+      apiModal.style.display = "none";
+      modalOverlay.style.display = "none";
+    });
+  }
+  
+};
+    //on page load, hide the result dive and button row at the bottom.
+//check localstorage for stored API key, if no keys found, open modal and get user's input
+//when user hit the saveApiKey button, it then store the key to local storage
+
+document.addEventListener("DOMContentLoaded", function () {
+  
+  //set the keys either from local or user's input from pop up modal
+  getApiInput();
+
+  // Hide the bottom section initially
+  resultContainer.classList.add("hide");
+  recipeNavBtns.classList.add("hide");
+
+  // Clear the searched recipes from localStorage from old session
+  localStorage.removeItem("recipes");
+
+});
+
+// Event listener for search button
+searchBtn.addEventListener("click", async (e) => {
+  e.preventDefault();
+  // Remove the "hide" class from the bottom section container element
+  resultContainer.classList.remove("hide");
+  recipeNavBtns.classList.remove("hide");
+
+  const cuisine = getCuisineInput();
+  const newRecipe = await fetchRecipe(cuisine);
+  displayArecipe(newRecipe);
+});
+
+//eventlistener for next and back buttons
+
+backNextBtn.forEach((btn) => {
+  btn.addEventListener("click", async (e) => {
+    e.preventDefault();
+    let loadRecipe = {};
+    let setIndex = 0;
+
+    if (btn.id === "back" && currentRecipesIndex >= 1) {
+      currentRecipesIndex--;
+    } else if (btn.id === "next") {
+      currentRecipesIndex++;
+    }
+    if (
+      currentRecipesIndex >= 0 &&
+      currentRecipesIndex < searchedRecipes.length
+    ) {
+      const currentRecipe = searchedRecipes[currentRecipesIndex];
+      displayArecipe(currentRecipe);
+    } else {
+      const cuisine = getCuisineInput();
+      const newRecipe = await fetchRecipe(cuisine);
+      displayArecipe(newRecipe);
+    }
+  });
+});
+
+//---------------------->UI manipulation functions------------------------------
+
 
 //--------------------------HTML changing functions--------------------------------------------------------
 
@@ -174,6 +197,7 @@ async function fetchRecipe(cuisine) {
   //push current recipe into var and advance index
   searchedRecipes.push(recipeOutput);
   currentRecipesIndex++;
+  currentRecipeID = recripeID;
   //return the repackaged recipeData contain only data that we need
   return recipeOutput;
 }
@@ -218,17 +242,7 @@ function displayArecipe(recipe) {
   recipeImgEl.src = recipe.image;
   recipeTitleEl.textContent = recipe.title;
   caloriesEl.textContent = `Calories: ${recipe.calories}`;
-  ingredientsEl.innerHTML = `<b>Ingredients:</b><br>${recipe.ingredients.join(
-    "<br>"
-  )}`;
-  instructionsEl.innerHTML = `<b>Instructions:</b><br>${recipe.instructions.join(
-    "<br>"
-  )}`;
-
-  // Scroll to the recipe section
-  document
-    .querySelector("#recipe-section")
-    .scrollIntoView({ behavior: "smooth" });
+  recripeSummary.innerHTML = `${recipe.summary}`;
 }
 
 function displaySavedRecipes() {};
