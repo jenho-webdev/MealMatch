@@ -1,13 +1,13 @@
-//API Keys
-//hard coding the keys before we have the grab key fuctions on page load
-// const NINJAS_API = "qeQ/ixgJ1FhLzMigxs+yag==sahHalNRb0bq0szN";
-// const Spoonacular_API_Keiji = "b7db31d63a4d49e4ba04b02bdfcde847"; //keiji's key
-// const Spoonacular_API_Douglas = "c6c9bb9062a14ace88c599472838ee3f";
-// const Spoonacular_API_jen = "c6c9bb9062a14ace88c599472838ee3f";
+// API Keys
+// hard coding the keys before we have the grab key fuctions on page load
+const NINJAS_API = "qeQ/ixgJ1FhLzMigxs+yag==sahHalNRb0bq0szN";
+const Spoonacular_API_Keiji = "b7db31d63a4d49e4ba04b02bdfcde847"; //keiji's key
+const Spoonacular_API_Douglas = "c6c9bb9062a14ace88c599472838ee3f";
+const Spoonacular_API_jen = "c6c9bb9062a14ace88c599472838ee3f";
 
-//keys that are storaged locally on user's localstorage. will be get when onload
-var NINJAS_API = null;
-var Spoonacular_API = null;
+// //keys that are storaged locally on user's localstorage. will be get when onload
+// var NINJAS_API = null;
+// var Spoonacular_API = null;
 
 //Recipe Request Page DOM
 const searchBtn = document.querySelector("#search");
@@ -99,7 +99,8 @@ function getApiInput()
   };
   
 };
-    //on page load, hide the result dive and button row at the bottom.
+
+//on page load, hide the result div and button row at the bottom.
 //check localstorage for stored API key, if no keys found, open modal and get user's input
 //when user hit the saveApiKey button, it then store the key to local storage
 
@@ -167,7 +168,7 @@ function moveHTML() {
 // return recipe contain {recipe name,calories,ID, image url,}
 async function fetchRecipe(cuisine) {
   //1.06pts per call that return a recipe with info and nutrition
-  const apiUrl = `https://api.spoonacular.com/recipes/complexSearch?apiKey=${Spoonacular_API}&cuisine=${cuisine}&sort=random&number=1&addRecipeNutrition=true&fillIngredients=true`;
+  const apiUrl = `https://api.spoonacular.com/recipes/complexSearch?apiKey=${Spoonacular_API_Douglas}&cuisine=${cuisine}&sort=random&number=1&addRecipeNutrition=true&fillIngredients=true`;
 
   const apiFetch = await (await fetch(apiUrl)).json();
 
@@ -199,6 +200,9 @@ async function fetchRecipe(cuisine) {
     title: title,
     vegan: vegan,
   };
+
+ 
+
   //push current recipe into var and advance index
   searchedRecipes.push(recipeOutput);
   currentRecipeID = recipeID;
