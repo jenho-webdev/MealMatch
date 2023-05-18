@@ -28,7 +28,7 @@ const fetchExercises = `https://api.api-ninjas.com/v1/exercises?`;
 
 //Global Var
 
- 
+const searchValue = document.getElementById("result")
 //all the recipes searched in current browser session(page refresh will wipe this!)
 var searchedRecipes = [];
 //an idex to know which recipe is the user seeing now in current session
@@ -36,6 +36,7 @@ var currentRecipesIndex = 0;
 var currentRecipeID = 0;
 
 //------------------Locate Storage functions(https://developer.mozilla.org/en-US/docs/Web/API/Window/localStorage)
+//-----------exporting information---------------------------------------------------
 
 
 //----------------DOM functions and eventlistener functions-------------------------------------------
@@ -192,7 +193,7 @@ function getLocalRecipesData() {
 }
 function getLocalRecipesDataByID(recipeID) {
   const savedRecipes = JSON.parse(localStorage.getItem("recipes"));
-  return savedRecipes.find((recipe) => recipe.recipeId === recipeID);
+  return savedRecipes.find((recipe) => recipe.recipeID === recipeID);
 }
 
 //------------------>display to UI-------------------------------

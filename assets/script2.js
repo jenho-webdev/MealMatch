@@ -3,17 +3,17 @@
 //Recipe Detail page DOM
 // const recipeCont = document.querySelector("#content-container");
 // document.addEventListener('DOMContentLoaded', function() {
-//     // Hide the bottom section initially
-//    //# filler for now
+    // Hide the bottom section initially
+   //# filler for now
 //     recipeCont.classList.add('hide');
 //   });
 
-// //Global Var
+//Global Var
 
 
-// //all the recipes searched in current browser session(page refresh will wipe this!)
+//all the recipes searched in current browser session(page refresh will wipe this!)
 // const searchedRecipes = [];
-// //an idex to know which recipe is the user seeing now in current session
+//an idex to know which recipe is the user seeing now in current session
 // var currentRecipesIndex = window.location; 
 
 
@@ -21,7 +21,7 @@
 
 
 //----------------DOM functions and eventlistener functions-------------------------------------------
-let searchValue = localStorage.getItem('') || "";
+let searchValue = localStorage.getItem('searchValue') || "";
 
 // Use the retrieved value in your code
 
