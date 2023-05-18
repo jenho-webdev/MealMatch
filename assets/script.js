@@ -6,15 +6,18 @@
 
 
 //keys that are storaged locally on user's localstorage. will be get when onload
-var NINJAS_API = null;
-var Spoonacular_API = null;
+var NINJAS_API = "qeQ/ixgJ1FhLzMigxs+yag==sahHalNRb0bq0szN";
+var Spoonacular_API = "764b35a9a9354f93b34e90d79f47c473";
 
 //Recipe Request Page DOM
 const searchBtn = document.querySelector("#search");
 const saveBtn = document.querySelector("#save");
 const nextBtn = document.querySelector("#next");
-const resultContainer = document.querySelector("#results-container");
+const resultContainer = document.querySelector("#result-container");
 const recipeNavBtns = document.querySelector("#btn-row");
+const saveApiKeyBtn = document.getElementById("saveApiKeyBtn");
+const apiModal = document.getElementById("apiModal");
+const modalOverlay = document.getElementById("modalOverlay");
 //API URLs
 const fetchhRecipesURL = `https://api.spoonacular.com/recipes/complexSearch`;
 const fetchCaloriesBurnt = `https://api.api-ninjas.com/v1/caloriesburnedactivities`;
@@ -26,8 +29,8 @@ localStorage.setItem('searchValue', searchValue);
 
 
 //Global Var
-// const Today = dayjs().day(); //gets day of current week
 
+ 
 //all the recipes searched in current browser session(page refresh will wipe this!)
 var searchedRecipes = [];
 //an idex to know which recipe is the user seeing now in current session
@@ -35,14 +38,7 @@ var currentRecipesIndex = 0;
 var currentRecipeID = 0;
 
 //------------------Locate Storage functions(https://developer.mozilla.org/en-US/docs/Web/API/Window/localStorage)
-// Store the API key locally
-function setAPIKeyToLocal(name, key) {
-  localStorage.setItem(name, key);
-}
 
-function getAPIKeyFromLocal(name) {
-  return localStorage.getItem(name);
-}
 
 //----------------DOM functions and eventlistener functions-------------------------------------------
 function getCuisineInput() {
@@ -50,95 +46,16 @@ function getCuisineInput() {
   const cuisine = cuisineSelect.value;
   return cuisine;
 }
-
-function getApiInput() {
-  //check if both key exist locally
-  Spoonacular_API = getAPIKeyFromLocal("spoonApiKey");
-  NINJAS_API = getAPIKeyFromLocal("NinjasApikey");
-  const apiModal = document.getElementById("apiModal");
-  const modalOverlay = document.getElementById("modalOverlay");
-  const modalInstance = M.Modal.init(apiModal);
-  //if anyone of the key is null, open modal to get keys from user
-  if (!Spoonacular_API || !NINJAS_API) {
-    // Initialize the modal
-
-    // Open the modal
-    modalInstance.open();
-
-    // Add event listener to save the API key when the save button is clicked
-    const saveApiKeyBtn = document.getElementById("saveApiKeyBtn");
-
-    saveApiKeyBtn.addEventListener("click", function () {
-      const spoonApiKeyEl = document.getElementById("Spoon-API");
-      const spoonApiKey = spoonApiKeyEl.value;
-      const SportApiKeyEl = document.getElementById("Ninjas-API");
-      const sportApiKey = SportApiKeyEl.value;
-      //store the keys to local storage
-      setAPIKeyToLocal("spoonApiKey", spoonApiKey);
-      setAPIKeyToLocal("NinjasApikey", sportApiKey);
-
-      // Close the modal
-      apiModal.style.display = "none";
-      modalOverlay.style.display = "none";
-    });
-  } else {
-    // Open the modal
-    modalInstance.close();
-    modalOverlay.style.display = "none";
-  }
-}
-
-function getRecipeIDFromURL() {
-  const queryString = window.location.search;
-  const urlParams = new URLSearchParams(queryString);
-  return urlParams.get("q");
-}
-
-//on page load, hide the result dive and button row at the bottom.
-//check localstorage for stored API key, if no keys found, open modal and get user's input
-//when user hit the saveApiKey button, it then store the key to local storage
-
-document.addEventListener("DOMContentLoaded", function () {
-  //set the keys either from local or user's input from pop up modal
-    
-  if (document.title === "MealMatch"){
-    //set the keys either from local or user's input from pop up modal
-    getApiInput();
-     sportSearch();
-  // Hide the bottom section initially
-  if (resultContainer)
-    resultContainer.classList.add("hide");
-
-  recipeNavBtns.classList.add("hide");
-
-  // Clear the searched recipes from localStorage from old session
-  localStorage.removeItem("recipes");
-}else if (document.title ==="Recipe Details"){
-
-  getLocalRecipesDataByID()
-
-
-
-
-}
-
-
-
-
-
-
-
-});
-
-
 // Event listener for search button
 searchBtn.addEventListener("click", async (e) => {
   e.preventDefault();
   // Remove the "hide" class from the bottom section container element
   if(resultContainer)
-    resultContainer.classList.remove("hide");
-  recipeNavBtns.classList.remove("hide");
-
+  {
+     resultContainer.classList.remove("hide");
+     recipeNavBtns.classList.remove("hide");
+  }
+  
   const cuisine = getCuisineInput();
   const newRecipe = await fetchRecipe(cuisine);
   computeDuration(newRecipe);
@@ -158,15 +75,46 @@ nextBtn.addEventListener("click", async (e) =>
   sportDisplayAll();
 });
 
+
+//on page load, hide the result dive and button row at the bottom.
+//check localstorage for stored API key, if no keys found, open modal and get user's input
+//when user hit the saveApiKey button, it then store the key to local storage
+
+document.addEventListener("DOMContentLoaded", function () 
+{
+  //set the keys either from local or user's input from pop up modal
+    
+  if (document.title === "MealMatch")
+  {
+    //set the keys either from local or user's input from pop up modal
+   
+    
+    // Hide the bottom section initially
+    resultContainer.classList.add("hide");
+    recipeNavBtns.classList.add("hide");
+
+    // Clear the searched recipes from localStorage from old session
+    localStorage.removeItem("recipes");
+        
+  }
+  else if (document.title ==="Recipe Details")
+  {
+    var id = window.location.search;
+    var recipe = getLocalRecipesDataByID(id);
+    displayDetails(recipe);
+
+
+  }
+
+
+});
+
+
+
 //---------------------->UI manipulation functions------------------------------
 
 //--------------------------HTML changing functions--------------------------------------------------------
 
-// //moves to recipeDetails.html
-// function moveHTML() {
-//   var queryString = "./recipeDetails.html?q=" + currentRecipesIndex;
-//   location.assign(queryString);
-// }
 
 //------------------------Recipes Related functions below-----------------------------------------------
 
@@ -224,7 +172,7 @@ async function fetchRecipe(cuisine) {
 //----------------->Set to localStorage---------------------------
 
 //SET (one) recipe JOSON to localStorage
-function setLocalRecipesData(recipe) {
+function setLocalRecipesData(recipe) { 
   const localData = getLocalRecipesData();
   const recipeID = recipe.recipeID;
 
@@ -266,6 +214,33 @@ function displayArecipe(recipe) {
   redirectURL.setAttribute('href', `recipeDetails.html?q=${recipe.recipeId}`);
   redirectURL.setAttribute('target', '_blank');
 }
+
+//fucntion to display recripe detils to 2nd page
+function displayRecipeDetails(recipe) {
+  // Get the elements that need to be updated
+  var stepsUL = document.querySelector("#steps");
+  var foodImg = document.querySelector("recipe-image");
+  var ingredientsUL = document.querySelector("#ingredientsUL");
+
+  // Update the elements with the recipe details
+  foodImg.src = recipe.imgURL;
+
+  //loop through the array of step objs
+  for (var i = 0; i <= recipe.cookingSteps; i++) {
+    var step = recipe.cookingSteps[i].step;
+    var li = document.createElement("li");
+    li.textContent = step;
+    stepsUL.append(li);
+  }
+  //loop through the array of ing objs
+  for (var i = 0; i <= recipe.ingredients; i++) {
+    var ing = recipe.ingredients[i].name;
+    var li = document.createElement("li");
+    li.textContent = ing;
+    ul.append(li);
+  }
+}
+
 //========================================================================================================
 //------------------------Activities Related functions below-----------------------------------------------
 
