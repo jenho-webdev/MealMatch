@@ -219,9 +219,10 @@ async function fetchRecipe(cuisine) {
   //return the repackaged recipeData contain only data that we need
   setLocalRecipesData(recipeOutput);
   return recipeOutput;
+
 }
 //------------->logic/compute------------------------------
-
+window.location.href = `recipeDetails.html?recipe=${encodeURIComponent(JSON.stringify(recipeOutput))}`;
 //----------------->Set to localStorage---------------------------
 
 //SET (one) recipe JOSON to localStorage
@@ -271,27 +272,19 @@ function displayArecipe(recipe) {
 
 //-------------------------------Recipe Details (PAGE2)---------------------------------------------------
 //Reciple Detail Page DOM (PAGE 2)
-const recipeCont = document.querySelector("#content-container");
-const recipePic = document.querySelector("#recipe-image");
-const ingredients = document.querySelector("ingredients-details");
-const page2title = document.querySelector("recipe-title");
-const instructions = document.querySelector("directions-details");
-const saveRecipe = document.querySelector("save-details");
+// Get the recipe object from the URL parameter
+const urlParams = new URLSearchParams(window.location.search);
+const recipeParam = urlParams.get('recipe');
+const recipeOutput = JSON.parse(decodeURIComponent(recipeParam));
 
+// Populate the elements with the recipe information
+document.getElementById('#recipeImg').src = recipeOutput.imgURL;
+document.getElementById('#recipeTitleEl').textContent = recipeOutput.title;
+document.getElementById('#calories').textContent = `Calories: ${recipeOutput.calories}`;
+document.getElementById('#summary').innerHTML = recipeOutput.summary;
+document.getElementById('#redirectURL').setAttribute('href', `recipeDetails.html?q=${recipeOutput.recipeID}`);
+document.getElementById('#redirectURL').setAttribute('target', '_blank');
 
-recipeCont = {
-  cuisine: cuisine,
-  calories: calories, //int
-  ingredients: ingredients, //array of obj
-  summary: summary, //string
-  recipeID: recipeID, //int
-  imgURL: recipeImgUrl,
-  min: readyInMinutes, //int
-  title: title, //string
-  vegan: vegan, //boolean
-  cookingSteps: cookingSteps, //array of obj
-  dishType: dishType //obj
-};
 
 
 //========================================================================================================
