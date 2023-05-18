@@ -3,7 +3,7 @@
 // const NINJAS_API = "qeQ/ixgJ1FhLzMigxs+yag==sahHalNRb0bq0szN";
 // const Spoonacular_API_Keiji = "b7db31d63a4d49e4ba04b02bdfcde847"; //keiji's key
 // const Spoonacular_API_Douglas = "c6c9bb9062a14ace88c599472838ee3f";
-// const Spoonacular_API_jen = "c6c9bb9062a14ace88c599472838ee3f";
+
 
 //keys that are storaged locally on user's localstorage. will be get when onload
 var NINJAS_API = null;
@@ -20,8 +20,8 @@ const fetchhRecipesURL = `https://api.spoonacular.com/recipes/complexSearch`;
 const fetchCaloriesBurnt = `https://api.api-ninjas.com/v1/caloriesburnedactivities`;
 const fetchExercises = `https://api.api-ninjas.com/v1/exercises?`;
 
-//exporting information
-const searchValue = resultContainer.textContent;
+//exporting information -Keiji what is this for? do you need t
+const searchValue = document.getElementById('result-container').textContent;
 localStorage.setItem('searchValue', searchValue);
 
 
