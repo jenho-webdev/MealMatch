@@ -20,6 +20,11 @@ const fetchhRecipesURL = `https://api.spoonacular.com/recipes/complexSearch`;
 const fetchCaloriesBurnt = `https://api.api-ninjas.com/v1/caloriesburnedactivities`;
 const fetchExercises = `https://api.api-ninjas.com/v1/exercises?`;
 
+//exporting information
+const searchValue = document.getElementById('result-container').textContent;
+localStorage.setItem('searchValue', searchValue);
+
+
 //Global Var
 // const Today = dayjs().day(); //gets day of current week
 
