@@ -1,13 +1,13 @@
-// API Keys
-// hard coding the keys before we have the grab key fuctions on page load
-const NINJAS_API = "qeQ/ixgJ1FhLzMigxs+yag==sahHalNRb0bq0szN";
-const Spoonacular_API_Keiji = "b7db31d63a4d49e4ba04b02bdfcde847"; //keiji's key
-const Spoonacular_API_Douglas = "c6c9bb9062a14ace88c599472838ee3f";
-const Spoonacular_API_jen = "c6c9bb9062a14ace88c599472838ee3f";
+//API Keys
+//hard coding the keys before we have the grab key fuctions on page load
+// const NINJAS_API = "qeQ/ixgJ1FhLzMigxs+yag==sahHalNRb0bq0szN";
+// const Spoonacular_API_Keiji = "b7db31d63a4d49e4ba04b02bdfcde847"; //keiji's key
+// const Spoonacular_API_Douglas = "c6c9bb9062a14ace88c599472838ee3f";
+// const Spoonacular_API_jen = "c6c9bb9062a14ace88c599472838ee3f";
 
-// //keys that are storaged locally on user's localstorage. will be get when onload
-// var NINJAS_API = null;
-// var Spoonacular_API = null;
+//keys that are storaged locally on user's localstorage. will be get when onload
+var NINJAS_API = null;
+var Spoonacular_API = null;
 
 //Recipe Request Page DOM
 const searchBtn = document.querySelector("#search");
@@ -34,19 +34,15 @@ var searchedRecipes = [];
 var currentRecipesIndex = 0;
 var currentRecipeID = 0;
 
-
 //------------------Locate Storage functions(https://developer.mozilla.org/en-US/docs/Web/API/Window/localStorage)
- // Store the API key locally
- function setAPIKeyToLocal (name,key)
- {
-    localStorage.setItem(name, key);
- };
+// Store the API key locally
+function setAPIKeyToLocal(name, key) {
+  localStorage.setItem(name, key);
+}
 
- function getAPIKeyFromLocal(name) 
- {
-   return localStorage.getItem(name);
- };
-
+function getAPIKeyFromLocal(name) {
+  return localStorage.getItem(name);
+}
 
 //-----------------------Get locally stored data---------------------------------------------------
 
@@ -56,7 +52,6 @@ var currentRecipeID = 0;
 
 //CALL setLocalRecipesData (recipe); TO SAVE RECIPE TO LOCAL STORAGE
 
-
 //----------------DOM functions and eventlistener functions-------------------------------------------
 function getCuisineInput() {
   const cuisineSelect = document.getElementById("cuisine-select");
@@ -64,8 +59,7 @@ function getCuisineInput() {
   return cuisine;
 }
 
-function getApiInput()
-{
+function getApiInput() {
   //check if both key exist locally
   Spoonacular_API = getAPIKeyFromLocal("spoonApiKey");
   NINJAS_API = getAPIKeyFromLocal("NinjasApikey");
@@ -75,13 +69,12 @@ function getApiInput()
   //if anyone of the key is null, open modal to get keys from user
   if (!Spoonacular_API || !NINJAS_API) {
     // Initialize the modal
-    
+
     // Open the modal
     modalInstance.open();
 
     // Add event listener to save the API key when the save button is clicked
     const saveApiKeyBtn = document.getElementById("saveApiKeyBtn");
-    
 
     saveApiKeyBtn.addEventListener("click", function () {
       const spoonApiKeyEl = document.getElementById("Spoon-API");
@@ -96,38 +89,36 @@ function getApiInput()
       apiModal.style.display = "none";
       modalOverlay.style.display = "none";
     });
-
-  }else {
+  } else {
     // Open the modal
     modalInstance.close();
     modalOverlay.style.display = "none";
-  };
-  
-};
-
-//on page load, hide the result div and button row at the bottom.
+  }
+}
+//on page load, hide the result dive and button row at the bottom.
 //check localstorage for stored API key, if no keys found, open modal and get user's input
 //when user hit the saveApiKey button, it then store the key to local storage
 
 document.addEventListener("DOMContentLoaded", function () {
-  
   //set the keys either from local or user's input from pop up modal
   getApiInput();
 
   // Hide the bottom section initially
-  resultContainer.classList.add("hide");
+  if (resultContainer)
+    resultContainer.classList.add("hide");
+
   recipeNavBtns.classList.add("hide");
 
   // Clear the searched recipes from localStorage from old session
   localStorage.removeItem("recipes");
-
 });
 
 // Event listener for search button
 searchBtn.addEventListener("click", async (e) => {
   e.preventDefault();
   // Remove the "hide" class from the bottom section container element
-  resultContainer.classList.remove("hide");
+  if(resultContainer)
+    resultContainer.classList.remove("hide");
   recipeNavBtns.classList.remove("hide");
 
   const cuisine = getCuisineInput();
@@ -143,17 +134,15 @@ nextBtn.forEach((btn) => {
     let loadRecipe = {};
     let setIndex = 0;
 
-    if (btn.id === "next")
-     {
+    if (btn.id === "next") {
       const cuisine = getCuisineInput();
       const newRecipe = await fetchRecipe(cuisine);
-       displayArecipe(newRecipe);
+      displayArecipe(newRecipe);
     }
   });
 });
 
 //---------------------->UI manipulation functions------------------------------
-
 
 //--------------------------HTML changing functions--------------------------------------------------------
 
@@ -173,7 +162,7 @@ function moveHTML() {
 // return recipe contain {recipe name,calories,ID, image url,}
 async function fetchRecipe(cuisine) {
   //1.06pts per call that return a recipe with info and nutrition
-  const apiUrl = `https://api.spoonacular.com/recipes/complexSearch?apiKey=${Spoonacular_API_Douglas}&cuisine=${cuisine}&sort=random&number=1&addRecipeNutrition=true&fillIngredients=true`;
+  const apiUrl = `https://api.spoonacular.com/recipes/complexSearch?apiKey=${Spoonacular_API}&cuisine=${cuisine}&sort=random&number=1&addRecipeNutrition=true&fillIngredients=true`;
 
   const apiFetch = await (await fetch(apiUrl)).json();
 
@@ -205,9 +194,6 @@ async function fetchRecipe(cuisine) {
     title: title,
     vegan: vegan,
   };
-
- 
-
   //push current recipe into var and advance index
   searchedRecipes.push(recipeOutput);
   currentRecipeID = recipeID;
@@ -261,33 +247,27 @@ function displayArecipe(recipe) {
 
 //------------------------Activities Related functions below-----------------------------------------------
 
-
 //Sports area DOM
 const walk = document.querySelector("#walk");
 const run = document.querySelector("#run");
 const bike = document.querySelector("#bike");
 const swim = document.querySelector("#swim");
 
-
-
-
-
 //list of variables
 var saveCurrentSport = []; //initial blank savelist at load. Array. store cuisine input.
-var sampleMenuCalories = 123;  //sample var used for testingcode . 
+var sampleMenuCalories = 123; //sample var used for testingcode .
 var sportResult = "default";
 // var sportCalories = 1;
 var sportDuration = [];
-var sport0 = "3.0 mph" //output = Walking 3.0 mph, moderate
-var sport1 = "6.7 mph" //output = Running, 6.7 mph (9 min mile)
-var sport2 = "12-13.9 mph" //output = Cycling, 12-13.9 mph, moderate
-var sport3 = "treading water, m" //output = Swimming, treading water, moderate
+var sport0 = "3.0 mph"; //output = Walking 3.0 mph, moderate
+var sport1 = "6.7 mph"; //output = Running, 6.7 mph (9 min mile)
+var sport2 = "12-13.9 mph"; //output = Cycling, 12-13.9 mph, moderate
+var sport3 = "treading water, m"; //output = Swimming, treading water, moderate
 
-var sportSet = ["3.0 mph", "6.7 mph", "12-13.9 mph", "treading water, m"]
+var sportSet = ["3.0 mph", "6.7 mph", "12-13.9 mph", "treading water, m"];
 var sportInfoCurrent = [];
 var sportInfoPackage = [];
 const displaySportLoop = [walk, run, bike, swim];
-
 
 //----------->Get Sport Data-------------------------------------
 //Sample of Jen's async
@@ -295,64 +275,63 @@ const displaySportLoop = [walk, run, bike, swim];
 
 //search for activities based on sport var (currently use only the [0] of the API response array)
 
-function sportSearch(){
+function sportSearch() {
   for (var i = 0; i < sportSet.length; i++) {
-var searchNinjaUrl = "https://api.api-ninjas.com/v1/caloriesburned?activity=" + sportSet[i];
-fetch(searchNinjaUrl,
-{headers: { 'X-Api-Key': NINJAS_API},})
-.then(function (response) {
-  if (!response.ok) {
-    throw response.json();
-  }
+    var searchNinjaUrl =
+      "https://api.api-ninjas.com/v1/caloriesburned?activity=" + sportSet[i];
+    fetch(searchNinjaUrl, { headers: { "X-Api-Key": NINJAS_API } })
+      .then(function (response) {
+        if (!response.ok) {
+          throw response.json();
+        }
 
-  return response.json();
-})
-.then(function (data) {
-  if (data == "") {
-    console.log("search input did not have output. try something else");
-    return;  //ends function early for bad search input.
+        return response.json();
+      })
+      .then(function (data) {
+        if (data == "") {
+          console.log("search input did not have output. try something else");
+          return; //ends function early for bad search input.
+        }
+        sportInfoCurrent.push(data);
+        // console.log(data);
+        // sportResult = data[0];
+        // sportCalories = sportResult.calories_per_hour;
+        // console.log(sportResult);
+        // console.log(sportResult.name);
+        // console.log(sportResult.calories_per_hour);
+        // console.log(sportCalories);
+      })
+      .catch(function (error) {
+        console.error(error);
+        notFound.textContent = "searchNinjaUrl_error";
+      });
+    console.log(i);
   }
-  sportInfoCurrent.push(data)
-  // console.log(data); 
-  // sportResult = data[0];
-  // sportCalories = sportResult.calories_per_hour;
-  // console.log(sportResult);
-  // console.log(sportResult.name);
-  // console.log(sportResult.calories_per_hour);
-  // console.log(sportCalories);
-})
-.catch(function (error) {
-  console.error(error);
-  notFound.textContent = "searchNinjaUrl_error";
-});
-console.log(i)
-}
-if (i >= sportSet.length){
-return;
-}
+  if (i >= sportSet.length) {
+    return;
+  }
 }
 
 async function fetchActivities(calories) {
   const sportData = await fetch(``);
 }
 
-
 //------------------->compute-------------------------------
 
 //get duration of sport in minutes to match menu calories
 function computeDuration() {
-  for (var i = 0; i < saveList.length; i++) { 
-    var sportCalories = sportInfoCurrent[i][0].calories_per_hour
-  if (sportCalories == ""){
-    console.log("coumputeDuration function errored");
+  for (var i = 0; i < saveList.length; i++) {
+    var sportCalories = sportInfoCurrent[i][0].calories_per_hour;
+    if (sportCalories == "") {
+      console.log("coumputeDuration function errored");
+      return;
+    }
+    sportDuration = sampleMenuCalories / sportCalories;
+    console.log(sportDuration + "hours");
+    var sportDurationMin = sportDuration * 60;
+    console.log(sportDurationMin.toFixed() + "minutes");
     return;
   }
-  sportDuration = sampleMenuCalories / sportCalories;
-  console.log(sportDuration + "hours")
-  var sportDurationMin = sportDuration * 60;
-  console.log(sportDurationMin.toFixed() + "minutes");
-  return;
-}
 }
 
 //------------------------>set------------------------------
@@ -369,7 +348,7 @@ function computeDuration() {
 
 //save input value
 function storeSaveSport() {
-  saveList.push(cuisineInputEl.value);  //currently set to cuisine input. change if needed
+  saveList.push(cuisineInputEl.value); //currently set to cuisine input. change if needed
 
   localStorage.setItem("saved", JSON.stringify(saveList));
 }
@@ -408,10 +387,10 @@ function reloadSave(event) {
 //first run searchSport() in chrome inspect before running the display functions
 
 function sportDisplay() {
-  for (var i = 0; i < displaySportLoop.length; i++) { 
+  for (var i = 0; i < displaySportLoop.length; i++) {
     var content = document.createElement("p");
-    content.textContent = "calories burned per hour =" + sportInfoCurrent[i][0].calories_per_hour;
-    displaySportLoop[i].appendChild(content)
+    content.textContent =
+      "calories burned per hour =" + sportInfoCurrent[i][0].calories_per_hour;
+    displaySportLoop[i].appendChild(content);
   }
 }
-
