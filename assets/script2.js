@@ -1,11 +1,11 @@
 
 
 //Recipe Detail page DOM
+const recipeCont = document.querySelector("#content-container");
 document.addEventListener('DOMContentLoaded', function() {
     // Hide the bottom section initially
    //# filler for now
-    #.classList.add('hide');
-    #.classList.add('hide');
+    recipeCont.classList.add('hide');
   });
 
 //Global Var
