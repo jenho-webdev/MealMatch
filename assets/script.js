@@ -12,7 +12,7 @@ var Spoonacular_API = null;
 //Recipe Request Page DOM
 const searchBtn = document.querySelector("#search");
 const saveBtn = document.querySelector("#save");
-const nextBtn = document.querySelectorAll(".nav-btn-inline");
+const nextBtn = document.querySelector("#next");
 const resultContainer = document.querySelector("#results-container");
 const recipeNavBtns = document.querySelector("#btn-row");
 //API URLs
@@ -156,7 +156,6 @@ nextBtn.addEventListener("click", async (e) =>
   computeDuration(newRecipe);
   displayArecipe(newRecipe);
   sportDisplayAll();
-  
 });
 
 //---------------------->UI manipulation functions------------------------------
