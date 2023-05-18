@@ -60,30 +60,9 @@ document.addEventListener("DOMContentLoaded", function ()
   {
     //set the keys either from local or user's input from pop up modal
    
-    searchBtn.addEventListener("click", async (e) => {
-      e.preventDefault();
-      // Remove the "hide" class from the bottom section container element
-      if (resultContainer) {
-        resultContainer.classList.remove("hide");
-        recipeNavBtns.classList.remove("hide");
-      }
+    
 
-      const cuisine = getCuisineInput();
-      const newRecipe = await fetchRecipe(cuisine);
-      computeDuration(newRecipe);
-      displayArecipe(newRecipe);
-      sportDisplayAll();
-    });
-    nextBtn.addEventListener("click", async (e) => {
-      e.preventDefault();
-      const cuisine = getCuisineInput();
-      const newRecipe = await fetchRecipe(cuisine);
-      computeDuration(newRecipe);
-      displayArecipe(newRecipe);
-      sportDisplayAll();
-    });
-
-
+    
     // Hide the bottom section initially
     resultContainer.classList.add("hide");
     recipeNavBtns.classList.add("hide");
@@ -91,7 +70,32 @@ document.addEventListener("DOMContentLoaded", function ()
     // Clear the searched recipes from localStorage from old session
     localStorage.removeItem("recipes");
 
-    
+    searchBtn.addEventListener("click", async (e) => {
+      e.preventDefault();
+      // Remove the "hide" class from the bottom section container element
+     
+      const cuisine = getCuisineInput();
+      const newRecipe = await fetchRecipe(cuisine);
+      await sportSearch();
+      computeDuration(newRecipe);
+      displayArecipe(newRecipe);
+      sportDisplayAll();
+      resultContainer.classList.remove("hide");
+      recipeNavBtns.classList.remove("hide");
+    });
+
+    nextBtn.addEventListener("click", async (e) => {
+      e.preventDefault();
+      const cuisine = getCuisineInput();
+      const newRecipe = await fetchRecipe(cuisine);
+      await sportSearch();
+      computeDuration(newRecipe);
+      displayArecipe(newRecipe);
+      sportDisplayAll();
+      resultContainer.classList.remove("hide");
+      recipeNavBtns.classList.remove("hide");
+    });
+
         
   }
   else if (document.title ==="Recipe Details")
@@ -348,6 +352,7 @@ function storeIndexInfo() {
 
 //get duration of sport in minutes to match menu calories
 async function computeDuration(recipe) {
+  
   sportDurationCurrent = [];
   sportDuration = [];
   for (var i = 0; i < sportInfoCurrent.length; i++) { 
