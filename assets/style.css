@@ -346,8 +346,10 @@ p {
 }
 
 .form-label {
-  font-size: 1.5rem;
+  font-size: 1.7rem;
   margin: 0 0 0 10px;
+  color:#b07b74;
+  font-family:'Trebuchet MS', 'Lucida Sans Unicode', 'Lucida Grande', 'Lucida Sans', Arial, sans-serif;
 }
 
 .input-field {
