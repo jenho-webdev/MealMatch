@@ -3,7 +3,7 @@
 // const NINJAS_API = "qeQ/ixgJ1FhLzMigxs+yag==sahHalNRb0bq0szN";
 // const Spoonacular_API_Keiji = "b7db31d63a4d49e4ba04b02bdfcde847"; //keiji's key
 // const Spoonacular_API_Douglas = "c6c9bb9062a14ace88c599472838ee3f";
-// const Spoonacular_API_jen = "c6c9bb9062a14ace88c599472838ee3f";
+
 
 //keys that are storaged locally on user's localstorage. will be get when onload
 var NINJAS_API = null;
@@ -12,7 +12,7 @@ var Spoonacular_API = null;
 //Recipe Request Page DOM
 const searchBtn = document.querySelector("#search");
 const saveBtn = document.querySelector("#save");
-const nextBtn = Array.from(document.querySelectorAll(".nav-btn-inline"));
+const nextBtn = document.querySelector("#next");
 const resultContainer = document.querySelector("#results-container");
 const recipeNavBtns = document.querySelector("#btn-row");
 //API URLs
@@ -20,7 +20,7 @@ const fetchhRecipesURL = `https://api.spoonacular.com/recipes/complexSearch`;
 const fetchCaloriesBurnt = `https://api.api-ninjas.com/v1/caloriesburnedactivities`;
 const fetchExercises = `https://api.api-ninjas.com/v1/exercises?`;
 
-//exporting information
+//exporting information -Keiji what is this for? do you need t
 const searchValue = document.getElementById('result-container').textContent;
 localStorage.setItem('searchValue', searchValue);
 
@@ -43,14 +43,6 @@ function setAPIKeyToLocal(name, key) {
 function getAPIKeyFromLocal(name) {
   return localStorage.getItem(name);
 }
-
-//-----------------------Get locally stored data---------------------------------------------------
-
-//CALL getLocalRecipesData (); TO GET SAVED RECIPES FROM LOCAL STORAGE
-
-//--------------------------Set data to local storage----------------------------------
-
-//CALL setLocalRecipesData (recipe); TO SAVE RECIPE TO LOCAL STORAGE
 
 //----------------DOM functions and eventlistener functions-------------------------------------------
 function getCuisineInput() {
@@ -95,14 +87,24 @@ function getApiInput() {
     modalOverlay.style.display = "none";
   }
 }
+
+function getRecipeIDFromURL() {
+  const queryString = window.location.search;
+  const urlParams = new URLSearchParams(queryString);
+  return urlParams.get("q");
+}
+
 //on page load, hide the result dive and button row at the bottom.
 //check localstorage for stored API key, if no keys found, open modal and get user's input
 //when user hit the saveApiKey button, it then store the key to local storage
 
 document.addEventListener("DOMContentLoaded", function () {
   //set the keys either from local or user's input from pop up modal
-  getApiInput();
-
+    
+  if (document.title === "MealMatch"){
+    //set the keys either from local or user's input from pop up modal
+    getApiInput();
+     sportSearch();
   // Hide the bottom section initially
   if (resultContainer)
     resultContainer.classList.add("hide");
@@ -111,7 +113,23 @@ document.addEventListener("DOMContentLoaded", function () {
 
   // Clear the searched recipes from localStorage from old session
   localStorage.removeItem("recipes");
+}else if (document.title ==="Recipe Details"){
+
+  getLocalRecipesDataByID()
+
+
+
+
+}
+
+
+
+
+
+
+
 });
+
 
 // Event listener for search button
 searchBtn.addEventListener("click", async (e) => {
@@ -123,52 +141,48 @@ searchBtn.addEventListener("click", async (e) => {
 
   const cuisine = getCuisineInput();
   const newRecipe = await fetchRecipe(cuisine);
+  computeDuration(newRecipe);
   displayArecipe(newRecipe);
+  sportDisplayAll();
 });
 
-//eventlistener for next and back buttons
+//eventlistener for next buttons
 
-nextBtn.forEach((btn) => {
-  btn.addEventListener("click", async (e) => {
-    e.preventDefault();
-    let loadRecipe = {};
-    let setIndex = 0;
-
-    if (btn.id === "next") {
-      const cuisine = getCuisineInput();
-      const newRecipe = await fetchRecipe(cuisine);
-      displayArecipe(newRecipe);
-    }
-  });
+nextBtn.addEventListener("click", async (e) => 
+{
+  e.preventDefault();
+  const cuisine = getCuisineInput();
+  const newRecipe = await fetchRecipe(cuisine);
+  computeDuration(newRecipe);
+  displayArecipe(newRecipe);
+  sportDisplayAll();
 });
 
 //---------------------->UI manipulation functions------------------------------
 
 //--------------------------HTML changing functions--------------------------------------------------------
 
-//moves to recipeDetails.html
-function moveHTML() {
-  var queryString = "./recipeDetails.html?q=" + currentRecipesIndex;
-  location.assign(queryString);
-}
+// //moves to recipeDetails.html
+// function moveHTML() {
+//   var queryString = "./recipeDetails.html?q=" + currentRecipesIndex;
+//   location.assign(queryString);
+// }
 
 //------------------------Recipes Related functions below-----------------------------------------------
 
-// CALL displayArecipe (); OR displaySavedRecipes (); FOR RECIPE(S) OUTPUT TO UI;
-
-//------------>Get ------------------------
+//------------Fetch a Recripe from API------------------------
 
 //Pass in cuisine(String) and return a "repackaged" recipe
-// return recipe contain {recipe name,calories,ID, image url,}
+// return a repackaged recipe object
+
 async function fetchRecipe(cuisine) {
-  //1.06pts per call that return a recipe with info and nutrition
   const apiUrl = `https://api.spoonacular.com/recipes/complexSearch?apiKey=${Spoonacular_API}&cuisine=${cuisine}&sort=random&number=1&addRecipeNutrition=true&fillIngredients=true`;
 
   const apiFetch = await (await fetch(apiUrl)).json();
 
   const recipeObj = apiFetch.results[0]; //recipe object
-  //things that are under the recipeData.results[0]
 
+  //things that are under the recipeData.results[0] from response
   const recipeID = recipeObj.id;
   const recipeImgUrl = recipeObj.image;
   const summary = recipeObj.summary;
@@ -176,24 +190,28 @@ async function fetchRecipe(cuisine) {
   const title = recipeObj.title;
   const vegan = recipeObj.vegan;
   const ingredients = recipeObj.extendedIngredients;
+  const cookingSteps = recipeObj.analyzedInstructions[0].steps;
 
   //things that is under the butrients array
   const nutrients = recipeObj.nutrition.nutrients; //"nutrients array of objects"
   const calories = nutrients.find((item) => item.name === "Calories").amount;
+  const dishType = recipeObj.dishTypes; //return the first type only
 
   // repackage all the recipe data that we need into a new obj
   const recipeOutput = {
-    index: currentRecipesIndex,
     cuisine: cuisine,
-    calories: calories,
-    ingredients: ingredients,
-    summary: summary,
-    recipeID: recipeID,
+    calories: calories, //int
+    ingredients: ingredients, //array of obj
+    summary: summary, //string
+    recipeID: recipeID, //int
     imgURL: recipeImgUrl,
-    min: readyInMinutes,
-    title: title,
-    vegan: vegan,
+    min: readyInMinutes, //int
+    title: title, //string
+    vegan: vegan, //boolean
+    cookingSteps: cookingSteps, //array of obj
+    dishType: dishType //obj
   };
+
   //push current recipe into var and advance index
   searchedRecipes.push(recipeOutput);
   currentRecipeID = recipeID;
@@ -225,6 +243,10 @@ function getLocalRecipesData() {
   const savedRecipes = JSON.parse(localStorage.getItem("recipes")) || [];
   return savedRecipes;
 }
+function getLocalRecipesDataByID(recipeID) {
+  const savedRecipes = JSON.parse(localStorage.getItem("recipes"));
+  return savedRecipes.find((recipe) => recipe.recipeId === recipeID);
+}
 
 //------------------>display to UI-------------------------------
 
@@ -234,163 +256,150 @@ function displayArecipe(recipe) {
   const recipeTitleEl = document.querySelector("#recipeTitleEl");
   const caloriesEl = document.querySelector("#calories");
   const recripeSummary = document.querySelector("#summary");
+  const redirectURL = document.querySelector("#redirectURL");
 
   // Update the elements with the recipe details
   recipeImgEl.src = recipe.imgURL;
   recipeTitleEl.textContent = recipe.title;
   caloriesEl.textContent = `Calories: ${recipe.calories}`;
   recripeSummary.innerHTML = `${recipe.summary}`;
+  redirectURL.setAttribute('href', `recipeDetails.html?q=${recipe.recipeId}`);
+  redirectURL.setAttribute('target', '_blank');
 }
-
-// function displaySavedRecipes() {};
-//TO BE DONE AFTER UI IS FINALIZED
-
+//========================================================================================================
 //------------------------Activities Related functions below-----------------------------------------------
 
 //Sports area DOM
 const walk = document.querySelector("#walk");
+const walkCalories = document.querySelector("#walkCalories");
+const walkDuration = document.querySelector("#walkDuration");
 const run = document.querySelector("#run");
+const runCalories = document.querySelector("#runCalories");
+const runDuration = document.querySelector("#runDuration");
 const bike = document.querySelector("#bike");
+const bikeCalories = document.querySelector("#bikeCalories");
+const bikeDuration = document.querySelector("#bikeDuration");
 const swim = document.querySelector("#swim");
+const swimCalories = document.querySelector("#swimCalories");
+const swimDuration = document.querySelector("#swimDuration");
+const displaySportCaloriesLoop = [walkCalories, runCalories, bikeCalories, swimCalories];
+const displaySportDurationLoop = [walkDuration, runDuration, bikeDuration, swimDuration];
+
+
+
+
 
 //list of variables
-var saveCurrentSport = []; //initial blank savelist at load. Array. store cuisine input.
-var sampleMenuCalories = 123; //sample var used for testingcode .
-var sportResult = "default";
-// var sportCalories = 1;
-var sportDuration = [];
-var sport0 = "3.0 mph"; //output = Walking 3.0 mph, moderate
-var sport1 = "6.7 mph"; //output = Running, 6.7 mph (9 min mile)
-var sport2 = "12-13.9 mph"; //output = Cycling, 12-13.9 mph, moderate
-var sport3 = "treading water, m"; //output = Swimming, treading water, moderate
+var saveCurrentSport = []; //stores info from API call.
+// var sampleMenuCalories = 1200;  //sample var used for testing sports code. will be replaced with actual food calories. 
+var sportSet = ["3.0 mph", "6.7 mph", "12-13.9 mph", "treading water, m"]
+var sportInfoCurrent = []; // sports data gets stored here.
+var sportDuration = []; //computed duration gets stored here.
+var sportDurationCurrent = [];  //array of collected durations
+var sportInfoPackage = []; //array of sports information to be sent to local storage for use in recipeDetails page.
 
-var sportSet = ["3.0 mph", "6.7 mph", "12-13.9 mph", "treading water, m"];
-var sportInfoCurrent = [];
-var sportInfoPackage = [];
-const displaySportLoop = [walk, run, bike, swim];
 
 //----------->Get Sport Data-------------------------------------
-//Sample of Jen's async
-//async function fetchActivities(calories){const sportData = await fetch(``);}
 
-//search for activities based on sport var (currently use only the [0] of the API response array)
-
-function sportSearch() {
+//search sportSet variable content in order.
+async function sportSearch(){
+  if (sportInfoCurrent === undefined || sportInfoCurrent.length == 0) {
+  //sportInfoCurrent = [];
   for (var i = 0; i < sportSet.length; i++) {
-    var searchNinjaUrl =
-      "https://api.api-ninjas.com/v1/caloriesburned?activity=" + sportSet[i];
-    fetch(searchNinjaUrl, { headers: { "X-Api-Key": NINJAS_API } })
-      .then(function (response) {
-        if (!response.ok) {
-          throw response.json();
-        }
+var searchNinjaUrl = "https://api.api-ninjas.com/v1/caloriesburned?activity=" + sportSet[i];
+await fetch(searchNinjaUrl,
+{headers: { 'X-Api-Key': NINJAS_API},})
+.then(function (response) {
+  if (!response.ok) {
+    throw response.json();
+  }
 
-        return response.json();
-      })
-      .then(function (data) {
-        if (data == "") {
-          console.log("search input did not have output. try something else");
-          return; //ends function early for bad search input.
-        }
-        sportInfoCurrent.push(data);
-        // console.log(data);
-        // sportResult = data[0];
-        // sportCalories = sportResult.calories_per_hour;
-        // console.log(sportResult);
-        // console.log(sportResult.name);
-        // console.log(sportResult.calories_per_hour);
-        // console.log(sportCalories);
-      })
-      .catch(function (error) {
-        console.error(error);
-        notFound.textContent = "searchNinjaUrl_error";
-      });
-    console.log(i);
+  return response.json();
+})
+.then(function (data) {
+  if (data == "") {
+    console.log("search input did not have output. try something else");
+    return;  //ends function early for bad search input.
   }
-  if (i >= sportSet.length) {
-    return;
-  }
+
+  sportInfoCurrent.push(data);
+
+})
+.catch(function (error) {
+  console.error(error);
+  notFound.textContent = "searchNinjaUrl_error";
+});
+// console.log(i);
 }
+if (i === sportSet.length){
+  console.log(sportInfoCurrent);
 
-async function fetchActivities(calories) {
-  const sportData = await fetch(``);
+return;
 }
-
-//------------------->compute-------------------------------
-
-//get duration of sport in minutes to match menu calories
-function computeDuration() {
-  for (var i = 0; i < saveList.length; i++) {
-    var sportCalories = sportInfoCurrent[i][0].calories_per_hour;
-    if (sportCalories == "") {
-      console.log("coumputeDuration function errored");
-      return;
-    }
-    sportDuration = sampleMenuCalories / sportCalories;
-    console.log(sportDuration + "hours");
-    var sportDurationMin = sportDuration * 60;
-    console.log(sportDurationMin.toFixed() + "minutes");
-    return;
-  }
+}
+else {
+  return;
+}
 }
 
 //------------------------>set------------------------------
 
-//below are functions to load, save, display, and use locally stored cuisine element
-
-//load local storage
-// function loadSaved() {
-//   var saved = JSON.parse(localStorage.getItem("saved"));
-//   console.log(saved);
-//   if (saved !== null) {
-//     saveList = saved;
-//   }}
-
-//save input value
-function storeSaveSport() {
-  saveList.push(cuisineInputEl.value); //currently set to cuisine input. change if needed
-
-  localStorage.setItem("saved", JSON.stringify(saveList));
+//prepares sport information set. waiting to be stored into local storage to be used in recipeDetails page.
+async function sportInfoPackagePrep() {
+  sportInfoPackage = [];
+  for (var i = 0; i < sportSet.length; i++) {
+    var set = [sportInfoCurrent[i][0], {duration: sportDurationCurrent[i]}]
+    sportInfoPackage.push(set);
+  }
+  if (i === sportSet.length){
+    console.log(sportInfoPackage);
+    return;
+  }
+  
 }
 
-//displays the local storage save content. generates li with buttons nested to make list of saved content.
-function displaySave() {
-  saveDisplay.innerHTML = ""; //wipe reviously loaded content
-  for (var i = 0; i < saveList.length; i++) {
-    var save = saveList[i];
+// save to local storage
+var mainPackage = [];
+function storeIndexInfo() {
+  mainPackage.push(sportInfoPackage);  //adds sport information package at end of mainPackage
+  localStorage.setItem("MealMatchIndex", JSON.stringify(mainPackage));
+  };
 
-    var li = document.createElement("li");
-    li.textContent = "";
-    li.setAttribute("saveValue", i);
+//------------------->compute-------------------------------
 
-    var button = document.createElement("button");
-    button.textContent = save;
+//get duration of sport in minutes to match menu calories
+async function computeDuration(recipe) {
+  sportDurationCurrent = [];
+  sportDuration = [];
+  for (var i = 0; i < sportInfoCurrent.length; i++) { 
+    var sportCalories = sportInfoCurrent[i][0].calories_per_hour;
+  sportDuration = recipe.calories / sportCalories;
+  sportDurationCurrent.push(sportDuration);
+}
+}
 
-    li.appendChild(button);
-    saveList.appendChild(li);
+//------------------->display-------------------------------
+
+async function sportDisplayCalories() {
+  for (var i = 0; i < displaySportCaloriesLoop.length; i++) { 
+    displaySportCaloriesLoop[i].textContent = "Calories: \n " + sportInfoCurrent[i][0].calories_per_hour +"/hour";
   }
 }
 
-//re-search using saved content.
-function reloadSave(event) {
-  var element = event.target;
-
-  if (element.matches("button") === true) {
-    var index = element.parentElement.getAttribute("saveValue");
-    console.log(index);
-    inputValue = saveList[index];
-    fetchRecipe(cuisine); //or other function to start cuisine search process.
-  }
+async function sportDisplayDuration() {
+  for (var i = 0; i < displaySportDurationLoop.length; i++) { 
+    if (sportDurationCurrent[i] >= 1){
+      displaySportDurationLoop[i].textContent = "Duration: \n " + sportDurationCurrent[i].toFixed(1)+ " hours";
+    }
+    else {
+      var sportDurationMin = sportDurationCurrent[i] * 60
+      displaySportDurationLoop[i].textContent = "Duration: \n " + sportDurationMin.toFixed()+ " minutes";
+    }
+}
 }
 
-//------------------------>display-------------------------
-//first run searchSport() in chrome inspect before running the display functions
-
-function sportDisplay() {
-  for (var i = 0; i < displaySportLoop.length; i++) {
-    var content = document.createElement("p");
-    content.textContent =
-      "calories burned per hour =" + sportInfoCurrent[i][0].calories_per_hour;
-    displaySportLoop[i].appendChild(content);
-  }
+// bundled display functions for sports
+function sportDisplayAll(){
+  sportDisplayCalories();
+  sportDisplayDuration();
 }
