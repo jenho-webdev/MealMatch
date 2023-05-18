@@ -289,7 +289,7 @@ async function sportSearch(){
   for (var i = 0; i < sportSet.length; i++) {
 var searchNinjaUrl = "https://api.api-ninjas.com/v1/caloriesburned?activity=" + sportSet[i];
 await fetch(searchNinjaUrl,
-{headers: { 'X-Api-Key': NINJAS_API},})
+{headers: { 'X-Api-Key': NINJAS_API} })
 .then(function (response) {
   if (!response.ok) {
     throw response.json();
@@ -307,7 +307,7 @@ await fetch(searchNinjaUrl,
 
 })
 .catch(function (error) {
-  console.error(error);
+  console.log(error);
   notFound.textContent = "searchNinjaUrl_error";
 });
 // console.log(i);

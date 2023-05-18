@@ -34,8 +34,11 @@
       <div>
         <h3 class="card-header text-uppercase">Find a workout to match your meal</h3>
         <form id="user-form" class="card-search">
-          <label class="form-label" for="cuisine-select">Don't know which cuisine to choose? Click below for a random match!!"</label>
+          <label class="form-label" for="cuisine-select">Don't know which cuisine to choose? Click below for a random
+            match!!"</label>
           <select id="cuisine-select" class="browser-default input-field">
+
+            <!--Drop down box of cuisine selections-->
             <option value="" disabled selected>Select a cuisine</option>
             <option value="mexican">Mexican</option>
             <option value="japanese">Japanese</option>
@@ -50,6 +53,8 @@
     <section class="container" id="result-container">
       <section class="display row">
         <div class="grid-container">
+
+          <!--Recipe card with a short summary of recipe fetched-->
           <div class="grid-item">
             RECIPE CARD
             <div class="col s12">
@@ -75,7 +80,7 @@
           </div>
           <div class="grid-item">
             SPORT CARD
-            <!-- sport card -->
+            <!-- sport card with duration of exercise and calories burned -->
             <div class="col s12">
               <div class="card large z-depth-4">
                 <div class="sportChoice" id="sport-details">
