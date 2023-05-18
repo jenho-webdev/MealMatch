@@ -21,7 +21,7 @@ var currentRecipesIndex = window.location;
 
 
 //----------------DOM functions and eventlistener functions-------------------------------------------
-let searchValue = localStorage.getItem('searchValue') || "";
+let searchValue = localStorage.getItem('') || "";
 
 // Use the retrieved value in your code
 
