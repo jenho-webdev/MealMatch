@@ -9,7 +9,7 @@
 var NINJAS_API = "qeQ/ixgJ1FhLzMigxs+yag==sahHalNRb0bq0szN";
 var Spoonacular_API = "764b35a9a9354f93b34e90d79f47c473";
 
-//Recipe Request Page DOM (PAGE 1)
+//Recipe Request Page DOM
 const searchBtn = document.querySelector("#search");
 const saveBtn = document.querySelector("#save");
 const nextBtn = document.querySelector("#next");
@@ -25,7 +25,7 @@ const fetchExercises = `https://api.api-ninjas.com/v1/exercises?`;
 
 //Global Var
 
-const searchValue = document.getElementById("result")
+ 
 //all the recipes searched in current browser session(page refresh will wipe this!)
 var searchedRecipes = [];
 //an idex to know which recipe is the user seeing now in current session
@@ -33,7 +33,6 @@ var currentRecipesIndex = 0;
 var currentRecipeID = 0;
 
 //------------------Locate Storage functions(https://developer.mozilla.org/en-US/docs/Web/API/Window/localStorage)
-//-----------exporting information---------------------------------------------------
 
 
 //----------------DOM functions and eventlistener functions-------------------------------------------
@@ -132,7 +131,7 @@ async function fetchRecipe(cuisine) {
   const apiFetch = await (await fetch(apiUrl)).json();
 
   const recipeObj = apiFetch.results[0]; //recipe object
-  // window.location.href = `recipeDetails.html?recipe=${encodeURIComponent(JSON.stringify(recipeOutput))}`;
+
   //things that are under the recipeData.results[0] from response
   const recipeID = recipeObj.id;
   const recipeImgUrl = recipeObj.image;
@@ -169,7 +168,6 @@ async function fetchRecipe(cuisine) {
   //return the repackaged recipeData contain only data that we need
   setLocalRecipesData(recipeOutput);
   return recipeOutput;
-
 }
 //------------->logic/compute------------------------------
 
@@ -293,7 +291,7 @@ async function sportSearch(){
   for (var i = 0; i < sportSet.length; i++) {
 var searchNinjaUrl = "https://api.api-ninjas.com/v1/caloriesburned?activity=" + sportSet[i];
 await fetch(searchNinjaUrl,
-{headers: { 'X-Api-Key': NINJAS_API} })
+{headers: { 'X-Api-Key': NINJAS_API},})
 .then(function (response) {
   if (!response.ok) {
     throw response.json();
@@ -311,7 +309,7 @@ await fetch(searchNinjaUrl,
 
 })
 .catch(function (error) {
-  console.log(error);
+  console.error(error);
   notFound.textContent = "searchNinjaUrl_error";
 });
 // console.log(i);
