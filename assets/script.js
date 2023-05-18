@@ -116,10 +116,15 @@ document.addEventListener("DOMContentLoaded", function () {
   localStorage.removeItem("recipes");
 }else if (document.title ==="Recipe Details"){
 
-  getLocalRecipesDataByID()
+  getLocalRecipesDataByID(recipeId)
+
+window.location.search = 
 
 
 
+function displayRecipeDetails {
+  
+}
 
 }
 
@@ -182,7 +187,7 @@ async function fetchRecipe(cuisine) {
   const apiFetch = await (await fetch(apiUrl)).json();
 
   const recipeObj = apiFetch.results[0]; //recipe object
-
+  // window.location.href = `recipeDetails.html?recipe=${encodeURIComponent(JSON.stringify(recipeOutput))}`;
   //things that are under the recipeData.results[0] from response
   const recipeID = recipeObj.id;
   const recipeImgUrl = recipeObj.image;
@@ -222,7 +227,7 @@ async function fetchRecipe(cuisine) {
 
 }
 //------------->logic/compute------------------------------
-window.location.href = `recipeDetails.html?recipe=${encodeURIComponent(JSON.stringify(recipeOutput))}`;
+
 //----------------->Set to localStorage---------------------------
 
 //SET (one) recipe JOSON to localStorage
@@ -272,18 +277,18 @@ function displayArecipe(recipe) {
 
 //-------------------------------Recipe Details (PAGE2)---------------------------------------------------
 //Reciple Detail Page DOM (PAGE 2)
-// Get the recipe object from the URL parameter
-const urlParams = new URLSearchParams(window.location.search);
-const recipeParam = urlParams.get('recipe');
-const recipeOutput = JSON.parse(decodeURIComponent(recipeParam));
+// // Get the recipe object from the URL parameter
+// const urlParams = new URLSearchParams(window.location.search);
+// const recipeParam = urlParams.get('recipe');
+// const recipeOutput = JSON.parse(decodeURIComponent(recipeParam));
 
-// Populate the elements with the recipe information
-document.getElementById('#recipeImg').src = recipeOutput.imgURL;
-document.getElementById('#recipeTitleEl').textContent = recipeOutput.title;
-document.getElementById('#calories').textContent = `Calories: ${recipeOutput.calories}`;
-document.getElementById('#summary').innerHTML = recipeOutput.summary;
-document.getElementById('#redirectURL').setAttribute('href', `recipeDetails.html?q=${recipeOutput.recipeID}`);
-document.getElementById('#redirectURL').setAttribute('target', '_blank');
+// // Populate the elements with the recipe information
+// document.getElementById('#recipeImg').src = recipeObj.dishType.imgURL;
+// document.getElementById('#recipeTitleEl').textContent = recipeOutput.title;
+// document.getElementById('#calories').textContent = `Calories: ${recipeOutput.calories}`;
+// document.getElementById('#directions-details').innerHTML = recipeOutput.cookingSteps;
+// document.getElementById('#redirectURL').setAttribute('href', `recipeDetails.html?q=${recipeOutput.recipeID}`);
+// document.getElementById('#redirectURL').setAttribute('target', '_blank');
 
 
 
