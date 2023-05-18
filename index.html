@@ -12,16 +12,16 @@
   <link href="https://fonts.googleapis.com/icon?family=Material+Icons" rel="stylesheet">
   <link rel="stylesheet" href="https://fonts.googleapis.com/css?family=Raleway">
   <link rel="stylesheet" href="./assets/style.css" />
-  <link rel="stylesheet" href="./assets/mock.css" />
   <title>MealMatch</title>
 </head>
 
-<body>
+<body class="body-bg">
+
   
 <!-- uncomment once it is ready -->
 
 Modal Structure
-<div id="apiModal" class="modal" style="z-index: 1003; display: block; opacity: 1; top: 20%; transform: scaleX(1) scaleY(1); height:80%">
+<div id="apiModal" class="modal" style="z-index: 1003; opacity: 1; top: 20%; transform: scaleX(1) scaleY(1); height:80%">
   <div class="modal-content b">
     <h2>Enter your API Key</h2>
     <div class="input-field">
@@ -35,17 +35,10 @@ Modal Structure
   </div>
 
   <div class="modal-footer">
-    <a href="#!" class="modal-close waves-effect waves-light btn">Cancel</a>
     <a href="#!" id="saveApiKeyBtn" class="modal-close waves-effect waves-light btn">Save</a>
   </div>
 </div>
-<div class="modal-overlay" id="modal-overlay" style="z-index: 1002; display: block; opacity: 0.5;"></div>
-
-  <div class="modal-footer">
-    <a href="#!" class="modal-close waves-effect waves-light btn">Cancel</a>
-    <a href="#!" id="saveApiKeyBtn" class="modal-close waves-effect waves-light btn">Save</a>
-  </div>
-</div>
+<div class="modal-overlay" id="modalOverlay" style="z-index: 1002; display: none; opacity: 0.5;"></div>
 
   <!-- Header -->
   <header>
@@ -54,16 +47,15 @@ Modal Structure
         <img class="logo" src="./assets/image/logo.png">
       </div>
       <h1>~Welcome to Meal Match~ </h1>
+
       <!--home page id = homePage-->
-      <div class="home" id="homePage">
-        <a href="index.html">Back to Home </a>
-      </div>
+    
     </nav>
 
   </header>
 
   <!-- Main container -->
-  <main class="frontPage">
+  <main class="frontPage z-depth-5">
     <!-- Tabs -->
     <div class="input-field row">
       <div>
@@ -82,109 +74,119 @@ Modal Structure
         </form>
       </div>
     </div>
-
-    <section class="container" id="results-container">
-      <section class="row">
-
-        <!-- food card -->
-   
-          <div class="col 16 s6">
-            <div class="card">
-              <div class="card-image">
-                <img id="recipeImg" src="./assets/image/logo.png">
-                <span id="recipeTitleEl" class="card-title">Card Title</span>
-                <a class="btn-floating halfway-fab waves-effect waves-light red"><i class="material-icons">add</i></a>
-              </div>
-              <div class="card-content">
-                <p id="summary"></p>
-              </div>
-              <div class="card-action">
-
-                
-                <a id="calories" href="#">Calories: </a>
-                <a id="redirectURL" href="#">More Info
-                  <i class="small material-icons">restaurant</i>
-                </a>
+    <section class="container" id="result-container">
+      <section class="display row">
+        <div class="grid-container">
+          <div class="grid-item">
+RECIPE CARD 
+            <div class="col s12">
+              <div class="card z-depth-4">
+                <div class="card-image">
+                  <img id="recipeImg" src="./assets/image/logo.png">
+                  <span id="recipeTitleEl" class="card-title">Card Title</span>
+                  <a class="btn-floating halfway-fab waves-effect waves-light red"><i class="material-icons">add</i></a>
+                </div>
+                <div class="card-content">
+                  <p id="summary"></p>
+                </div>
+                <div class="card-action">
 
 
-<!--tool tips / card-->
+                  <a id="calories" href="#">Calories: </a>
+                  <a id="redirectURL" href="#">More Info
+                    <i class="small material-icons">restaurant</i>
+                  </a>
+
+
+                  <!--tool tips / card-->
+                </div>
               </div>
             </div>
+
+      
           </div>
-        </div>
-        
-        <!-- sport card -->
-        <div class="col l6 s6">
-          <div class="card large">
+          <div class="grid-item">
+SPORT CARD
+            <!-- sport card -->
+            <div class="col s12">
+              <div class="card large z-depth-4">
 
-              <div class="sportChoice" id="sport-details">
+                <div class="sportChoice" id="sport-details">
 
-                <!-- Row Container 1 -->
-                <div class="sport-row" id="walk" style="border:solid black 3px">
-                  <h2>
-                    <i class="small material-icons">directions_walk</i>
-                    Walking
-                    <div class="info">
-                      <p class="description col s6" id="walkCalories">
-                        <!--duration and calories burned goes here--> Calories: 254
-                      </p>
-                      <p class="description col s6" id="walkDuration">
-                       Duration: 1.5hours
-                      </p>
-                    </div>
-                  </h2><!-- Content for Row Container 1 -->
-                </div>
+                  <!-- Row Container 1 -->
+                  <div class="sport-row" id="walk" style="border:solid black 3px">
+                    <h2>
+                      <i class="small material-icons">directions_walk</i>
+                      Walking
 
-                <!-- Row Container 2 -->
-                <div class="sport-row" id="run" style="border:solid black 3px">
-                  <h2>
-                    <i class="small material-icons">directions_run</i>
-                    Running
-                    <div class="info">
-                      <p class="description col s6" id="runCalories">
-                        <!--duration and calories burned goes here--> Calories: 254
-                      </p>
-                      <p class="description col s6" id="runDuration">
-                       Duration: 1.5hours
-                      </p>
-                    </div>
-                  </h2><!-- Content for Row Container 2 -->
-                </div>
+                      <div class="info">
+                        <p class="description col s6" id="walkCalories">
+                          <!--duration and calories burned goes here--> Calories: 254
+                        </p>
+                        <p class="description col s6" id="walkDuration">
+                          Duration: 1.5hours
+                        </p>
+                      </div>
+                    </h2><!-- Content for Row Container 1 -->
+                  </div>
 
-                <!-- Row Container 3 -->
-                <div class="sport-row" id="bike" style="border:solid black 3px">
-                  <h2>
-                    <i class="small material-icons">directions_bike</i>
-                    Biking
-                    <div class="info">
-                      <p class="description col s6" id="bikeCalories">
-                        <!--duration and calories burned goes here--> Calories: 254
-                      </p>
-                      <p class="description col s6" id="bikeDuration">
-                       Duration: 1.5hours
-                      </p>
-                    </div>
-                  </h2><!-- Content for Row Container 3 -->
-                </div>
+                  <!-- Row Container 2 -->
 
-                <!-- Row Container 4 -->
-                <div class="sport-row" id="swim" style="border:solid black 3px">
-                  <h2>
-                    <i class="small material-icons">pool</i>
-                    Swimming
-                    <div class="info">
-                    <p class="description col s6" id="swimCalories">
-                      <!--duration and calories burned goes here--> Calories: 254
-                    </p>
-                    <p class="description col s6" id="swimDuration">
-                     Duration: 1.5hours
-                    </p>
-                    </div>
-                  </h2>
+                  <div class="sport-row" id="run" style="border:solid black 3px">
+                    <h2>
+                      <i class="small material-icons">directions_run</i>
+                      Running
+                      <div class="info">
+                        <p class="description col s6" id="runCalories">
+                          <!--duration and calories burned goes here--> Calories: 254
+                        </p>
+                        <p class="description col s6" id="runDuration">
+                          Duration: 1.5hours
+                        </p>
+                      </div>
+                    </h2><!-- Content for Row Container 2 -->
+                  </div>
+
+                  <!-- Row Container 3 -->
+                  <div class="sport-row" id="bike" style="border:solid black 3px">
+                    <h2>
+                      <i class="small material-icons">directions_bike</i>
+                      Biking
+                      <div class="info">
+                        <p class="description col s6" id="bikeCalories">
+                          <!--duration and calories burned goes here--> Calories: 254
+                        </p>
+                        <p class="description col s6" id="bikeDuration">
+                          Duration: 1.5hours
+                        </p>
+                      </div>
+                    </h2><!-- Content for Row Container 3 -->
+                  </div>
+
+                  <!-- Row Container 4 -->
+                  <div class="sport-row" id="swim" style="border:solid black 3px">
+                    <h2>
+                      <i class="small material-icons">pool</i>
+                      Swimming
+                      <div class="info">
+                        <p class="description col s6" id="swimCalories">
+                          <!--duration and calories burned goes here--> Calories: 254
+                        </p>
+                        <p class="description col s6" id="swimDuration">
+                          Duration: 1.5hours
+                        </p>
+                      </div>
+                    </h2>
+                  </div>
                 </div>
               </div>
-             
+            </div>
+
+
           </div>
+
+          <!-- food card -->
+
       </section>
     </section>
 
@@ -192,8 +194,7 @@ Modal Structure
     <div class="row" id="btn-row">
       <div class="nav-container">
         <!-- <button class="nav-btn nav-btn-inline" id="save">Save</button> -->
-        <button class="nav-btn nav-btn-inline" id="back">Back</button>
-        <button class="nav-btn nav-btn-inline" id="next">Next</button>
+        <button class="nav-btn nav-btn-inline" id="next">Next Recipe</button>
 
       </div>
     </div>
@@ -208,6 +209,7 @@ Modal Structure
 
 
   </main>
+
 </body>
 
 <!-- <script src="https://code.jquery.com/jquery-3.4.1.min.js"></script> -->
@@ -215,7 +217,7 @@ Modal Structure
   integrity="sha256-iu/zLUB+QgISXBLCW/mcDi/rnf4m4uEDO0wauy76x7U=" crossorigin="anonymous"></script>
 <script src="https://cdnjs.cloudflare.com/ajax/libs/materialize/1.0.0/js/materialize.min.js"></script>
 <script src="./assets/script.js"></script>
-
+<script src="./assets/script2.js"></script>
 </html>
 
 <!--88 disappearing js file, minjs-->
