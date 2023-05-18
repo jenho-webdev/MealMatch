@@ -1,13 +1,13 @@
-// API Keys
-// hard coding the keys before we have the grab key fuctions on page load
-const NINJAS_API = "qeQ/ixgJ1FhLzMigxs+yag==sahHalNRb0bq0szN";
-const Spoonacular_API_Keiji = "b7db31d63a4d49e4ba04b02bdfcde847"; //keiji's key
-const Spoonacular_API_Douglas = "c6c9bb9062a14ace88c599472838ee3f";
-const Spoonacular_API_jen = "c6c9bb9062a14ace88c599472838ee3f";
+//API Keys
+//hard coding the keys before we have the grab key fuctions on page load
+// const NINJAS_API = "qeQ/ixgJ1FhLzMigxs+yag==sahHalNRb0bq0szN";
+// const Spoonacular_API_Keiji = "b7db31d63a4d49e4ba04b02bdfcde847"; //keiji's key
+// const Spoonacular_API_Douglas = "c6c9bb9062a14ace88c599472838ee3f";
+// const Spoonacular_API_jen = "c6c9bb9062a14ace88c599472838ee3f";
 
-// //keys that are storaged locally on user's localstorage. will be get when onload
-// var NINJAS_API = null;
-// var Spoonacular_API = null;
+//keys that are storaged locally on user's localstorage. will be get when onload
+var NINJAS_API = null;
+var Spoonacular_API = null;
 
 //Recipe Request Page DOM
 const searchBtn = document.querySelector("#search");
@@ -34,19 +34,15 @@ var searchedRecipes = [];
 var currentRecipesIndex = 0;
 var currentRecipeID = 0;
 
-
 //------------------Locate Storage functions(https://developer.mozilla.org/en-US/docs/Web/API/Window/localStorage)
- // Store the API key locally
- function setAPIKeyToLocal (name,key)
- {
-    localStorage.setItem(name, key);
- };
+// Store the API key locally
+function setAPIKeyToLocal(name, key) {
+  localStorage.setItem(name, key);
+}
 
- function getAPIKeyFromLocal(name) 
- {
-   return localStorage.getItem(name);
- };
-
+function getAPIKeyFromLocal(name) {
+  return localStorage.getItem(name);
+}
 
 //-----------------------Get locally stored data---------------------------------------------------
 
@@ -56,7 +52,6 @@ var currentRecipeID = 0;
 
 //CALL setLocalRecipesData (recipe); TO SAVE RECIPE TO LOCAL STORAGE
 
-
 //----------------DOM functions and eventlistener functions-------------------------------------------
 function getCuisineInput() {
   const cuisineSelect = document.getElementById("cuisine-select");
@@ -64,8 +59,7 @@ function getCuisineInput() {
   return cuisine;
 }
 
-function getApiInput()
-{
+function getApiInput() {
   //check if both key exist locally
   Spoonacular_API = getAPIKeyFromLocal("spoonApiKey");
   NINJAS_API = getAPIKeyFromLocal("NinjasApikey");
@@ -75,13 +69,12 @@ function getApiInput()
   //if anyone of the key is null, open modal to get keys from user
   if (!Spoonacular_API || !NINJAS_API) {
     // Initialize the modal
-    
+
     // Open the modal
     modalInstance.open();
 
     // Add event listener to save the API key when the save button is clicked
     const saveApiKeyBtn = document.getElementById("saveApiKeyBtn");
-    
 
     saveApiKeyBtn.addEventListener("click", function () {
       const spoonApiKeyEl = document.getElementById("Spoon-API");
@@ -96,21 +89,17 @@ function getApiInput()
       apiModal.style.display = "none";
       modalOverlay.style.display = "none";
     });
-
-  }else {
+  } else {
     // Open the modal
     modalInstance.close();
     modalOverlay.style.display = "none";
-  };
-  
-};
-
-//on page load, hide the result div and button row at the bottom.
+  }
+}
+//on page load, hide the result dive and button row at the bottom.
 //check localstorage for stored API key, if no keys found, open modal and get user's input
 //when user hit the saveApiKey button, it then store the key to local storage
 
 document.addEventListener("DOMContentLoaded", function () {
-  
   //set the keys either from local or user's input from pop up modal
   getApiInput();
 
@@ -120,7 +109,6 @@ document.addEventListener("DOMContentLoaded", function () {
 
   // Clear the searched recipes from localStorage from old session
   localStorage.removeItem("recipes");
-
 });
 
 // Event listener for search button
@@ -143,17 +131,15 @@ nextBtn.forEach((btn) => {
     let loadRecipe = {};
     let setIndex = 0;
 
-    if (btn.id === "next")
-     {
+    if (btn.id === "next") {
       const cuisine = getCuisineInput();
       const newRecipe = await fetchRecipe(cuisine);
-       displayArecipe(newRecipe);
+      displayArecipe(newRecipe);
     }
   });
 });
 
 //---------------------->UI manipulation functions------------------------------
-
 
 //--------------------------HTML changing functions--------------------------------------------------------
 
@@ -173,7 +159,7 @@ function moveHTML() {
 // return recipe contain {recipe name,calories,ID, image url,}
 async function fetchRecipe(cuisine) {
   //1.06pts per call that return a recipe with info and nutrition
-  const apiUrl = `https://api.spoonacular.com/recipes/complexSearch?apiKey=${Spoonacular_API_Douglas}&cuisine=${cuisine}&sort=random&number=1&addRecipeNutrition=true&fillIngredients=true`;
+  const apiUrl = `https://api.spoonacular.com/recipes/complexSearch?apiKey=${Spoonacular_API}&cuisine=${cuisine}&sort=random&number=1&addRecipeNutrition=true&fillIngredients=true`;
 
   const recipeData = await recipeURL.json();
   const nutrients = recipeData.results[0].nutrition.nutrients;
@@ -195,9 +181,6 @@ async function fetchRecipe(cuisine) {
     title: title,
     vegan: vegan,
   };
-
- 
-
   //push current recipe into var and advance index
   searchedRecipes.push(recipeOutput);
   currentRecipeID = recipeID;
@@ -269,11 +252,8 @@ const swimDuration = document.querySelector("#swimDuration");
 const displaySportCaloriesLoop = [walkCalories, runCalories, bikeCalories, swimCalories];
 const displaySportDurationLoop = [walkDuration, runDuration, bikeDuration, swimDuration];
 
-
-
-
-
 //list of variables
+
 var saveCurrentSport = []; //stores info from API call.
 var sampleMenuCalories = 1200;  //sample var used for testing sports code. will be replaced with actual food calories. 
 var sportSet = ["3.0 mph", "6.7 mph", "12-13.9 mph", "treading water, m"]
@@ -282,8 +262,8 @@ var sportDuration = []; //computed duration gets stored here.
 var sportDurationCurrent = [];  //array of collected durations
 var sportInfoPackage = []; //array of sports information to be sent to local storage for use in recipeDetails page.
 
-
 //----------->Get Sport Data-------------------------------------
+
 
 //search sportSet variable content in order.
 async function sportSearch(){
@@ -295,15 +275,14 @@ await fetch(searchNinjaUrl,
 .then(function (response) {
   if (!response.ok) {
     throw response.json();
+    
+    
+
+  }
+  if (i >= sportSet.length) {
+    return;
   }
 
-  return response.json();
-})
-.then(function (data) {
-  if (data == "") {
-    console.log("search input did not have output. try something else");
-    return;  //ends function early for bad search input.
-  }
 
   sportInfoCurrent.push(data);
 
@@ -335,6 +314,7 @@ async function sportInfoPackagePrep() {
     return;
   }
   
+
 }
 
 //below are functions to save and load from local storage
@@ -347,12 +327,14 @@ async function sportInfoPackagePrep() {
 //     saveList = saved;
 //   }}
 
+
 // save to local storage
 var mainPackage = [];
 function storeIndexInfo() {
   mainPackage.push(sportInfoPackage);  //adds sport information package at end of mainPackage
   localStorage.setItem("MealMatchIndex", JSON.stringify(mainPackage));
   };
+
 
 //------------------->compute-------------------------------
 
@@ -377,6 +359,7 @@ async function sportDisplayCalories() {
   }
 }
 
+
 async function sportDisplayDuration() {
   for (var i = 0; i < displaySportDurationLoop.length; i++) { 
     displaySportDurationLoop[i].textContent = "Duration: \n " + sportDurationCurrent[i]+" hours";
@@ -393,3 +376,4 @@ async function sportTest(){
   await sportInfoPackagePrep();
   return;
 };
+
