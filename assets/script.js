@@ -274,7 +274,7 @@ const displaySportDurationLoop = [walkDuration, runDuration, bikeDuration, swimD
 
 //list of variables
 var saveCurrentSport = []; //stores info from API call.
-var sampleMenuCalories = 1200;  //sample var used for testing sports code. will be replaced with actual food calories. 
+// var sampleMenuCalories = 1200;  //sample var used for testing sports code. will be replaced with actual food calories. 
 var sportSet = ["3.0 mph", "6.7 mph", "12-13.9 mph", "treading water, m"]
 var sportInfoCurrent = []; // sports data gets stored here.
 var sportDuration = []; //computed duration gets stored here.
@@ -312,7 +312,7 @@ await fetch(searchNinjaUrl,
   console.error(error);
   notFound.textContent = "searchNinjaUrl_error";
 });
-console.log(i);
+// console.log(i);
 }
 if (i === sportSet.length){
   console.log(sportInfoCurrent);
@@ -341,16 +341,6 @@ async function sportInfoPackagePrep() {
   
 }
 
-//below are functions to save and load from local storage
-
-//load local storage
-// function loadSaved() {
-//   var saved = JSON.parse(localStorage.getItem("saved"));
-//   console.log(saved);
-//   if (saved !== null) {
-//     saveList = saved;
-//   }}
-
 // save to local storage
 var mainPackage = [];
 function storeIndexInfo() {
@@ -367,12 +357,7 @@ async function computeDuration(recipe) {
   for (var i = 0; i < sportInfoCurrent.length; i++) { 
     var sportCalories = sportInfoCurrent[i][0].calories_per_hour;
   sportDuration = recipe.calories / sportCalories;
-  console.log(sportDuration + "hours");
-  var sportDurationMin = sportDuration * 60;
-  console.log(sportDurationMin.toFixed() + "minutes");
   sportDurationCurrent.push(sportDuration);
-  sportDisplayCalories();
-  sportDisplayDuration();
 }
 }
 
@@ -396,18 +381,8 @@ async function sportDisplayDuration() {
 }
 }
 
-//test function to see all sport functions in action. 
-//Get info from API -> calculate duration -> display info on HTML -> prepare sports information package
-// async function sportTest(){
-//   await sportSearch();
-//   await computeDuration();
-//   await sportDisplayCalories();
-//   await sportDisplayDuration();
-//   await sportInfoPackagePrep();
-//   return;
-// };
-
+// bundled display functions for sports
 function sportDisplayAll(){
+  sportDisplayCalories();
   sportDisplayDuration();
-  sportInfoPackagePrep();
 }
