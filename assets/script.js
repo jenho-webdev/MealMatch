@@ -104,7 +104,9 @@ document.addEventListener("DOMContentLoaded", function () {
   getApiInput();
 
   // Hide the bottom section initially
-  resultContainer.classList.add("hide");
+  if (resultContainer)
+    resultContainer.classList.add("hide");
+
   recipeNavBtns.classList.add("hide");
 
   // Clear the searched recipes from localStorage from old session
@@ -115,7 +117,8 @@ document.addEventListener("DOMContentLoaded", function () {
 searchBtn.addEventListener("click", async (e) => {
   e.preventDefault();
   // Remove the "hide" class from the bottom section container element
-  resultContainer.classList.remove("hide");
+  if(resultContainer)
+    resultContainer.classList.remove("hide");
   recipeNavBtns.classList.remove("hide");
 
   const cuisine = getCuisineInput();
