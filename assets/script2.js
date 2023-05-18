@@ -1,20 +1,20 @@
 
 
 //Recipe Detail page DOM
-const recipeCont = document.querySelector("#content-container");
-document.addEventListener('DOMContentLoaded', function() {
-    // Hide the bottom section initially
-   //# filler for now
-    recipeCont.classList.add('hide');
-  });
+// const recipeCont = document.querySelector("#content-container");
+// document.addEventListener('DOMContentLoaded', function() {
+//     // Hide the bottom section initially
+//    //# filler for now
+//     recipeCont.classList.add('hide');
+//   });
 
-//Global Var
+// //Global Var
 
 
-//all the recipes searched in current browser session(page refresh will wipe this!)
-const searchedRecipes = [];
-//an idex to know which recipe is the user seeing now in current session
-var currentRecipesIndex = window.location; 
+// //all the recipes searched in current browser session(page refresh will wipe this!)
+// const searchedRecipes = [];
+// //an idex to know which recipe is the user seeing now in current session
+// var currentRecipesIndex = window.location; 
 
 
 

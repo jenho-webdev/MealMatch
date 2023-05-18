@@ -9,12 +9,15 @@
 var NINJAS_API = null;
 var Spoonacular_API = null;
 
-//Recipe Request Page DOM
+//Recipe Request Page DOM (PAGE 1)
 const searchBtn = document.querySelector("#search");
 const saveBtn = document.querySelector("#save");
 const nextBtn = document.querySelector("#next");
 const resultContainer = document.querySelector("#results-container");
 const recipeNavBtns = document.querySelector("#btn-row");
+
+
+
 //API URLs
 const fetchhRecipesURL = `https://api.spoonacular.com/recipes/complexSearch`;
 const fetchCaloriesBurnt = `https://api.api-ninjas.com/v1/caloriesburnedactivities`;
@@ -264,6 +267,33 @@ function displayArecipe(recipe) {
   redirectURL.setAttribute('href', `recipeDetails.html?q=${recipe.recipeId}`);
   redirectURL.setAttribute('target', '_blank');
 }
+
+
+//-------------------------------Recipe Details (PAGE2)---------------------------------------------------
+//Reciple Detail Page DOM (PAGE 2)
+const recipeCont = document.querySelector("#content-container");
+const recipePic = document.querySelector("#recipe-image");
+const ingredients = document.querySelector("ingredients-details");
+const page2title = document.querySelector("recipe-title");
+const instructions = document.querySelector("directions-details");
+const saveRecipe = document.querySelector("save-details");
+
+
+recipeCont = {
+  cuisine: cuisine,
+  calories: calories, //int
+  ingredients: ingredients, //array of obj
+  summary: summary, //string
+  recipeID: recipeID, //int
+  imgURL: recipeImgUrl,
+  min: readyInMinutes, //int
+  title: title, //string
+  vegan: vegan, //boolean
+  cookingSteps: cookingSteps, //array of obj
+  dishType: dishType //obj
+};
+
+
 //========================================================================================================
 //------------------------Activities Related functions below-----------------------------------------------
 
