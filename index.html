@@ -17,29 +17,26 @@
 
 <body class="body-bg">
 
-  
-<!-- uncomment once it is ready -->
-
-Modal Structure
-<div id="apiModal" class="modal" style="z-index: 1003; opacity: 1; top: 20%; transform: scaleX(1) scaleY(1); height:80%">
-  <div class="modal-content b">
-    <h2>Enter your API Key</h2>
-    <div class="input-field">
-      <input type="text" id="Spoon-API" placeholder="Enter Spoonacular API Key">
-      <label for="apiKeyInput">API Key</label>
+ 
+  <!-- Modal Structure -->
+  <div id="apiModal" class="modal"
+    style="z-index: 1003; opacity: 1; top: 20%; transform: scaleX(1) scaleY(1); height:80%">
+    <div class="modal-content b">
+      <h2>Enter your API Key</h2>
+      <div class="input-field">
+        <input type="text" id="Spoon-API" placeholder="Enter Spoonacular API Key">
+        <label for="apiKeyInput">API Key</label>
+      </div>
+      <div class="input-field">
+        <input type="text" id="Ninjas-API" placeholder="Enter Ninjas API Key">
+        <label for="apiKeyInput">API Key</label>
+      </div>
     </div>
-    <div class="input-field">
-      <input type="text" id="Ninjas-API" placeholder="Enter Ninjas API Key">
-      <label for="apiKeyInput">API Key</label>
+    <div class="modal-footer">
+      <a href="#!" id="saveApiKeyBtn" class="modal-close waves-effect waves-light btn">Save</a>
     </div>
   </div>
-
-  <div class="modal-footer">
-    <a href="#!" id="saveApiKeyBtn" class="modal-close waves-effect waves-light btn">Save</a>
-  </div>
-</div>
-<div class="modal-overlay" id="modalOverlay" style="z-index: 1002; display: none; opacity: 0.5;"></div>
-
+  <div class="modal-overlay" id="modalOverlay" style="z-index: 1002; display: none; opacity: 0.5;"></div>
   <!-- Header -->
   <header>
     <nav class="nav-extended">
@@ -47,13 +44,10 @@ Modal Structure
         <img class="logo" src="./assets/image/logo.png">
       </div>
       <h1>~Welcome to Meal Match~ </h1>
-
       <!--home page id = homePage-->
-    
+
     </nav>
-
   </header>
-
   <!-- Main container -->
   <main class="frontPage z-depth-5">
     <!-- Tabs -->
@@ -78,7 +72,7 @@ Modal Structure
       <section class="display row">
         <div class="grid-container">
           <div class="grid-item">
-RECIPE CARD 
+            RECIPE CARD
             <div class="col s12">
               <div class="card z-depth-4">
                 <div class="card-image">
@@ -90,35 +84,27 @@ RECIPE CARD
                   <p id="summary"></p>
                 </div>
                 <div class="card-action">
-
-
                   <a id="calories" href="#">Calories: </a>
                   <a id="redirectURL" href="#">More Info
                     <i class="small material-icons">restaurant</i>
                   </a>
-
-
                   <!--tool tips / card-->
                 </div>
               </div>
             </div>
 
-      
           </div>
           <div class="grid-item">
-SPORT CARD
+            SPORT CARD
             <!-- sport card -->
             <div class="col s12">
               <div class="card large z-depth-4">
-
                 <div class="sportChoice" id="sport-details">
-
                   <!-- Row Container 1 -->
                   <div class="sport-row" id="walk" style="border:solid black 3px">
                     <h2>
                       <i class="small material-icons">directions_walk</i>
                       Walking
-
                       <div class="info">
                         <p class="description col s6" id="walkCalories">
                           <!--duration and calories burned goes here--> Calories: 254
@@ -129,9 +115,7 @@ SPORT CARD
                       </div>
                     </h2><!-- Content for Row Container 1 -->
                   </div>
-
                   <!-- Row Container 2 -->
-
                   <div class="sport-row" id="run" style="border:solid black 3px">
                     <h2>
                       <i class="small material-icons">directions_run</i>
@@ -146,7 +130,6 @@ SPORT CARD
                       </div>
                     </h2><!-- Content for Row Container 2 -->
                   </div>
-
                   <!-- Row Container 3 -->
                   <div class="sport-row" id="bike" style="border:solid black 3px">
                     <h2>
@@ -162,7 +145,6 @@ SPORT CARD
                       </div>
                     </h2><!-- Content for Row Container 3 -->
                   </div>
-
                   <!-- Row Container 4 -->
                   <div class="sport-row" id="swim" style="border:solid black 3px">
                     <h2>
@@ -181,43 +163,25 @@ SPORT CARD
                 </div>
               </div>
             </div>
-
-
           </div>
-
           <!-- food card -->
-
       </section>
     </section>
-
-
     <div class="row" id="btn-row">
       <div class="nav-container">
         <!-- <button class="nav-btn nav-btn-inline" id="save">Save</button> -->
         <button class="nav-btn nav-btn-inline" id="next">Next Recipe</button>
-
       </div>
     </div>
-
-
-
-
-
-
-
-
-
-
   </main>
-
 </body>
-
 <!-- <script src="https://code.jquery.com/jquery-3.4.1.min.js"></script> -->
 <script src="https://cdn.jsdelivr.net/npm/dayjs@1.11.3/dayjs.min.js"
   integrity="sha256-iu/zLUB+QgISXBLCW/mcDi/rnf4m4uEDO0wauy76x7U=" crossorigin="anonymous"></script>
 <script src="https://cdnjs.cloudflare.com/ajax/libs/materialize/1.0.0/js/materialize.min.js"></script>
 <script src="./assets/script.js"></script>
 <!--<script src="./assets/script2.js"></script>-->
+
 </html>
 
 <!--88 disappearing js file, minjs-->
