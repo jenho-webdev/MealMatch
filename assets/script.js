@@ -147,6 +147,7 @@ backNextBtn.forEach((btn) => {
       const cuisine = getCuisineInput();
       const newRecipe = await fetchRecipe(cuisine);
       displayArecipe(newRecipe);
+      computeDuration(newRecipe);
     }
   });
 });
@@ -354,15 +355,18 @@ function storeIndexInfo() {
 //------------------->compute-------------------------------
 
 //get duration of sport in minutes to match menu calories
-async function computeDuration() {
+async function computeDuration(recipe) {
+  sportSearch();
   sportDuration = [];
   for (var i = 0; i < sportInfoCurrent.length; i++) { 
     var sportCalories = sportInfoCurrent[i][0].calories_per_hour;
-  sportDuration = sampleMenuCalories / sportCalories;
+  sportDuration = recipe.calories / sportCalories;
   console.log(sportDuration + "hours");
   var sportDurationMin = sportDuration * 60;
   console.log(sportDurationMin.toFixed() + "minutes");
   sportDurationCurrent.push(sportDuration.toFixed(1));
+  sportDisplayCalories();
+  sportDisplayDuration();
 }
 }
 
