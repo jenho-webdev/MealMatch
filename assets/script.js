@@ -23,11 +23,6 @@ const fetchhRecipesURL = `https://api.spoonacular.com/recipes/complexSearch`;
 const fetchCaloriesBurnt = `https://api.api-ninjas.com/v1/caloriesburnedactivities`;
 const fetchExercises = `https://api.api-ninjas.com/v1/exercises?`;
 
-//exporting information -Keiji what is this for? do you need t
-const searchValue = document.getElementById('result-container').textContent;
-localStorage.setItem('searchValue', searchValue);
-
-
 //Global Var
 
  
@@ -47,33 +42,10 @@ function getCuisineInput() {
   return cuisine;
 }
 // Event listener for search button
-searchBtn.addEventListener("click", async (e) => {
-  e.preventDefault();
-  // Remove the "hide" class from the bottom section container element
-  if(resultContainer)
-  {
-     resultContainer.classList.remove("hide");
-     recipeNavBtns.classList.remove("hide");
-  }
-  
-  const cuisine = getCuisineInput();
-  const newRecipe = await fetchRecipe(cuisine);
-  computeDuration(newRecipe);
-  displayArecipe(newRecipe);
-  sportDisplayAll();
-});
 
 //eventlistener for next buttons
 
-nextBtn.addEventListener("click", async (e) => 
-{
-  e.preventDefault();
-  const cuisine = getCuisineInput();
-  const newRecipe = await fetchRecipe(cuisine);
-  computeDuration(newRecipe);
-  displayArecipe(newRecipe);
-  sportDisplayAll();
-});
+
 
 
 //on page load, hide the result dive and button row at the bottom.
@@ -88,22 +60,48 @@ document.addEventListener("DOMContentLoaded", function ()
   {
     //set the keys either from local or user's input from pop up modal
    
-    
+    searchBtn.addEventListener("click", async (e) => {
+      e.preventDefault();
+      // Remove the "hide" class from the bottom section container element
+      if (resultContainer) {
+        resultContainer.classList.remove("hide");
+        recipeNavBtns.classList.remove("hide");
+      }
+
+      const cuisine = getCuisineInput();
+      const newRecipe = await fetchRecipe(cuisine);
+      computeDuration(newRecipe);
+      displayArecipe(newRecipe);
+      sportDisplayAll();
+    });
+    nextBtn.addEventListener("click", async (e) => {
+      e.preventDefault();
+      const cuisine = getCuisineInput();
+      const newRecipe = await fetchRecipe(cuisine);
+      computeDuration(newRecipe);
+      displayArecipe(newRecipe);
+      sportDisplayAll();
+    });
+
+
     // Hide the bottom section initially
     resultContainer.classList.add("hide");
     recipeNavBtns.classList.add("hide");
 
     // Clear the searched recipes from localStorage from old session
     localStorage.removeItem("recipes");
+
+    
         
   }
   else if (document.title ==="Recipe Details")
   {
-    var id = window.location.search;
+    
+    const urlParams = new URLSearchParams(window.location.search);
+    var id = urlParams.get("q");
     var recipe = getLocalRecipesDataByID(id);
-    displayDetails(recipe);
-
-
+    displayRecipeDetails(recipe);
+ 
   }
 
 
@@ -193,7 +191,10 @@ function getLocalRecipesData() {
 }
 function getLocalRecipesDataByID(recipeID) {
   const savedRecipes = JSON.parse(localStorage.getItem("recipes"));
-  return savedRecipes.find((recipe) => recipe.recipeId === recipeID);
+  const returnRecipe = savedRecipes.find(
+    (recipe) => recipeID === recipeID
+  );
+  return returnRecipe;
 }
 
 //------------------>display to UI-------------------------------
@@ -211,33 +212,36 @@ function displayArecipe(recipe) {
   recipeTitleEl.textContent = recipe.title;
   caloriesEl.textContent = `Calories: ${recipe.calories}`;
   recripeSummary.innerHTML = `${recipe.summary}`;
-  redirectURL.setAttribute('href', `recipeDetails.html?q=${recipe.recipeId}`);
+  const urlLink = `recipeDetails.html?q=${recipe.recipeID}`;
+  redirectURL.setAttribute('href', urlLink);
   redirectURL.setAttribute('target', '_blank');
 }
 
 //fucntion to display recripe detils to 2nd page
 function displayRecipeDetails(recipe) {
   // Get the elements that need to be updated
-  var stepsUL = document.querySelector("#steps");
-  var foodImg = document.querySelector("recipe-image");
-  var ingredientsUL = document.querySelector("#ingredientsUL");
+  if (document.title === "Recipe Details") 
+  {
+    var stepsUL = document.querySelector("#steps");
+    var foodImg = document.querySelector("#recipe-image");
+    var ingredientsUL = document.querySelector("#ingredientsUL");
 
-  // Update the elements with the recipe details
-  foodImg.src = recipe.imgURL;
+    // Update the elements with the recipe details
+    foodImg.src = recipe.imgURL;
 
-  //loop through the array of step objs
-  for (var i = 0; i <= recipe.cookingSteps; i++) {
-    var step = recipe.cookingSteps[i].step;
-    var li = document.createElement("li");
-    li.textContent = step;
-    stepsUL.append(li);
-  }
-  //loop through the array of ing objs
-  for (var i = 0; i <= recipe.ingredients; i++) {
-    var ing = recipe.ingredients[i].name;
-    var li = document.createElement("li");
-    li.textContent = ing;
-    ul.append(li);
+    //loop through the array of step objs
+    for (var i = 0; i < recipe.cookingSteps.length; i++) {
+      var li = document.createElement("li");
+      li.textContent = recipe.cookingSteps[i].step;
+      stepsUL.appendChild(li);
+    }
+    //loop through the array of ing objs
+    for (var i = 0; i < recipe.ingredients.length; i++) {
+      
+      var li = document.createElement("li");
+      li.textContent = recipe.ingredients[i].original;
+      ingredientsUL.appendChild(li);
+    }
   }
 }
 
