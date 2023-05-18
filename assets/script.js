@@ -249,94 +249,89 @@ function displayArecipe(recipe) {
 
 //Sports area DOM
 const walk = document.querySelector("#walk");
+const walkCalories = document.querySelector("#walkCalories");
+const walkDuration = document.querySelector("#walkDuration");
 const run = document.querySelector("#run");
+const runCalories = document.querySelector("#runCalories");
+const runDuration = document.querySelector("#runDuration");
 const bike = document.querySelector("#bike");
+const bikeCalories = document.querySelector("#bikeCalories");
+const bikeDuration = document.querySelector("#bikeDuration");
 const swim = document.querySelector("#swim");
+const swimCalories = document.querySelector("#swimCalories");
+const swimDuration = document.querySelector("#swimDuration");
+const displaySportCaloriesLoop = [walkCalories, runCalories, bikeCalories, swimCalories];
+const displaySportDurationLoop = [walkDuration, runDuration, bikeDuration, swimDuration];
+
+
+
+
 
 //list of variables
-var saveCurrentSport = []; //initial blank savelist at load. Array. store cuisine input.
-var sampleMenuCalories = 123; //sample var used for testingcode .
-var sportResult = "default";
-// var sportCalories = 1;
-var sportDuration = [];
-var sport0 = "3.0 mph"; //output = Walking 3.0 mph, moderate
-var sport1 = "6.7 mph"; //output = Running, 6.7 mph (9 min mile)
-var sport2 = "12-13.9 mph"; //output = Cycling, 12-13.9 mph, moderate
-var sport3 = "treading water, m"; //output = Swimming, treading water, moderate
+var saveCurrentSport = []; //stores info from API call.
+var sampleMenuCalories = 1200;  //sample var used for testing sports code. will be replaced with actual food calories. 
+var sportSet = ["3.0 mph", "6.7 mph", "12-13.9 mph", "treading water, m"]
+var sportInfoCurrent = []; // sports data gets stored here.
+var sportDuration = []; //computed duration gets stored here.
+var sportDurationCurrent = [];  //array of collected durations
+var sportInfoPackage = []; //array of sports information to be sent to local storage for use in recipeDetails page.
 
-var sportSet = ["3.0 mph", "6.7 mph", "12-13.9 mph", "treading water, m"];
-var sportInfoCurrent = [];
-var sportInfoPackage = [];
-const displaySportLoop = [walk, run, bike, swim];
 
 //----------->Get Sport Data-------------------------------------
-//Sample of Jen's async
-//async function fetchActivities(calories){const sportData = await fetch(``);}
 
-//search for activities based on sport var (currently use only the [0] of the API response array)
-
-function sportSearch() {
+//search sportSet variable content in order.
+async function sportSearch(){
+  sportInfoCurrent = [];
   for (var i = 0; i < sportSet.length; i++) {
-    var searchNinjaUrl =
-      "https://api.api-ninjas.com/v1/caloriesburned?activity=" + sportSet[i];
-    fetch(searchNinjaUrl, { headers: { "X-Api-Key": NINJAS_API } })
-      .then(function (response) {
-        if (!response.ok) {
-          throw response.json();
-        }
+var searchNinjaUrl = "https://api.api-ninjas.com/v1/caloriesburned?activity=" + sportSet[i];
+await fetch(searchNinjaUrl,
+{headers: { 'X-Api-Key': NINJAS_API},})
+.then(function (response) {
+  if (!response.ok) {
+    throw response.json();
+  }
 
-        return response.json();
-      })
-      .then(function (data) {
-        if (data == "") {
-          console.log("search input did not have output. try something else");
-          return; //ends function early for bad search input.
-        }
-        sportInfoCurrent.push(data);
-        // console.log(data);
-        // sportResult = data[0];
-        // sportCalories = sportResult.calories_per_hour;
-        // console.log(sportResult);
-        // console.log(sportResult.name);
-        // console.log(sportResult.calories_per_hour);
-        // console.log(sportCalories);
-      })
-      .catch(function (error) {
-        console.error(error);
-        notFound.textContent = "searchNinjaUrl_error";
-      });
-    console.log(i);
+  return response.json();
+})
+.then(function (data) {
+  if (data == "") {
+    console.log("search input did not have output. try something else");
+    return;  //ends function early for bad search input.
   }
-  if (i >= sportSet.length) {
-    return;
-  }
+
+  sportInfoCurrent.push(data);
+
+})
+.catch(function (error) {
+  console.error(error);
+  notFound.textContent = "searchNinjaUrl_error";
+});
+console.log(i);
 }
+if (i === sportSet.length){
+  console.log(sportInfoCurrent);
 
-async function fetchActivities(calories) {
-  const sportData = await fetch(``);
+return;
 }
-
-//------------------->compute-------------------------------
-
-//get duration of sport in minutes to match menu calories
-function computeDuration() {
-  for (var i = 0; i < saveList.length; i++) {
-    var sportCalories = sportInfoCurrent[i][0].calories_per_hour;
-    if (sportCalories == "") {
-      console.log("coumputeDuration function errored");
-      return;
-    }
-    sportDuration = sampleMenuCalories / sportCalories;
-    console.log(sportDuration + "hours");
-    var sportDurationMin = sportDuration * 60;
-    console.log(sportDurationMin.toFixed() + "minutes");
-    return;
-  }
 }
 
 //------------------------>set------------------------------
 
-//below are functions to load, save, display, and use locally stored cuisine element
+//prepares sport information set. waiting to be stored into local storage to be used in recipeDetails page.
+async function sportInfoPackagePrep() {
+  sportInfoPackage = [];
+  for (var i = 0; i < sportSet.length; i++) {
+    var set = [sportInfoCurrent[i][0], {duration: sportDurationCurrent[i]}]
+    sportInfoPackage.push(set);
+  }
+  if (i === sportSet.length){
+    console.log(sportInfoPackage);
+    return;
+  }
+  
+}
+
+//below are functions to save and load from local storage
 
 //load local storage
 // function loadSaved() {
@@ -346,51 +341,52 @@ function computeDuration() {
 //     saveList = saved;
 //   }}
 
-//save input value
-function storeSaveSport() {
-  saveList.push(cuisineInputEl.value); //currently set to cuisine input. change if needed
+// save to local storage
+var mainPackage = [];
+function storeIndexInfo() {
+  mainPackage.push(sportInfoPackage);  //adds sport information package at end of mainPackage
+  localStorage.setItem("MealMatchIndex", JSON.stringify(mainPackage));
+  };
 
-  localStorage.setItem("saved", JSON.stringify(saveList));
+//------------------->compute-------------------------------
+
+//get duration of sport in minutes to match menu calories
+async function computeDuration(recipe) {
+  sportSearch();
+  sportDuration = [];
+  for (var i = 0; i < sportInfoCurrent.length; i++) { 
+    var sportCalories = sportInfoCurrent[i][0].calories_per_hour;
+  sportDuration = recipe.calories / sportCalories;
+  console.log(sportDuration + "hours");
+  var sportDurationMin = sportDuration * 60;
+  console.log(sportDurationMin.toFixed() + "minutes");
+  sportDurationCurrent.push(sportDuration.toFixed(1));
+  sportDisplayCalories();
+  sportDisplayDuration();
+}
 }
 
-//displays the local storage save content. generates li with buttons nested to make list of saved content.
-function displaySave() {
-  saveDisplay.innerHTML = ""; //wipe reviously loaded content
-  for (var i = 0; i < saveList.length; i++) {
-    var save = saveList[i];
+//------------------->display-------------------------------
 
-    var li = document.createElement("li");
-    li.textContent = "";
-    li.setAttribute("saveValue", i);
-
-    var button = document.createElement("button");
-    button.textContent = save;
-
-    li.appendChild(button);
-    saveList.appendChild(li);
+async function sportDisplayCalories() {
+  for (var i = 0; i < displaySportCaloriesLoop.length; i++) { 
+    displaySportCaloriesLoop[i].textContent = "Calories: \n " + sportInfoCurrent[i][0].calories_per_hour +"/hour";
   }
 }
 
-//re-search using saved content.
-function reloadSave(event) {
-  var element = event.target;
-
-  if (element.matches("button") === true) {
-    var index = element.parentElement.getAttribute("saveValue");
-    console.log(index);
-    inputValue = saveList[index];
-    fetchRecipe(cuisine); //or other function to start cuisine search process.
+async function sportDisplayDuration() {
+  for (var i = 0; i < displaySportDurationLoop.length; i++) { 
+    displaySportDurationLoop[i].textContent = "Duration: \n " + sportDurationCurrent[i]+" hours";
   }
 }
 
-//------------------------>display-------------------------
-//first run searchSport() in chrome inspect before running the display functions
-
-function sportDisplay() {
-  for (var i = 0; i < displaySportLoop.length; i++) {
-    var content = document.createElement("p");
-    content.textContent =
-      "calories burned per hour =" + sportInfoCurrent[i][0].calories_per_hour;
-    displaySportLoop[i].appendChild(content);
-  }
-}
+//test function to see all sport functions in action. 
+//Get info from API -> calculate duration -> display info on HTML -> prepare sports information package
+async function sportTest(){
+  await sportSearch();
+  await computeDuration();
+  await sportDisplayCalories();
+  await sportDisplayDuration();
+  await sportInfoPackagePrep();
+  return;
+};
