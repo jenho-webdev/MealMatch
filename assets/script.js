@@ -236,7 +236,7 @@ function displayRecipeDetails(recipe) {
     var ing = recipe.ingredients[i].name;
     var li = document.createElement("li");
     li.textContent = ing;
-    ul.append(li);
+    ingredientsUL.append(li);
   }
 }
 
