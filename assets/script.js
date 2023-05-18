@@ -1,18 +1,18 @@
-//API Keys
-//hard coding the keys before we have the grab key fuctions on page load
-// const NINJAS_API = "qeQ/ixgJ1FhLzMigxs+yag==sahHalNRb0bq0szN";
-// const Spoonacular_API_Keiji = "b7db31d63a4d49e4ba04b02bdfcde847"; //keiji's key
-// const Spoonacular_API_Douglas = "c6c9bb9062a14ace88c599472838ee3f";
-// const Spoonacular_API_jen = "c6c9bb9062a14ace88c599472838ee3f";
+// API Keys
+// hard coding the keys before we have the grab key fuctions on page load
+const NINJAS_API = "qeQ/ixgJ1FhLzMigxs+yag==sahHalNRb0bq0szN";
+const Spoonacular_API_Keiji = "b7db31d63a4d49e4ba04b02bdfcde847"; //keiji's key
+const Spoonacular_API_Douglas = "c6c9bb9062a14ace88c599472838ee3f";
+const Spoonacular_API_jen = "c6c9bb9062a14ace88c599472838ee3f";
 
-//keys that are storaged locally on user's localstorage. will be get when onload
-var NINJAS_API = null;
-var Spoonacular_API = null;
+// //keys that are storaged locally on user's localstorage. will be get when onload
+// var NINJAS_API = null;
+// var Spoonacular_API = null;
 
 //Recipe Request Page DOM
 const searchBtn = document.querySelector("#search");
 const saveBtn = document.querySelector("#save");
-const backNextBtn = Array.from(document.querySelectorAll(".nav-btn-inline"));
+const nextBtn = Array.from(document.querySelectorAll(".nav-btn-inline"));
 const resultContainer = document.querySelector("#results-container");
 const recipeNavBtns = document.querySelector("#btn-row");
 //API URLs
@@ -69,19 +69,19 @@ function getApiInput()
   //check if both key exist locally
   Spoonacular_API = getAPIKeyFromLocal("spoonApiKey");
   NINJAS_API = getAPIKeyFromLocal("NinjasApikey");
-
+  const apiModal = document.getElementById("apiModal");
+  const modalOverlay = document.getElementById("modalOverlay");
+  const modalInstance = M.Modal.init(apiModal);
   //if anyone of the key is null, open modal to get keys from user
   if (!Spoonacular_API || !NINJAS_API) {
     // Initialize the modal
-    const apiModal = document.getElementById("apiModal");
-    const modalInstance = M.Modal.init(apiModal);
-
+    
     // Open the modal
     modalInstance.open();
 
     // Add event listener to save the API key when the save button is clicked
     const saveApiKeyBtn = document.getElementById("saveApiKeyBtn");
-    const modalOverlay = document.getElementsById("modal-overlay");
+    
 
     saveApiKeyBtn.addEventListener("click", function () {
       const spoonApiKeyEl = document.getElementById("Spoon-API");
@@ -96,10 +96,16 @@ function getApiInput()
       apiModal.style.display = "none";
       modalOverlay.style.display = "none";
     });
-  }
+
+  }else {
+    // Open the modal
+    modalInstance.close();
+    modalOverlay.style.display = "none";
+  };
   
 };
-    //on page load, hide the result dive and button row at the bottom.
+
+//on page load, hide the result div and button row at the bottom.
 //check localstorage for stored API key, if no keys found, open modal and get user's input
 //when user hit the saveApiKey button, it then store the key to local storage
 
@@ -131,27 +137,17 @@ searchBtn.addEventListener("click", async (e) => {
 
 //eventlistener for next and back buttons
 
-backNextBtn.forEach((btn) => {
+nextBtn.forEach((btn) => {
   btn.addEventListener("click", async (e) => {
     e.preventDefault();
     let loadRecipe = {};
     let setIndex = 0;
 
-    if (btn.id === "back" && currentRecipesIndex >= 1) {
-      currentRecipesIndex--;
-    } else if (btn.id === "next") {
-      currentRecipesIndex++;
-    }
-    if (
-      currentRecipesIndex >= 0 &&
-      currentRecipesIndex < searchedRecipes.length
-    ) {
-      const currentRecipe = searchedRecipes[currentRecipesIndex];
-      displayArecipe(currentRecipe);
-    } else {
+    if (btn.id === "next")
+     {
       const cuisine = getCuisineInput();
       const newRecipe = await fetchRecipe(cuisine);
-      displayArecipe(newRecipe);
+       displayArecipe(newRecipe);
     }
   });
 });
@@ -177,7 +173,7 @@ function moveHTML() {
 // return recipe contain {recipe name,calories,ID, image url,}
 async function fetchRecipe(cuisine) {
   //1.06pts per call that return a recipe with info and nutrition
-  const apiUrl = `https://api.spoonacular.com/recipes/complexSearch?apiKey=${Spoonacular_API_jen}&cuisine=${cuisine}&sort=random&number=1&addRecipeNutrition=true&fillIngredients=true`;
+  const apiUrl = `https://api.spoonacular.com/recipes/complexSearch?apiKey=${Spoonacular_API_Douglas}&cuisine=${cuisine}&sort=random&number=1&addRecipeNutrition=true&fillIngredients=true`;
 
   const apiFetch = await (await fetch(apiUrl)).json();
 
@@ -209,10 +205,12 @@ async function fetchRecipe(cuisine) {
     title: title,
     vegan: vegan,
   };
+
+ 
+
   //push current recipe into var and advance index
   searchedRecipes.push(recipeOutput);
-  currentRecipesIndex++;
-  currentRecipeID = recripeID;
+  currentRecipeID = recipeID;
   //return the repackaged recipeData contain only data that we need
   setLocalRecipesData(recipeOutput);
   return recipeOutput;
