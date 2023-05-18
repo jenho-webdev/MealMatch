@@ -20,9 +20,7 @@ const fetchhRecipesURL = `https://api.spoonacular.com/recipes/complexSearch`;
 const fetchCaloriesBurnt = `https://api.api-ninjas.com/v1/caloriesburnedactivities`;
 const fetchExercises = `https://api.api-ninjas.com/v1/exercises?`;
 
-//exporting information -Keiji what is this for? do you need t
-const searchValue = document.getElementById('result-container').textContent;
-localStorage.setItem('searchValue', searchValue);
+
 
 
 //Global Var
