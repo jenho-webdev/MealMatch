@@ -32,15 +32,11 @@ MealMatch is an app designed for foodies and fitness enthusiasts alike! If you w
 
 
 ## Usage/Examples
+![Home Page](./assets/image/)
 
-There is no need to sign up or download any API keys to use this app. Selected meals and activities are saved in local storage and will be reloaded to the page upon refresh or reopening.
+![Recipe Details Page](./assets/image/recipe-details-screenshot.png)
 
-Add screenshot
-Add gif
-
-
-    ![alt text](assets/images/screenshot.png)
-    ![alt text](assets/images/demo.gif)
+![alt text](assets/images/demo.gif)
 
 
 
