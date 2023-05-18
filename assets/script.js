@@ -12,7 +12,7 @@ var Spoonacular_API = null;
 //Recipe Request Page DOM
 const searchBtn = document.querySelector("#search");
 const saveBtn = document.querySelector("#save");
-const nextBtn = Array.from(document.querySelectorAll(".nav-btn-inline"));
+const nextBtn = document.querySelectorAll(".nav-btn-inline");
 const resultContainer = document.querySelector("#results-container");
 const recipeNavBtns = document.querySelector("#btn-row");
 //API URLs
@@ -21,7 +21,7 @@ const fetchCaloriesBurnt = `https://api.api-ninjas.com/v1/caloriesburnedactiviti
 const fetchExercises = `https://api.api-ninjas.com/v1/exercises?`;
 
 //exporting information
-const searchValue = document.getElementById('result-container').textContent;
+const searchValue = resultContainer.textContent;
 localStorage.setItem('searchValue', searchValue);
 
 
@@ -43,14 +43,6 @@ function setAPIKeyToLocal(name, key) {
 function getAPIKeyFromLocal(name) {
   return localStorage.getItem(name);
 }
-
-//-----------------------Get locally stored data---------------------------------------------------
-
-//CALL getLocalRecipesData (); TO GET SAVED RECIPES FROM LOCAL STORAGE
-
-//--------------------------Set data to local storage----------------------------------
-
-//CALL setLocalRecipesData (recipe); TO SAVE RECIPE TO LOCAL STORAGE
 
 //----------------DOM functions and eventlistener functions-------------------------------------------
 function getCuisineInput() {
@@ -95,15 +87,24 @@ function getApiInput() {
     modalOverlay.style.display = "none";
   }
 }
+
+function getRecipeIDFromURL() {
+  const queryString = window.location.search;
+  const urlParams = new URLSearchParams(queryString);
+  return urlParams.get("q");
+}
+
 //on page load, hide the result dive and button row at the bottom.
 //check localstorage for stored API key, if no keys found, open modal and get user's input
 //when user hit the saveApiKey button, it then store the key to local storage
 
 document.addEventListener("DOMContentLoaded", function () {
   //set the keys either from local or user's input from pop up modal
-  getApiInput();
-  sportSearch();
-
+    
+  if (document.title === "MealMatch"){
+    //set the keys either from local or user's input from pop up modal
+    getApiInput();
+     sportSearch();
   // Hide the bottom section initially
   if (resultContainer)
     resultContainer.classList.add("hide");
@@ -112,7 +113,23 @@ document.addEventListener("DOMContentLoaded", function () {
 
   // Clear the searched recipes from localStorage from old session
   localStorage.removeItem("recipes");
+}else if (document.title ==="Recipe Details"){
+
+  getLocalRecipesDataByID()
+
+
+
+
+}
+
+
+
+
+
+
+
 });
+
 
 // Event listener for search button
 searchBtn.addEventListener("click", async (e) => {
@@ -129,51 +146,44 @@ searchBtn.addEventListener("click", async (e) => {
   sportDisplayAll();
 });
 
-//eventlistener for next and back buttons
+//eventlistener for next buttons
 
-nextBtn.forEach((btn) => {
-  btn.addEventListener("click", async (e) => {
-    e.preventDefault();
-    let loadRecipe = {};
-    let setIndex = 0;
-
-    if (btn.id === "next") {
-      const cuisine = getCuisineInput();
-      const newRecipe = await fetchRecipe(cuisine);
-      computeDuration(newRecipe);
-      displayArecipe(newRecipe);
-      sportDisplayAll();
-    }
-  });
+nextBtn.addEventListener("click", async (e) => 
+{
+  e.preventDefault();
+  const cuisine = getCuisineInput();
+  const newRecipe = await fetchRecipe(cuisine);
+  computeDuration(newRecipe);
+  displayArecipe(newRecipe);
+  sportDisplayAll();
+  
 });
 
 //---------------------->UI manipulation functions------------------------------
 
 //--------------------------HTML changing functions--------------------------------------------------------
 
-//moves to recipeDetails.html
-function moveHTML() {
-  var queryString = "./recipeDetails.html?q=" + currentRecipesIndex;
-  location.assign(queryString);
-}
+// //moves to recipeDetails.html
+// function moveHTML() {
+//   var queryString = "./recipeDetails.html?q=" + currentRecipesIndex;
+//   location.assign(queryString);
+// }
 
 //------------------------Recipes Related functions below-----------------------------------------------
 
-// CALL displayArecipe (); OR displaySavedRecipes (); FOR RECIPE(S) OUTPUT TO UI;
-
-//------------>Get ------------------------
+//------------Fetch a Recripe from API------------------------
 
 //Pass in cuisine(String) and return a "repackaged" recipe
-// return recipe contain {recipe name,calories,ID, image url,}
+// return a repackaged recipe object
+
 async function fetchRecipe(cuisine) {
-  //1.06pts per call that return a recipe with info and nutrition
   const apiUrl = `https://api.spoonacular.com/recipes/complexSearch?apiKey=${Spoonacular_API}&cuisine=${cuisine}&sort=random&number=1&addRecipeNutrition=true&fillIngredients=true`;
 
   const apiFetch = await (await fetch(apiUrl)).json();
 
   const recipeObj = apiFetch.results[0]; //recipe object
-  //things that are under the recipeData.results[0]
 
+  //things that are under the recipeData.results[0] from response
   const recipeID = recipeObj.id;
   const recipeImgUrl = recipeObj.image;
   const summary = recipeObj.summary;
@@ -181,24 +191,28 @@ async function fetchRecipe(cuisine) {
   const title = recipeObj.title;
   const vegan = recipeObj.vegan;
   const ingredients = recipeObj.extendedIngredients;
+  const cookingSteps = recipeObj.analyzedInstructions[0].steps;
 
   //things that is under the butrients array
   const nutrients = recipeObj.nutrition.nutrients; //"nutrients array of objects"
   const calories = nutrients.find((item) => item.name === "Calories").amount;
+  const dishType = recipeObj.dishTypes; //return the first type only
 
   // repackage all the recipe data that we need into a new obj
   const recipeOutput = {
-    index: currentRecipesIndex,
     cuisine: cuisine,
-    calories: calories,
-    ingredients: ingredients,
-    summary: summary,
-    recipeID: recipeID,
+    calories: calories, //int
+    ingredients: ingredients, //array of obj
+    summary: summary, //string
+    recipeID: recipeID, //int
     imgURL: recipeImgUrl,
-    min: readyInMinutes,
-    title: title,
-    vegan: vegan,
+    min: readyInMinutes, //int
+    title: title, //string
+    vegan: vegan, //boolean
+    cookingSteps: cookingSteps, //array of obj
+    dishType: dishType //obj
   };
+
   //push current recipe into var and advance index
   searchedRecipes.push(recipeOutput);
   currentRecipeID = recipeID;
@@ -230,6 +244,10 @@ function getLocalRecipesData() {
   const savedRecipes = JSON.parse(localStorage.getItem("recipes")) || [];
   return savedRecipes;
 }
+function getLocalRecipesDataByID(recipeID) {
+  const savedRecipes = JSON.parse(localStorage.getItem("recipes"));
+  return savedRecipes.find((recipe) => recipe.recipeId === recipeID);
+}
 
 //------------------>display to UI-------------------------------
 
@@ -239,17 +257,17 @@ function displayArecipe(recipe) {
   const recipeTitleEl = document.querySelector("#recipeTitleEl");
   const caloriesEl = document.querySelector("#calories");
   const recripeSummary = document.querySelector("#summary");
+  const redirectURL = document.querySelector("#redirectURL");
 
   // Update the elements with the recipe details
   recipeImgEl.src = recipe.imgURL;
   recipeTitleEl.textContent = recipe.title;
   caloriesEl.textContent = `Calories: ${recipe.calories}`;
   recripeSummary.innerHTML = `${recipe.summary}`;
+  redirectURL.setAttribute('href', `recipeDetails.html?q=${recipe.recipeId}`);
+  redirectURL.setAttribute('target', '_blank');
 }
-
-// function displaySavedRecipes() {};
-//TO BE DONE AFTER UI IS FINALIZED
-
+//========================================================================================================
 //------------------------Activities Related functions below-----------------------------------------------
 
 //Sports area DOM
