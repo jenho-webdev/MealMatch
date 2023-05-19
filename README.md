@@ -7,7 +7,7 @@ MealMatch is an app designed for foodies and fitness enthusiasts alike! If you w
 - [Deployed Application](https://jenho-webdev.github.io/MealMatch/)
 
 ## Table of Contents
-
+- [Technologies Used](#technologies-used)
 - [Wireframe](#wireframe)
 - [Usage](#usage)
 - [API Reference](#api-reference)
@@ -17,6 +17,19 @@ MealMatch is an app designed for foodies and fitness enthusiasts alike! If you w
 - [Acknowledgements](#acknowledgements)
 - [License](#license)
 
+## Technologies Used
+
+![HTML5](https://img.shields.io/badge/html5-%23E34F26.svg?style=for-the-badge&logo=html5&logoColor=white)
+
+![CSS3](https://img.shields.io/badge/css3-%231572B6.svg?style=for-the-badge&logo=css3&logoColor=white)
+
+![MaterializeCSSFramerwork](https://img.shields.io/badge/CSS-Materialize-ff69b4?style=for-the-badge&logo)
+
+![JavaScript](https://img.shields.io/badge/javascript-%23323330.svg?style=for-the-badge&logo=javascript&logoColor=%23F7DF1E)
+
+![Snoopacular API](https://img.shields.io/badge/API-Spoonacular-success?style=for-the-badge&logo)
+
+![API Ninjas](https://img.shields.io/badge/API-APINInjas-lightgrey?style=for-the-badge&logo)
 
 ## Wireframe
 - Main Page
@@ -32,13 +45,11 @@ MealMatch is an app designed for foodies and fitness enthusiasts alike! If you w
 
 
 ## Usage/Examples
-![Home Page](./assets/image/)
-
-![Recipe Details Page](./assets/image/recipe-details-screenshot.png)
-
-![alt text](assets/images/demo.gif)
+![Home Page1](./assets/image/homepage1-screenshot.png)
+![Home Page2](./assets/image/homepage2-screenshot.png)
 
 
+![Recipe Details Page](./assets/image/recipe-details.png)
 
 
 
@@ -52,13 +63,13 @@ MealMatch is an app designed for foodies and fitness enthusiasts alike! If you w
 
 ## Color Reference
 
-| Color             | Hex                                                                |
-| ----------------- | ------------------------------------------------------------------ |
-| Dark-Cyan | ![#579E99](https://via.placeholder.com/10/579E99?text=+) #579E99 |
-| Light-Cyan | ![#BFFFFB](https://via.placeholder.com/10/BFFFFB?text=+) #BFFFFB |
-| Cyan | ![#98EBE5](https://via.placeholder.com/10/98EBE5?text=+) #98EBE5 |
-| Red-Orange | ![#9E6447](https://via.placeholder.com/10/9E6447?text=+) #9E6447 |
-| Light-Orange| ![#EBB498](https://via.placeholder.com/10/EBB498?text=+) #EBB498 |
+| Hex                                                                |
+| ------------------------------------------------------------------ |
+![#579E99](https://via.placeholder.com/10/579E99?text=+) #579E99 |
+![#BFFFFB](https://via.placeholder.com/10/BFFFFB?text=+) #BFFFFB |
+![#98EBE5](https://via.placeholder.com/10/98EBE5?text=+) #98EBE5 |
+![#9E6447](https://via.placeholder.com/10/9E6447?text=+) #9E6447 |
+![#EBB498](https://via.placeholder.com/10/EBB498?text=+) #EBB498 |
 
 
 
