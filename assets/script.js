@@ -184,11 +184,9 @@ function getLocalRecipesData() {
 
 function getLocalRecipesDataByID(recipeID) {
   const savedRecipes = JSON.parse(localStorage.getItem("recipes"));
-  console.log(savedRecipes, recipeID);
   const returnRecipe = savedRecipes.find(
     (recipe) => recipe.recipeID == recipeID
   );
-  console.log(returnRecipe);
   return returnRecipe;
 }
 //------------------>display to UI-------------------------------
