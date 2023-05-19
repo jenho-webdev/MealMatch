@@ -1,13 +1,8 @@
-//API Keys
-//hard coding the keys before we have the grab key fuctions on page load
-// const NINJAS_API = "qeQ/ixgJ1FhLzMigxs+yag==sahHalNRb0bq0szN";
-// const Spoonacular_API_Keiji = "b7db31d63a4d49e4ba04b02bdfcde847"; //keiji's key
-// const Spoonacular_API_Douglas = "c6c9bb9062a14ace88c599472838ee3f";
 
 
 //keys that are storaged locally on user's localstorage. will be get when onload
 var NINJAS_API = "qeQ/ixgJ1FhLzMigxs+yag==sahHalNRb0bq0szN";
-var Spoonacular_API = "764b35a9a9354f93b34e90d79f47c473";
+var Spoonacular_API = "24ff974f730a4fbf98084b4f1a1c30eb";
 
 //Recipe Request Page DOM
 const searchBtn = document.querySelector("#search");
@@ -41,12 +36,6 @@ function getCuisineInput() {
   const cuisine = cuisineSelect.value;
   return cuisine;
 }
-// Event listener for search button
-
-//eventlistener for next buttons
-
-
-
 
 //on page load, hide the result dive and button row at the bottom.
 //check localstorage for stored API key, if no keys found, open modal and get user's input
@@ -54,14 +43,10 @@ function getCuisineInput() {
 
 document.addEventListener("DOMContentLoaded", function () 
 {
-  //set the keys either from local or user's input from pop up modal
+  
     
   if (document.title === "MealMatch")
   {
-    //set the keys either from local or user's input from pop up modal
-   
-    
-
     
     // Hide the bottom section initially
     resultContainer.classList.add("hide");
@@ -70,20 +55,21 @@ document.addEventListener("DOMContentLoaded", function ()
     // Clear the searched recipes from localStorage from old session
     localStorage.removeItem("recipes");
 
+    //search button event listener onclick
     searchBtn.addEventListener("click", async (e) => {
       e.preventDefault();
-      // Remove the "hide" class from the bottom section container element
-     
+
       const cuisine = getCuisineInput();
       const newRecipe = await fetchRecipe(cuisine);
       await sportSearch();
       computeDuration(newRecipe);
       displayArecipe(newRecipe);
       sportDisplayAll();
+      // Remove the "hide" class from the bottom section container element
       resultContainer.classList.remove("hide");
       recipeNavBtns.classList.remove("hide");
     });
-
+    //next button event listener
     nextBtn.addEventListener("click", async (e) => {
       e.preventDefault();
       const cuisine = getCuisineInput();
@@ -96,12 +82,17 @@ document.addEventListener("DOMContentLoaded", function ()
 
         
   }
-  else if (document.title ==="Recipe Details")
+  else if (document.title ==="Recipe Details") //for Recripe Detail page use
   {
-    
+    //Grab the Parms url
     const urlParams = new URLSearchParams(window.location.search);
+    //get the id behind the q in the url
     var id = urlParams.get("q");
+    //passing in the id to the get recipe from localStorage fucntion 
+    //that return a recipe object
     var recipe = getLocalRecipesDataByID(id);
+    //pass in the returned recipe and call the display function out to the
+    //recipe detail page
     displayRecipeDetails(recipe);
  
   }
@@ -109,19 +100,12 @@ document.addEventListener("DOMContentLoaded", function ()
 
 });
 
-
-
-//---------------------->UI manipulation functions------------------------------
-
-//--------------------------HTML changing functions--------------------------------------------------------
-
-
 //------------------------Recipes Related functions below-----------------------------------------------
 
 //------------Fetch a Recripe from API------------------------
 
 //Pass in cuisine(String) and return a "repackaged" recipe
-// return a repackaged recipe object
+
 
 async function fetchRecipe(cuisine) {
   const apiUrl = `https://api.spoonacular.com/recipes/complexSearch?apiKey=${Spoonacular_API}&cuisine=${cuisine}&sort=random&number=1&addRecipeNutrition=true&fillIngredients=true`;
@@ -157,14 +141,16 @@ async function fetchRecipe(cuisine) {
     title: title, //string
     vegan: vegan, //boolean
     cookingSteps: cookingSteps, //array of obj
-    dishType: dishType //obj
+    dishType: dishType, //obj
   };
 
-  //push current recipe into var and advance index
+  //push current recipe into var
   searchedRecipes.push(recipeOutput);
   currentRecipeID = recipeID;
-  //return the repackaged recipeData contain only data that we need
+
   setLocalRecipesData(recipeOutput);
+
+  //return the repackaged recipeData contain only data that we need
   return recipeOutput;
 }
 //------------->logic/compute------------------------------
@@ -173,9 +159,12 @@ async function fetchRecipe(cuisine) {
 
 //SET (one) recipe JOSON to localStorage
 function setLocalRecipesData(recipe) { 
+  //check to see if anything storaged locally
   const localData = getLocalRecipesData();
+  //getting the passing in obj's (recipe) ID
   const recipeID = recipe.recipeID;
-
+  
+  //check with the passing in recipe is a new recipe before pushing it and storage to local
   const isRecipesUnique = localData.every((item) => item.recipeID !== recipeID);
 
   if (isRecipesUnique) {
@@ -191,16 +180,19 @@ function getLocalRecipesData() {
   const savedRecipes = JSON.parse(localStorage.getItem("recipes")) || [];
   return savedRecipes;
 }
+//get recipe by ID function
+
 function getLocalRecipesDataByID(recipeID) {
   const savedRecipes = JSON.parse(localStorage.getItem("recipes"));
+  console.log(savedRecipes, recipeID);
   const returnRecipe = savedRecipes.find(
-    (recipe) => recipeID === recipeID
+    (recipe) => recipe.recipeID == recipeID
   );
+  console.log(returnRecipe);
   return returnRecipe;
 }
-
 //------------------>display to UI-------------------------------
-
+//display function for index.html page below
 function displayArecipe(recipe) {
   // Get the elements that need to be updated
   const recipeImgEl = document.querySelector("#recipeImg");
@@ -219,7 +211,7 @@ function displayArecipe(recipe) {
   redirectURL.setAttribute('target', '_blank');
 }
 
-//fucntion to display recripe detils to 2nd page
+//fucntion to display recripe detils to recipeDetail.html page
 function displayRecipeDetails(recipe) {
   // Get the elements that need to be updated
   if (document.title === "Recipe Details") 
@@ -301,7 +293,7 @@ await fetch(searchNinjaUrl,
 })
 .then(function (data) {
   if (data == "") {
-    console.log("search input did not have output. try something else");
+    
     return;  //ends function early for bad search input.
   }
 
@@ -309,15 +301,13 @@ await fetch(searchNinjaUrl,
 
 })
 .catch(function (error) {
-  console.error(error);
+  
   notFound.textContent = "searchNinjaUrl_error";
 });
-// console.log(i);
+
 }
 if (i === sportSet.length){
-  console.log(sportInfoCurrent);
-
-return;
+  return;
 }
 }
 else {
@@ -335,7 +325,7 @@ async function sportInfoPackagePrep() {
     sportInfoPackage.push(set);
   }
   if (i === sportSet.length){
-    console.log(sportInfoPackage);
+    
     return;
   }
   
