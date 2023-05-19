@@ -5,11 +5,13 @@
 MealMatch is an app designed for foodies and fitness enthusiasts alike! If you want to know what it takes to burn off the calories you just ate by doing simple exercise activities, then this app is a match for you. Users search for recipes by cuisine and are provided with a recipe that contains ingredients, cooking instructions and caloric info, as well as the activity duration needed to burn that same amount of calories. 
 
 - [Deployed Application](https://jenho-webdev.github.io/MealMatch/)
+- [Repo Wiki](https://github.com/jenho-webdev/MealMatch/wiki)
 
 ## Table of Contents
 - [Technologies Used](#technologies-used)
 - [Wireframe](#wireframe)
 - [Usage](#usage)
+- [Demo](#demo)
 - [API Reference](#api-reference)
 - [Color Reference](#color-reference)
 - [Roadmap](#roadmap)
@@ -23,9 +25,9 @@ MealMatch is an app designed for foodies and fitness enthusiasts alike! If you w
 
 ![CSS3](https://img.shields.io/badge/css3-%231572B6.svg?style=for-the-badge&logo=css3&logoColor=white)
 
-![MaterializeCSSFramerwork](https://img.shields.io/badge/CSS-Materialize-ff69b4?style=for-the-badge&logo)
-
 ![JavaScript](https://img.shields.io/badge/javascript-%23323330.svg?style=for-the-badge&logo=javascript&logoColor=%23F7DF1E)
+
+![MaterializeCSSFramerwork](https://img.shields.io/badge/CSS-Materialize-ff69b4?style=for-the-badge&logo)
 
 ![Snoopacular API](https://img.shields.io/badge/API-Spoonacular-success?style=for-the-badge&logo)
 
@@ -52,6 +54,10 @@ MealMatch is an app designed for foodies and fitness enthusiasts alike! If you w
 ![Recipe Details Page](./assets/image/recipe-details.png)
 
 
+## Demo
+
+![Demo gif](./assets/image/demo.gif)
+
 
 ## API Reference
 
@@ -75,9 +81,12 @@ MealMatch is an app designed for foodies and fitness enthusiasts alike! If you w
 
 ## Roadmap
 
-- Additional browser support
+- Recipes can be saved and added to a custom book
+- Recipe book access via buttons on both pages
+- Recipe can be searched by keyword
+- Add feedback feature
+- Add hide recipe from list feature
 
-- Add more integrations
 
 
 ## Authors
