@@ -92,8 +92,6 @@ document.addEventListener("DOMContentLoaded", function ()
       computeDuration(newRecipe);
       displayArecipe(newRecipe);
       sportDisplayAll();
-      resultContainer.classList.remove("hide");
-      recipeNavBtns.classList.remove("hide");
     });
 
         
@@ -210,7 +208,7 @@ function displayArecipe(recipe) {
   const caloriesEl = document.querySelector("#calories");
   const recripeSummary = document.querySelector("#summary");
   const redirectURL = document.querySelector("#redirectURL");
-
+  
   // Update the elements with the recipe details
   recipeImgEl.src = recipe.imgURL;
   recipeTitleEl.textContent = recipe.title;
@@ -229,10 +227,12 @@ function displayRecipeDetails(recipe) {
     var stepsUL = document.querySelector("#steps");
     var foodImg = document.querySelector("#recipe-image");
     var ingredientsUL = document.querySelector("#ingredientsUL");
-
+    const titleEl = document.querySelector("#recipe-title");
+    
     // Update the elements with the recipe details
     foodImg.src = recipe.imgURL;
-
+    titleEl.textContent = recipe.title;
+    
     //loop through the array of step objs
     for (var i = 0; i < recipe.cookingSteps.length; i++) {
       var li = document.createElement("li");
