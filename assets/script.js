@@ -181,12 +181,16 @@ function getLocalRecipesData() {
   return savedRecipes;
 }
 //get recipe by ID function
+
 function getLocalRecipesDataByID(recipeID) {
   const savedRecipes = JSON.parse(localStorage.getItem("recipes"));
-  const returnRecipe = savedRecipes.find((item) => recipeID === recipeID);
+  console.log(savedRecipes, recipeID);
+  const returnRecipe = savedRecipes.find(
+    (recipe) => recipe.recipeID == recipeID
+  );
+  console.log(returnRecipe);
   return returnRecipe;
 }
-
 //------------------>display to UI-------------------------------
 //display function for index.html page below
 function displayArecipe(recipe) {
