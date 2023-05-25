@@ -29,23 +29,32 @@
   </header>
   <!-- Main container -->
   <main class="frontPage z-depth-5">
-    <!-- Tabs -->
-    <div class="input-field row">
+    
+    <div class="input-field row rounded">
       <div>
-        <h3 class="card-header text-uppercase">Find a workout to match your meal</h3>
+        <h3 class="card-header text-uppercase">Search a recipe and see what it takes to burn it off!</h3>
         <form id="user-form" class="card-search">
-          <label class="form-label" for="cuisine-select">Don't know which cuisine to choose? Click below for a random
+          <label class="form-label center-align" for="cuisine-select">Don't know which cuisine to choose? Click below for a random
             match!"</label>
-          <select id="cuisine-select" class="browser-default input-field">
+            <!-- autocomplete input -->
+                <div class="row">
+                  <div class="input-field col s12">
+                    <i class="material-icons prefix">textsms</i>
+                    <input type="text" id="cuisine-input" class="autocomplete" placeholder="Input a cuisine">
+                    <label for="cuisine-input"></label>
+                  </div>
+                </div>
+              
+          <!-- <select id="cuisine-select" class="browser-default input-field">
 
-            <!--Drop down box of cuisine selections-->
+            Drop down box of cuisine selections
             <option value="" disabled selected>Select a cuisine</option>
             <option value="mexican">Mexican</option>
             <option value="japanese">Japanese</option>
             <option value="american">American</option>
             <option value="chinese">Chinese</option>
             <option value="italian">Italian</option>
-          </select>
+          </select> -->
           <button type="submit" class="btn" id="search">Get Your Match!</button>
         </form>
       </div>
@@ -148,9 +157,10 @@
               </div>
             </div>
           </div>
-          <!-- food card -->
       </section>
     </section>
+
+
     <div class="row" id="btn-row">
       <div class="nav-container">
         <!-- <button class="nav-btn nav-btn-inline" id="save">Save</button> -->

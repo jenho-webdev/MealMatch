@@ -1,0 +1,69 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/materialize/1.0.0/css/materialize.min.css">
+    <link href="https://fonts.googleapis.com/icon?family=Material+Icons" rel="stylesheet">
+    <link href="https://fonts.googleapis.com/icon?family=Material+Icons" rel="stylesheet">
+    <link rel="stylesheet" href="./assets/style.css" />
+    <title>MealMatch</title>
+</head>
+<body>
+<header>
+<nav class="top-nav row"></nav>
+<div class="row">
+    <ul id="side-nav" class="col s2 sidenav sidenav-fixed center-align " style="transform: translateX(0%);">
+        <li>
+            <div class-="logo background">
+                <img class="logo p" src="./assets/image/logo.png">
+            </div>     
+        </li>
+        <li class=""><i class="material-icons">book</i>Your Recipe Book<i class="material-icons">book</i></li>
+        <li><div class="divider"></div></li>
+    </ul>
+
+</header>
+
+<main>
+    <div class="col s9">
+            <div class="container">
+                <!-- Main container -->
+                <div class="z-depth-3">
+                    <h3 class="card-header text-uppercase">Find a workout to match your meal</h3>
+                    <form id="user-form" class="card-search white">
+                        <label class="form-label" for="cuisine-select">Don't know which cuisine to choose? Click below for a
+                            random
+                            match!"</label>
+                        <select id="cuisine-select" class="browser-default input-field">
+        
+                            <!--Drop down box of cuisine selections-->
+                            <option value="" disabled selected>Select a cuisine</option>
+                            <option value="mexican">Mexican</option>
+                            <option value="japanese">Japanese</option>
+                            <option value="american">American</option>
+                            <option value="chinese">Chinese</option>
+                            <option value="italian">Italian</option>
+                        </select>
+                        <button type="submit" class="btn" id="search">Get Your Match!</button>
+                    </form>
+                <div>
+            </div>
+
+
+        </div>
+
+
+
+    </div>
+
+
+
+</main>
+<footer>
+
+    
+</footer>            
+</body>
