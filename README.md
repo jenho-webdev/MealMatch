@@ -1,13 +1,13 @@
-# Meal Match
+## Meal Match
 
-## Description
+### Description
 
 MealMatch is an app designed for foodies and fitness enthusiasts alike! If you want to know what it takes to burn off the calories you just ate by doing simple exercise activities, then this app is a match for you. Users search for recipes by cuisine and are provided with a recipe that contains ingredients, cooking instructions and caloric info, as well as the activity duration needed to burn that same amount of calories. 
 
 - [Deployed Application](https://jenho-webdev.github.io/MealMatch/)
 - [Repo Wiki](https://github.com/jenho-webdev/MealMatch/wiki)
 
-## Table of Contents
+### Table of Contents
 - [Technologies Used](#technologies-used)
 - [Wireframe](#wireframe)
 - [Usage](#usage)
@@ -19,7 +19,7 @@ MealMatch is an app designed for foodies and fitness enthusiasts alike! If you w
 - [Acknowledgements](#acknowledgements)
 - [License](#license)
 
-## Technologies Used
+### Technologies Used
 
 ![HTML5](https://img.shields.io/badge/html5-%23E34F26.svg?style=for-the-badge&logo=html5&logoColor=white)
 
@@ -33,7 +33,7 @@ MealMatch is an app designed for foodies and fitness enthusiasts alike! If you w
 
 ![API Ninjas](https://img.shields.io/badge/API-APINInjas-lightgrey?style=for-the-badge&logo)
 
-## Wireframe
+### Wireframe
 - Main Page
 
 
@@ -46,7 +46,7 @@ MealMatch is an app designed for foodies and fitness enthusiasts alike! If you w
 ![Recipe Page](./assets/image/RecipePage.png)
 
 
-## Usage/Examples
+### Usage/Examples
 ![Home Page1](./assets/image/homepage1-screenshot.png)
 ![Home Page2](./assets/image/homepage2-screenshot.png)
 
@@ -54,20 +54,28 @@ MealMatch is an app designed for foodies and fitness enthusiasts alike! If you w
 ![Recipe Details Page](./assets/image/recipe-details.png)
 
 
+<<<<<<< Updated upstream
 ## Demo
 
 ![Demo gif](./assets/image/demo.gif)
 
 
 ## API Reference
+=======
+### Demo
+Overview:
+![Demo gif](./assets/image/demo.gif)
+Autocomplete function:
+![Demo gif](./assets/image/demo-Autocomplete.gif)
+### API Reference
+>>>>>>> Stashed changes
 
 #### Links to API Documentation
  - [Snoonacular](https://spoonacular.com/food-api/docs)
 
  - [API-Ninjas](https://api-ninjas.com/api/caloriesburned)
 
-
-## Color Reference
+### Color Reference
 
 | Hex                                                                |
 | ------------------------------------------------------------------ |
@@ -79,7 +87,7 @@ MealMatch is an app designed for foodies and fitness enthusiasts alike! If you w
 
 
 
-## Roadmap
+### Roadmap
 
 - Recipes can be saved and added to a custom book
 - Recipe book access via buttons on both pages
@@ -89,7 +97,7 @@ MealMatch is an app designed for foodies and fitness enthusiasts alike! If you w
 
 
 
-## Authors
+### Authors
 
 - Jen Ho [@jenho-webdev](https://github.com/jenho-webdev)
 - Marinah Tamura [@Marinah1031](https://github.com/Marinah1031)
@@ -98,11 +106,11 @@ MealMatch is an app designed for foodies and fitness enthusiasts alike! If you w
 - Douglas Soda [@dsoda86](https://github.com/dsoda86)
 
 
-## Acknowledgements
+### Acknowledgements
  
  - Shields and badges sourced from [Shield.io](https://shields.io/)
 
 
-## License
+### License
 
 [![MIT License](https://img.shields.io/badge/License-MIT-green.svg)](https://choosealicense.com/licenses/mit/)
