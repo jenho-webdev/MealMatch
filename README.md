@@ -54,21 +54,12 @@ MealMatch is an app designed for foodies and fitness enthusiasts alike! If you w
 ![Recipe Details Page](./assets/image/recipe-details.png)
 
 
-<<<<<<< Updated upstream
-## Demo
-
-![Demo gif](./assets/image/demo.gif)
-
-
-## API Reference
-=======
 ### Demo
 Overview:
 ![Demo gif](./assets/image/demo.gif)
 Autocomplete function:
 ![Demo gif](./assets/image/demo-Autocomplete.gif)
 ### API Reference
->>>>>>> Stashed changes
 
 #### Links to API Documentation
  - [Snoonacular](https://spoonacular.com/food-api/docs)
