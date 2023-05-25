@@ -23,55 +23,43 @@
         <img class="logo" src="./assets/image/logo.png">
       </div>
       <h1>~Welcome to Meal Match~ </h1>
-      <!--home page id = homePage-->
-
     </nav>
   </header>
   <!-- Main container -->
   <main class="frontPage z-depth-5">
-    
+
     <div class="input-field row rounded">
       <div>
         <h3 class="card-header text-uppercase">Search a recipe and see what it takes to burn it off!</h3>
         <form id="user-form" class="card-search">
-          <label class="form-label center-align" for="cuisine-select">Don't know which cuisine to choose? Click below for a random
+          <label class="form-label center-align" for="cuisine-select">Don't know which cuisine to choose? Click below
+            for a random
             match!"</label>
-            <!-- autocomplete input -->
-                <div class="row">
-                  <div class="input-field col s12">
-                    <i class="material-icons prefix">textsms</i>
-                    <input type="text" id="cuisine-input" class="autocomplete" placeholder="Input a cuisine">
-                    <label for="cuisine-input"></label>
-                  </div>
-                </div>
-              
-          <!-- <select id="cuisine-select" class="browser-default input-field">
-
-            Drop down box of cuisine selections
-            <option value="" disabled selected>Select a cuisine</option>
-            <option value="mexican">Mexican</option>
-            <option value="japanese">Japanese</option>
-            <option value="american">American</option>
-            <option value="chinese">Chinese</option>
-            <option value="italian">Italian</option>
-          </select> -->
+          <!-- autocomplete input -->
+          <div class="row">
+            <div class="input-field col s12">
+              <i class="material-icons prefix">textsms</i>
+              <input type="text" id="cuisine-input" class="autocomplete" placeholder="Input a cuisine">
+              <label for="cuisine-input"></label>
+            </div>
+          </div>
+          <!-- search button in from -->
           <button type="submit" class="btn" id="search">Get Your Match!</button>
         </form>
       </div>
     </div>
+    <!-- result container hidden onload -->
     <section class="container" id="result-container">
       <section class="display row">
         <div class="grid-container">
-
-          <!--Recipe card with a short summary of recipe fetched-->
           <div class="grid-item">
             RECIPE CARD
             <div class="col s12">
               <div class="card z-depth-4">
                 <div class="card-image">
-                  <img id="recipeImg" src="./assets/image/logo.png">
-                  <span id="recipeTitleEl" class="card-title">Card Title</span>
-                  <a class="btn-floating halfway-fab waves-effect waves-light red"><i class="material-icons">add</i></a>
+                  <img id="recipeImg" src="">
+                  <span id="recipeTitleEl" class="card-title "></span>
+                  <!-- <a class="btn-floating halfway-fab waves-effect waves-light red"><i class="material-icons">add</i></a> -->
                 </div>
                 <div class="card-content">
                   <p id="summary"></p>
@@ -81,7 +69,6 @@
                   <a id="redirectURL" href="#">More Info
                     <i class="small material-icons">restaurant</i>
                   </a>
-                  <!--tool tips / card-->
                 </div>
               </div>
             </div>
@@ -100,13 +87,13 @@
                       Walking
                       <div class="info">
                         <p class="description col s6" id="walkCalories">
-                          <!--duration and calories burned goes here--> Calories: 254
+                          <!--Calories burned goes here--> 
                         </p>
                         <p class="description col s6" id="walkDuration">
-                          Duration: 1.5hours
+                          <!-- Duration goes here -->
                         </p>
                       </div>
-                    </h2><!-- Content for Row Container 1 -->
+                    </h2>
                   </div>
                   <!-- Row Container 2 -->
                   <div class="sport-row" id="run" style="border:solid black 3px">
@@ -115,10 +102,10 @@
                       Running
                       <div class="info">
                         <p class="description col s6" id="runCalories">
-                          <!--duration and calories burned goes here--> Calories: 254
+                          <!--Calories burned goes here-->
                         </p>
                         <p class="description col s6" id="runDuration">
-                          Duration: 1.5hours
+                          <!-- Duration goes here -->
                         </p>
                       </div>
                     </h2><!-- Content for Row Container 2 -->
@@ -130,10 +117,10 @@
                       Biking
                       <div class="info">
                         <p class="description col s6" id="bikeCalories">
-                          <!--duration and calories burned goes here--> Calories: 254
+                          <!--Calories burned goes here-->
                         </p>
                         <p class="description col s6" id="bikeDuration">
-                          Duration: 1.5hours
+                          <!-- Duration goes here -->
                         </p>
                       </div>
                     </h2><!-- Content for Row Container 3 -->
@@ -145,10 +132,10 @@
                       Swimming
                       <div class="info">
                         <p class="description col s6" id="swimCalories">
-                          <!--duration and calories burned goes here--> Calories: 254
+                          <!--calories burned goes here-->
                         </p>
                         <p class="description col s6" id="swimDuration">
-                          Duration: 1.5hours
+                          <!-- Duration goes here -->
                         </p>
                       </div>
                     </h2>
@@ -163,19 +150,14 @@
 
     <div class="row" id="btn-row">
       <div class="nav-container">
-        <!-- <button class="nav-btn nav-btn-inline" id="save">Save</button> -->
         <button class="nav-btn nav-btn-inline" id="next">Next Recipe</button>
       </div>
     </div>
   </main>
 </body>
-<!-- <script src="https://code.jquery.com/jquery-3.4.1.min.js"></script> -->
+
 <script src="https://cdn.jsdelivr.net/npm/dayjs@1.11.3/dayjs.min.js"
   integrity="sha256-iu/zLUB+QgISXBLCW/mcDi/rnf4m4uEDO0wauy76x7U=" crossorigin="anonymous"></script>
 <script src="https://cdnjs.cloudflare.com/ajax/libs/materialize/1.0.0/js/materialize.min.js"></script>
 <script src="./assets/script.js"></script>
-<!--<script src="./assets/script2.js"></script>-->
-
 </html>
-
-<!--88 disappearing js file, minjs-->
